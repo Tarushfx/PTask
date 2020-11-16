@@ -1,0 +1,20 @@
+{
+  "name": "ptask",
+  "version": "1.0.0",
+  "description": "## Stack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tarushfx/PTask.git"
+  },
+  "keywords": [],
+  "author": "Tarush Atishek",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tarushfx/PTask/issues"
+  },
+  "homepage": "https://github.com/Tarushfx/PTask#readme"
+}
