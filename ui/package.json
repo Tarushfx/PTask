@@ -1,0 +1,55 @@
+{
+  "name": "ptask-ui",
+  "version": "1.0.0",
+  "description": "## Stack",
+  "main": "index.js",
+  "scripts": {
+    "#start": "UI server, HMR is enabled in dev mode",
+    "start": "nodemon -w uiserver.js -w .env uiserver.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "#compile": "Compiles the code for production",
+    "compile": "webpack --mode production",
+    "#watch": "Compiles the code and watchs for changes",
+    "watch": "webpack --watch",
+    "#lint": "running ESLint on the files",
+    "lint": "eslint . --ext js,jsx --ignore-pattern public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tarushfx/PTask.git"
+  },
+  "keywords": [],
+  "author": "Tarush Atishek",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tarushfx/PTask/issues"
+  },
+  "homepage": "https://github.com/Tarushfx/PTask#readme",
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "dotenv": "^6.2.0",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^0.21.0",
+    "nodemon": "^1.19.4",
+    "prop-types": "^15.7.2",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "whatwg-fetch": "^3.5.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.5",
+    "babel-loader": "^8.2.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-hot-middleware": "^2.25.0"
+  }
+}
