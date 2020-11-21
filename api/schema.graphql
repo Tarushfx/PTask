@@ -2,15 +2,15 @@ scalar GraphQLDate
 
 type User {
     _id: ID!
-    id: Int!
     name: String!
-    age: Int!
-    created: GraphQLDate!
+    email: String!
+    password: String!
 }
 
 input UserInputs {
     name: String!
-    age: Int!
+    email: String!
+    password: String!
 }
 
 type Query{

@@ -1,23 +1,5 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  tasks: [TaskSchema],
-  projects: [ProjectSchema],
-  likes: [String],
-  //teams
-});
 const TaskSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -29,8 +11,8 @@ const TaskSchema = new mongoose.Schema({
   },
   state: {
     type: String,
-    enum: ["notStarted", "inProgress", "completed"],
-    default: "notStarted",
+    enum: ['notStarted', 'inProgress', 'completed'],
+    default: 'notStarted',
   },
   description: String,
 });
@@ -48,25 +30,30 @@ const ProjectSchema = new mongoose.Schema({
   },
   state: {
     type: String,
-    enum: ["notStarted", "inProgress", "completed"],
-    default: "notStarted",
+    enum: ['notStarted', 'inProgress', 'completed'],
+    default: 'notStarted',
   },
   description: String,
 });
-const TaskSchema = new mongoose.Schema({
-  title: {
+
+const UserSchema = new mongoose.Schema({
+  name: {
     type: String,
     required: true,
   },
-  created: {
-    type: Date,
-    default: Date.now(),
-  },
-  state: {
+  email: {
     type: String,
-    enum: ["notStarted", "inProgress", "completed"],
-    default: "notStarted",
+    required: true,
+    unique: true,
   },
-  description: String,
+  password: {
+    type: String,
+    required: true,
+  },
+  tasks: [TaskSchema],
+  projects: [ProjectSchema],
+  likes: [String],
+  // teams
 });
-export default UserSchema;
+
+module.exports = { UserSchema };
