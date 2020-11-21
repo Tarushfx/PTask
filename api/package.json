@@ -29,6 +29,7 @@
     "express": "^4.17.1",
     "graphql": "^0.13.2",
     "mongodb": "^3.6.3",
+    "mongoose": "^5.10.15",
     "nodemon": "^1.19.4"
   },
   "devDependencies": {
