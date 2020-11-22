@@ -15,6 +15,11 @@
   --main-container-bg: #f0f0f7;
 }
 
+*::before,
+*::after {
+  box-sizing: content-box;
+}
+
 * {
   outline: none;
   box-sizing: border-box;
