@@ -13,9 +13,9 @@ const ProfileBar = (props) => {
       <div className="task-manager"> Task Manager </div>
       <div className="side-wrapper">
         <div className="user-profile">
-          <img src="./assets/atishek.jpeg" alt="" className="user-photo" />
-          <div className="user-name">User name</div>
-          <div className="user-mail">userid@email.com</div>
+          <img src="" alt="" className="user-photo" />
+          <div className="user-name">{props.name}</div>
+          <div className="user-mail">{props.email}</div>
         </div>
         <div className="user-notification">
           <div className="notify">
@@ -47,23 +47,38 @@ const ProfileBar = (props) => {
             </svg>
           </div>
         </div>
-        <div className="progress-status">12/34</div>
+        {/* <div className="progress-status">10/34</div>
         <div className="progress">
-          <div className="progress-bar"></div>
-        </div>
+          <div className="progress-bar" id="progress-bar">
+            1
+          </div>
+        </div> */}
         <div className="task-status">
           <div className="task-stat">
-            <div className="task-number">12</div>
+            <div className="task-number">
+              {
+                // props.completed()
+              }
+            </div>
+
             <div className="task-condition">Completed</div>
             <div className="task-tasks">tasks</div>
           </div>
           <div className="task-stat">
-            <div className="task-number">22</div>
+            <div className="task-number">
+              {
+                // props.toDo()
+              }
+            </div>
             <div className="task-condition">To do</div>
             <div className="task-tasks">tasks</div>
           </div>
           <div className="task-stat">
-            <div className="task-number">57</div>
+            <div className="task-number">
+              {
+                // props.total()
+              }
+            </div>
             <div className="task-condition">All</div>
             <div className="task-tasks">completed</div>
           </div>
@@ -72,20 +87,8 @@ const ProfileBar = (props) => {
       <div className="side-wrapper">
         <div className="project-title">Projects</div>
         <div className="project-name">
-          <div className="project-department">Marketing</div>
-          <div className="project-department">Design</div>
-          <div className="project-department">Development</div>
-          <div className="project-department">Management</div>
-        </div>
-      </div>
-      <div className="side-wrapper">
-        <div className="project-title">Team</div>
-        <div className="team-member">
-          <img src="./assets/om.jpeg" alt="" className="members" />
-          <img src="./assets/atishek.jpeg" alt="" className="members" />
-          <img src="./assets/neha.jpeg" alt="" className="members" />
-          <img src="./assets/yash.jpeg" alt="" className="members" />
-          <img src="./assets/tarush.jpeg" alt="" className="members" />
+          {/* {projectArray.map((item)=><div className="project-department">{item}</div>)} */}
+          <div className="project-department">Hello</div>
         </div>
       </div>
       <div className="add-task">
@@ -96,3 +99,16 @@ const ProfileBar = (props) => {
 };
 
 export default ProfileBar;
+
+{
+  /* <div className="side-wrapper">
+  <div className="project-title">Team</div>
+  <div className="team-member">
+    <img src="./assets/om.jpeg" alt="" className="members" />
+    <img src="./assets/atishek.jpeg" alt="" className="members" />
+    <img src="./assets/neha.jpeg" alt="" className="members" />
+    <img src="./assets/yash.jpeg" alt="" className="members" />
+    <img src="./assets/tarush.jpeg" alt="" className="members" />
+  </div>
+</div> */
+}

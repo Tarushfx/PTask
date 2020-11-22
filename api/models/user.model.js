@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const Joi = require('joi');
-const jwt = require('jsonwebtoken');
+const mongoose = require("mongoose");
+const Joi = require("joi");
+const jwt = require("jsonwebtoken");
 
 const TaskSchema = new mongoose.Schema({
   title: {
@@ -13,8 +13,8 @@ const TaskSchema = new mongoose.Schema({
   },
   state: {
     type: String,
-    enum: ['notStarted', 'inProgress', 'completed'],
-    default: 'notStarted',
+    enum: ["notStarted", "inProgress", "completed"],
+    default: "notStarted",
   },
   description: String,
 });
@@ -32,8 +32,8 @@ const ProjectSchema = new mongoose.Schema({
   },
   state: {
     type: String,
-    enum: ['notStarted', 'inProgress', 'completed'],
-    default: 'notStarted',
+    enum: ["notStarted", "inProgress", "completed"],
+    default: "notStarted",
   },
   description: String,
 });
@@ -55,13 +55,19 @@ const UserSchema = new mongoose.Schema({
   tasks: [TaskSchema],
   projects: [ProjectSchema],
   likes: [String],
-  // teams
+  teams: {
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Team",
+      },
+    ],
+  },
 });
 
 const joiSchema = Joi.object({
   name: Joi.string().min(5).max(50),
-  email: Joi.string().min(5).max(255).email()
-    .required(),
+  email: Joi.string().min(5).max(255).email().required(),
   password: Joi.string().min(5).max(255).required(),
 });
 
@@ -72,7 +78,7 @@ UserSchema.methods.generateAuthToken = function () {
       name: this.name,
       email: this.email,
     },
-    'taskmanager',
+    "taskmanager"
   );
   return token;
 };
