@@ -118,6 +118,10 @@ img {
   background-color: var(--button-bg-color);
   color: var(--button-color);
 }
+.alert{
+  padding: 0rem 0rem;
+  margin-bottom: 0rem;
+}
 
 .notify {
   position: relative;

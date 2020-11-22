@@ -9,11 +9,6 @@ const User = mongoose.model('users', UserSchema);
 
 const emailRegex = /.+\@.+\..+/;
 
-async function list() {
-  const users = await User.find();
-  return users;
-}
-
 async function alreadyRegistered(user) {
   const foundUser = await User.findOne({ email: user.email });
   if (foundUser) {
@@ -79,4 +74,4 @@ async function logIn(_, { user }) {
   }
 }
 
-module.exports = { list, add, logIn };
+module.exports = { add, logIn };

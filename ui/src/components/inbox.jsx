@@ -1,5 +1,7 @@
 import React from "react";
 import MsgItem from "./msgItem.jsx";
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
 const Inbox = (props) => {
   const array = [1, 2, 3, 4];
   return (
@@ -164,7 +166,7 @@ const Inbox = (props) => {
         </div>
       </div>
       <div className="add-task">
-        <button className="add-button">Add task</button>
+        <button className="add-button" data-toggle="modal" data-target="#taskModal">Add task</button>
       </div>
     </div>
   );
