@@ -1,6 +1,8 @@
 
-import React from "react";
-import { BrowserRouter, HashRouter, Route, Switch } from "react-router-dom";
+import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+
+
 import Dashboard from "./Dashboard.jsx";
 import UserList from "./UserList.jsx";
 
@@ -20,9 +22,11 @@ export default class Main extends React.Component {
   render() {
     return (
 
-      <HashRouter>
-        <Dashboard />
-      </HashRouter>
+      <Switch>
+        <Redirect exact path="/" to="/auth" />
+        <Route path="/auth" component={Login} />
+        <Route path="/dashboard" component={UserList} />
+      </Switch>
 
     );
   }
