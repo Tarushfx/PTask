@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import UserSchema from "./UserSchema";
 
 const TeamSchema = new mongoose.Schema({
   title: {
@@ -10,9 +9,12 @@ const TeamSchema = new mongoose.Schema({
     type: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: UserSchema.ObjectId,
+        ref: "User",
       },
     ],
   },
   description: String,
 });
+module.exports = {
+  TeamSchema,
+};
