@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const Joi = require('joi');
+const jwt = require('jsonwebtoken');
 
 const TaskSchema = new mongoose.Schema({
   title: {
@@ -56,4 +58,23 @@ const UserSchema = new mongoose.Schema({
   // teams
 });
 
-module.exports = { UserSchema };
+const joiSchema = Joi.object({
+  name: Joi.string().min(5).max(50),
+  email: Joi.string().min(5).max(255).email()
+    .required(),
+  password: Joi.string().min(5).max(255).required(),
+});
+
+UserSchema.methods.generateAuthToken = function () {
+  const token = jwt.sign(
+    {
+      _id: this._id,
+      name: this.name,
+      email: this.email,
+    },
+    'taskmanager',
+  );
+  return token;
+};
+
+module.exports = { UserSchema, joiSchema };

@@ -5,6 +5,7 @@ type User {
     name: String!
     email: String!
     password: String!
+    token: String
 }
 
 input UserInputs {
@@ -13,9 +14,15 @@ input UserInputs {
     password: String!
 }
 
+input UserLoginInputs {
+    email: String!,
+    password: String!
+}
+
 type Query{
     about: String!
     userList: [User!]!
+    UserSignIn(user: UserLoginInputs!): User
 }
 
 type Mutation {
