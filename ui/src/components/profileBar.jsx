@@ -1,6 +1,13 @@
 import React from "react";
+import authService from "../../services/authservice";
 
 const ProfileBar = (props) => {
+
+  function signOut() {
+    authService.clearToken();
+    window.location = '/';
+  }
+
   return (
     <div className="user-profile-area">
       <div className="task-manager"> Task Manager </div>
@@ -53,6 +60,7 @@ const ProfileBar = (props) => {
                 // props.completed()
               }
             </div>
+
             <div className="task-condition">Completed</div>
             <div className="task-tasks">tasks</div>
           </div>
@@ -82,6 +90,9 @@ const ProfileBar = (props) => {
           {/* {projectArray.map((item)=><div className="project-department">{item}</div>)} */}
           <div className="project-department">Hello</div>
         </div>
+      </div>
+      <div className="add-task">
+        <button className="add-button" onClick={signOut}>Sign Out</button>
       </div>
     </div>
   );

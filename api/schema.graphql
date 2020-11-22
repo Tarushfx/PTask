@@ -1,11 +1,44 @@
 scalar GraphQLDate
 
+enum State {
+    notStarted
+    inProgress
+    completed
+}
+
+type Project {
+    title: String!
+    created: GraphQLDate!
+    state: State!
+    description: String
+}
+
+type Task {
+    title: String!
+    created: GraphQLDate!
+    state: State!
+    description: String
+}
+
+type UserData {
+    _id: ID!
+    name: String!
+    email: String!
+    tasks: [Task]
+    projects: [Project]
+    likes: [String]
+}
+
 type User {
     _id: ID!
     name: String!
     email: String!
     password: String!
     token: String
+}
+
+input getData {
+    _id: ID!
 }
 
 input UserInputs {
@@ -21,7 +54,7 @@ input UserLoginInputs {
 
 type Query{
     about: String!
-    userList: [User!]!
+    userData(user: getData!): UserData!
     UserSignIn(user: UserLoginInputs!): User
 }
 

@@ -56,7 +56,7 @@ export default class UserAdd extends React.Component {
               <h2 className="title">Sign in</h2>
               <div className="input-field">
                 <i className="fas fa-user" />
-                <input type="text" placeholder="Username" name="email" />
+                <input type="text" placeholder="Email" name="email" />
               </div>
               <div className="input-field">
                 <i className="fas fa-lock" />
