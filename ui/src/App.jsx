@@ -1,10 +1,12 @@
+
 import 'babel-polyfill';
 import 'whatwg-fetch';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter as Router } from 'react-router-dom';
 
-import Main from './Main.jsx';
+
+import Main from "./Main.jsx";
 
 function App() {
   return (
@@ -16,7 +18,7 @@ function App() {
 
 const element = <App />;
 
-ReactDOM.render(element, document.getElementById('content'));
+ReactDOM.render(element, document.getElementById("content"));
 
 if (module.hot) {
   module.hot.accept();

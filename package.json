@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/Tarushfx/PTask/issues"
   },
-  "homepage": "https://github.com/Tarushfx/PTask#readme"
+  "homepage": "https://github.com/Tarushfx/PTask#readme",
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1"
+  }
 }
