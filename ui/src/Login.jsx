@@ -20,6 +20,7 @@ export default class Login extends React.Component {
     if (data.UserAdd) {
       authService.setTokenSignUp(data);
       console.log('User Created');
+      window.location = '/';
     }
   }
 
@@ -33,6 +34,7 @@ export default class Login extends React.Component {
     if (data.UserSignIn) {
       authService.setTokenSignin(data);
       console.log('Sign in Done');
+      window.location = '/';
     } else {
       authService.clearToken();
       console.log('Unsuccessful');
@@ -42,7 +44,6 @@ export default class Login extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <a href="/dashboard"><h2>To the dash board</h2></a>
         <UserAdd createUser={this.createUser} login={this.login} />
       </React.Fragment>
     );
