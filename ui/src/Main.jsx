@@ -1,4 +1,5 @@
 import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import UserList from './UserList.jsx';
 import Login from './Login.jsx';
@@ -13,9 +14,11 @@ export default class Main extends React.Component {
   // eslint-disable-next-line react/require-render-return
   render() {
     return (
-      <React.Fragment>
-        <Login />
-      </React.Fragment>
+      <Switch>
+        <Redirect exact path="/" to="/auth" />
+        <Route path="/auth" component={Login} />
+        <Route path="/dashboard" component={UserList} />
+      </Switch>
     );
   }
 }

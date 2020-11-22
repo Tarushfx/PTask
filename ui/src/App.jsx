@@ -2,10 +2,19 @@ import 'babel-polyfill';
 import 'whatwg-fetch';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { HashRouter as Router } from 'react-router-dom';
 
 import Main from './Main.jsx';
 
-const element = <Main />;
+function App() {
+  return (
+    <Router>
+      <Main />
+    </Router>
+  );
+}
+
+const element = <App />;
 
 ReactDOM.render(element, document.getElementById('content'));
 

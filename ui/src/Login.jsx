@@ -42,6 +42,7 @@ export default class Login extends React.Component {
   render() {
     return (
       <React.Fragment>
+        <a href="/#/dashboard"><h2>To the dash board</h2></a>
         <UserAdd createUser={this.createUser} login={this.login} />
       </React.Fragment>
     );
