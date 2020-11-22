@@ -158,7 +158,7 @@ img {
 .progress-bar {
   background-color: var(--button-color);
   border-radius: 4px;
-  width: 35%;
+  width: 100%;
   height: 100%;
   animation: progressAnimation 6s;
   transition: 0.3s linear both;
