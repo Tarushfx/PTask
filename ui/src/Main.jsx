@@ -3,9 +3,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 
-import Dashboard from "./Dashboard.jsx";
-import UserList from "./UserList.jsx";
-
+import Dashboard from './Dashboard.jsx';
 
 
 import Login from './Login.jsx';
@@ -25,7 +23,7 @@ export default class Main extends React.Component {
       <Switch>
         <Redirect exact path="/" to="/auth" />
         <Route path="/auth" component={Login} />
-        <Route path="/dashboard" component={UserList} />
+        <Route path="/dashboard" component={Dashboard} />
       </Switch>
 
     );

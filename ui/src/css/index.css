@@ -36,7 +36,7 @@ img {
   max-width: 100%;
 }
 
-.container {
+.Container {
   background-color: var(--theme-bg-color);
   display: flex;
   max-width: 1600px;
