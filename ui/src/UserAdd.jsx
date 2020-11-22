@@ -10,21 +10,37 @@ export default class UserAdd extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const form = document.forms.userAdd;
-    const user = {
-      name: form.name.value,
-      age: form.age.value,
-    };
-
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.createUser(user);
-    form.name.value = ''; form.age.value = '';
+    try {
+      if (form.password.value === form.confirmpswd.value) {
+        const user = {
+          name: form.name.value,
+          email: form.email.value,
+          password: form.password.value,
+        };
+        // eslint-disable-next-line react/destructuring-assignment
+        this.props.createUser(user);
+      } else {
+        throw new Error("The passwords don't match");
+      }
+      // eslint-disable-next-line no-shadow
+    } catch (e) {
+      alert('Error:', e.message);
+    }
+    form.name.value = '';
+    form.email.value = '';
+    form.password.value = '';
+    form.confirmpswd.value = '';
   }
 
   render() {
     return (
       <form name="userAdd" onSubmit={this.handleSubmit}>
         <input type="text" name="name" placeholder="Name" />
-        <input type="number" name="age" placeholder="Age" />
+        <input type="email" name="email" placeholder="Email" />
+        <br />
+        <input type="password" name="password" placeholder="Password" />
+        <input type="password" name="confirmpswd" placeholder="Confirm Password" />
+        <br />
         {/* eslint-disable-next-line react/button-has-type */}
         <button>Add</button>
       </form>

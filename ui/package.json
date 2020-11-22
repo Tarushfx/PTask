@@ -29,6 +29,7 @@
     "babel-polyfill": "^6.26.0",
     "dotenv": "^6.2.0",
     "express": "^4.17.1",
+    "font-awesome": "^4.7.0",
     "http-proxy-middleware": "^0.21.0",
     "nodemon": "^1.19.4",
     "prop-types": "^15.7.2",

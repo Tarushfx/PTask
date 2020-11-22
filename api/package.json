@@ -23,11 +23,15 @@
     "node": ">=10.0.0",
     "npm": ">=6.0.0"
   },
+  "type": "commonjs",
   "dependencies": {
     "apollo-server-express": "^2.19.0",
+    "bcrypt": "^5.0.0",
     "dotenv": "^6.2.0",
     "express": "^4.17.1",
     "graphql": "^0.13.2",
+    "joi": "^17.3.0",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.3",
     "mongoose": "^5.10.15",
     "nodemon": "^1.19.4"
