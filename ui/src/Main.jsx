@@ -1,7 +1,13 @@
-import React from 'react';
 
-import UserList from './UserList.jsx';
+import React from "react";
+import { BrowserRouter, HashRouter, Route, Switch } from "react-router-dom";
+import Dashboard from "./Dashboard.jsx";
+import UserList from "./UserList.jsx";
+
+
+
 import Login from './Login.jsx';
+
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class Main extends React.Component {
@@ -13,9 +19,11 @@ export default class Main extends React.Component {
   // eslint-disable-next-line react/require-render-return
   render() {
     return (
-      <React.Fragment>
-        <Login />
-      </React.Fragment>
+
+      <HashRouter>
+        <Dashboard />
+      </HashRouter>
+
     );
   }
 }
