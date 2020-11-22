@@ -1,6 +1,7 @@
 import React from 'react';
 
 import UserList from './UserList.jsx';
+import Login from './Login.jsx';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class Main extends React.Component {
@@ -13,7 +14,7 @@ export default class Main extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <UserList />
+        <Login />
       </React.Fragment>
     );
   }

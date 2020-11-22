@@ -2,20 +2,27 @@ scalar GraphQLDate
 
 type User {
     _id: ID!
-    id: Int!
     name: String!
-    age: Int!
-    created: GraphQLDate!
+    email: String!
+    password: String!
+    token: String
 }
 
 input UserInputs {
     name: String!
-    age: Int!
+    email: String!
+    password: String!
+}
+
+input UserLoginInputs {
+    email: String!,
+    password: String!
 }
 
 type Query{
     about: String!
     userList: [User!]!
+    UserSignIn(user: UserLoginInputs!): User
 }
 
 type Mutation {

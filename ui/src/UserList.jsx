@@ -18,7 +18,7 @@ export default class UserList extends React.Component {
   async loadData() {
     const query = `query{
       userList{
-        id name age created
+        name email password
       }
     }`;
     const data = await graphQLFetch(query);
@@ -30,7 +30,7 @@ export default class UserList extends React.Component {
   async createUser(user) {
     const query = `mutation UserAdd($user: UserInputs!) {
       UserAdd(user: $user) {
-        id
+        _id
       }
     }`;
     const data = await graphQLFetch(query, { user });

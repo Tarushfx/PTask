@@ -5,10 +5,9 @@ function UserRow(props) {
 
   return (
     <tr>
-      <td>{ user.id }</td>
       <td>{ user.name }</td>
-      <td>{ user.age }</td>
-      <td>{ user.created.toDateString() }</td>
+      <td>{ user.email }</td>
+      <td>{ user.password }</td>
     </tr>
   );
 }
@@ -21,10 +20,9 @@ export default function UserTable(props) {
     <table className="bordered-table">
       <thead>
         <tr>
-          <th>ID</th>
           <th>Name</th>
-          <th>Age</th>
-          <th>Created</th>
+          <th>Email</th>
+          <th>Password</th>
         </tr>
       </thead>
       <tbody>
