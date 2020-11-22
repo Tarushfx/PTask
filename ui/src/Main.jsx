@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Switch } from "react-router-dom";
 import Dashboard from "./Dashboard.jsx";
 import UserList from "./UserList.jsx";
 
@@ -13,9 +13,9 @@ export default class Main extends React.Component {
   // eslint-disable-next-line react/require-render-return
   render() {
     return (
-      <BrowserRouter>
+      <HashRouter>
         <Dashboard />
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }
