@@ -1,5 +1,9 @@
 import React from "react";
-function getCalendarArray(props, dayArray) {
+import CalenderDay from "./CalendarDay.jsx";
+function getCalendarArray(props) {
+  const thisMonthArray = [],
+    prevMonthArray = [],
+    nextMonthArray = [];
   const day = props.date.getDay();
   const date = props.date.getDate();
   const month = props.date.getMonth();
@@ -15,26 +19,23 @@ function getCalendarArray(props, dayArray) {
     month === 0 ? year - 1 : year
   );
   for (let i = daysInPrevMonth - startDay; i < daysInPrevMonth; i++) {
-    dayArray.push(i + 1);
+    prevMonthArray.push(i + 1);
   }
   for (let i = 0; i < daysInMonth(month, year); i++) {
-    dayArray.push(i + 1);
+    thisMonthArray.push(i + 1);
   }
-  const arrayLength = dayArray.length > 35 ? 42 : 35;
-  const currentLength = dayArray.length;
-  // console.log(arrayLength, dayArray.length, arrayLength - dayArray.length);
+  const currentLength = thisMonthArray.length + prevMonthArray.length;
+  const arrayLength = currentLength > 35 ? 42 : 35;
+
   for (let i = 0; i < arrayLength - currentLength; i++) {
-    console.log(i + 1);
-    dayArray.push(i + 1);
+    nextMonthArray.push(i + 1);
   }
-  return dayArray;
+  return [prevMonthArray, thisMonthArray, nextMonthArray];
 }
 
 const Calender = (props) => {
-  let dayArray = [];
-  dayArray = getCalendarArray(props, dayArray);
+  const array = getCalendarArray(props);
 
-  console.log(dayArray);
   const daysArray = [
     "Sunday",
     "Monday",
@@ -44,6 +45,7 @@ const Calender = (props) => {
     "Friday",
     "Saturday",
   ];
+
   return (
     <div className="calendar-container">
       <div className="calender-tab anim-y">
@@ -58,6 +60,7 @@ const Calender = (props) => {
         <div className="week-month">
           <button className=" button button-weekends">Weekends</button>
           <button className=" button button-task active">Add task</button>
+          {/* use this button */}
         </div>
       </div>
       <div className="calendar-wrapper anim-y">
@@ -65,149 +68,18 @@ const Calender = (props) => {
           {daysArray.map((dayOfWeek) => (
             <div className="days">{dayOfWeek}</div>
           ))}
-          {dayArray.map((day, index) => (
-            <div className="day">{day}</div>
-          ))}
-          <div className="day project-market">
-            1<div className="hover-title">Marketing</div>
-            <div className="project-detail">Lorem ipsum</div>
-            <div className="project-detail">Dolor Amet</div>
-            <div className="popup-check">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="feather feather-check-square"
-              >
-                <path d="M9 11l3 3L22 4" />
-                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
-              </svg>
-            </div>
-          </div>
-          {/* 
-            not-work
-
-           */}
-          <div className="day not-work">31</div>
-          <div className="day project-market">
-            1<div className="hover-title">Marketing</div>
-            <div className="project-detail">Lorem ipsum</div>
-            <div className="project-detail">Dolor Amet</div>
-            <div className="popup-check">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="feather feather-check-square"
-              >
-                <path d="M9 11l3 3L22 4" />
-                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
-              </svg>
-            </div>
-          </div>
-          <div className="day">2</div>
-          <div className="day project-design">
-            3<div className="project-detail design">Lorem ipsum dolor amet</div>
-          </div>
-          <div className="day">4</div>
-          <div className="day">5</div>
-          <div className="day">6</div>
-          <div className="day project-develop">
-            7<div className="project-detail develop">Lorem ipsum</div>
-          </div>
-          <div className="day">8</div>
-          <div className="day">9</div>
-          <div className="day">10</div>
-          <div className="day">11</div>
-          <div className="day">12</div>
-          <div className="day">13</div>
-          <div className="day">14</div>
-          <div className="day project-market">
-            15
-            <div className="hover-title">Marketing</div>
-            <div className="project-detail">Lorem ipsum dolor</div>
-            <div className="popup-check">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="feather feather-check-square"
-              >
-                <path d="M9 11l3 3L22 4" />
-                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
-              </svg>
-            </div>
-          </div>
-          <div className="day">16</div>
-          <div className="day project-market">
-            17
-            <div className="hover-title">Marketing</div>
-            <div className="project-detail">Lorem ipsum</div>
-            <div className="project-detail">Dolor Amet Elit</div>
-            <div className="popup-check">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="feather feather-check-square"
-              >
-                <path d="M9 11l3 3L22 4" />
-                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
-              </svg>
-            </div>
-          </div>
-          <div className="day">18</div>
-          <div className="day">19</div>
-          <div className="day">20</div>
-          <div className="day">21</div>
-          <div className="day">22</div>
-          <div className="day project-finance">
-            23
-            <div className="hover-title">Management</div>
-            <div className="project-detail finance">Lorem ipsum dolor</div>
-            <div className="popup-check">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="feather feather-check-square"
-              >
-                <path d="M9 11l3 3L22 4" />
-                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
-              </svg>
-            </div>
-          </div>
-          <div className="day">24</div>
-          <div className="day">25</div>
-          <div className="day">26</div>
-          <div className="day">27</div>
-          <div className="day">28</div>
-          <div className="day">29</div>
-          <div className="day">30</div>
-          <div className="day not-work">1</div>
-          <div className="day not-work">2</div>
-          <div className="day not-work">3</div>
-          <div className="day not-work">4</div>
+          {array[0].map((day, index, array) => {
+            //db read
+            return <CalenderDay day={day} work={false} thisMonth={false} />;
+          })}
+          {array[1].map((day, index, array) => {
+            //db read
+            return <CalenderDay day={day} work={true} thisMonth={true} />;
+          })}
+          {array[2].map((day, index, array) => {
+            //db read
+            return <CalenderDay day={day} work={false} thisMonth={false} />;
+          })}
         </div>
       </div>
     </div>
