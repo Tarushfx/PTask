@@ -1,4 +1,6 @@
-import React from "react";
+
+
+import React from 'react';
 
 const CalendarDay = (props) => {
   const data = (
@@ -15,11 +17,12 @@ const CalendarDay = (props) => {
         strokeLinecap="round"
         strokeLinejoin="round"
         className="feather feather-check-square"
-      ></svg>
+      />
     </React.Fragment>
   );
-  let classes = props.work ? "day project-market" : "day";
-  if (!props.thisMonth) classes = classes + "not-work";
+
+  let classes = props.work ? 'day project-market' : 'day';
+  if (!props.thisMonth) classes += 'not-work';
   return (
     <div className={classes}>
       {props.day}

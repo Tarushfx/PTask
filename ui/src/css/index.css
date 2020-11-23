@@ -44,7 +44,7 @@ img {
 .Container {
   background-color: var(--theme-bg-color);
   display: flex;
-  max-width: 1600px;
+  max-width: 100%;
   height: 100vh;
   overflow: hidden;
   margin: 0 auto;
@@ -856,6 +856,7 @@ img {
 .hover-title {
   display: none;
   color: #fff;
+  text-align: right;
 }
 
 .popup-check {

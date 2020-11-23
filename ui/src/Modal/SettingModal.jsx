@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-
-const AddTaskModal = () => {
-  function handleSubmitTask() {
-
-  }
-
+const SettingModal = () => {
   return (
-    <div id="taskModal" className="modal fade" role="dialog">
+    <div id="settingModal" className="modal fade" role="dialog">
       <div className="modal-dialog modal-md modal-dialog-centered" role="content">
         <div className="modal-content">
           <div className="modal-header">
-            <h3 className="modal-title">Add a Task</h3>
+            <h3 className="modal-title">Settings</h3>
             <button type="button" className="close" data-dismiss="modal">&times;</button>
           </div>
           <div className="modal-body">
@@ -44,4 +39,4 @@ const AddTaskModal = () => {
   );
 };
 
-export default AddTaskModal;
+export default SettingModal;
