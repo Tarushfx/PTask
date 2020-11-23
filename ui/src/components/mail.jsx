@@ -5,7 +5,11 @@ const Mail = (props) => {
     <div className="mail-detail">
       <div className="mail-detail-header">
         <div className="mail-detail-profile">
-          <img src="./assets/om.jpeg" alt="" className="members inbox-detail" />
+          <img
+            src="images/User-Icon.jpg"
+            alt=""
+            className="members inbox-detail"
+          />
           <div className="mail-detail-name">User2</div>
         </div>
         <div className="mail-icons">

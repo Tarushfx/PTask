@@ -107,3 +107,6 @@ dist
 .idea
 
 /api/Additional/
+
+#vscode 
+.vscode/

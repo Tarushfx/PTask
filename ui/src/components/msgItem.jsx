@@ -9,12 +9,12 @@ const MsgItem = (props) => {
         id={`mail-${props.index}`}
         className="mail-choice"
       />
-      <label htmlFor={`mail-${props.key}`}></label>
+      <label htmlFor={`mail-${props.index}`}></label>
       <div className="msg-content">
         <div className="msg-title">{props.title}</div>
         <div className="msg-date">{props.date}</div>
       </div>
-      <img src="" alt="" className="members mail-members" />
+      <img src="images/User-Icon.jpg" alt="" className="members mail-members" />
     </div>
   );
 };

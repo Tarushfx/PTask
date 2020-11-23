@@ -1,6 +1,6 @@
-import React from 'react';
-import MsgItem from './msgItem.jsx';
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import React from "react";
+import MsgItem from "./msgItem.jsx";
+import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 const Inbox = (props) => {
   const array = [1, 2, 3, 4];
@@ -12,8 +12,8 @@ const Inbox = (props) => {
             classes="msg selected-bg anim-y"
             key={index}
             index={index}
-            tiitle="Hello"
-            // date={new Date("2020-15-08")}
+            title="Hello"
+            // date={formatDate(new Date("2020-15-08"))}
           />
         ))}
         <div className="msg msg-department anim-y">
@@ -39,7 +39,11 @@ const Inbox = (props) => {
             <div className="msg-title">Write an article about design</div>
             <div className="msg-date">20 August, 2020</div>
           </div>
-          <img src="./assets/om.jpeg" alt="" className="members mail-members" />
+          <img
+            src="images/User-Icon.jpg"
+            alt=""
+            className="members mail-members"
+          />
         </div>
         <div className="msg anim-y">
           <input
@@ -54,7 +58,7 @@ const Inbox = (props) => {
             <div className="msg-date">Date</div>
           </div>
           <img
-            src="./assets/atishek.jpeg"
+            src="images/User-Icon.jpg"
             alt=""
             className="members mail-members"
           />
@@ -73,7 +77,7 @@ const Inbox = (props) => {
             <div className="msg-date">Date</div>
           </div>
           <img
-            src="./assets/neha.jpeg"
+            src="images/User-Icon.jpg"
             alt=""
             className="members mail-members"
           />
@@ -91,7 +95,7 @@ const Inbox = (props) => {
             <div className="msg-date">Date</div>
           </div>
           <img
-            src="./assets/yash.jpeg"
+            src="images/User-Icon.jpg"
             alt=""
             className="members mail-members"
           />
@@ -109,7 +113,7 @@ const Inbox = (props) => {
             <div className="msg-date">Date</div>
           </div>
           <img
-            src="./assets/tarush.jpeg"
+            src="images/User-Icon.jpg"
             alt=""
             className="members mail-members"
           />
@@ -127,7 +131,7 @@ const Inbox = (props) => {
             <div className="msg-date">Date</div>
           </div>
           <img
-            src="./assets/atishek.jpeg"
+            src="images/User-Icon.jpg"
             alt=""
             className="members mail-members"
           />
@@ -144,7 +148,11 @@ const Inbox = (props) => {
             <div className="msg-title">Lorem</div>
             <div className="msg-date">Date</div>
           </div>
-          <img src="./assets/om.jpeg" alt="" className="members mail-members" />
+          <img
+            src="images/User-Icon.jpg"
+            alt=""
+            className="members mail-members"
+          />
         </div>
         <div className="msg anim-y">
           <input
@@ -159,14 +167,20 @@ const Inbox = (props) => {
             <div className="msg-date">Date</div>
           </div>
           <img
-            src="./assets/tarush.jpeg"
+            src="images/User-Icon.jpg"
             alt=""
             className="members mail-members"
           />
         </div>
       </div>
       <div className="add-task">
-        <button className="add-button" data-toggle="modal" data-target="#taskModal">Add task</button>
+        <button
+          className="add-button"
+          data-toggle="modal"
+          data-target="#taskModal"
+        >
+          Add task
+        </button>
       </div>
     </div>
   );
