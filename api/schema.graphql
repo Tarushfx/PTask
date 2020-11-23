@@ -6,6 +6,12 @@ enum State {
     completed
 }
 
+type Team {
+    title: String!
+    members: [ID!]
+    description: String
+}
+
 type Project {
     title: String!
     created: GraphQLDate!
@@ -27,6 +33,7 @@ type UserData {
     tasks: [Task]
     projects: [Project]
     likes: [String]
+    team: Team
 }
 
 type User {
