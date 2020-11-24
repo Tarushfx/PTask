@@ -81,6 +81,6 @@ type Mutation {
     setAboutMessage(message: String!): String!
     UserAdd(user: UserInputs!): User!
     addTask(task: TaskInput!): Task!
-    UserUpdate(user: UserUpdateInputs!): UserData
+    UserUpdate(user: UserUpdateInputs!): String
     UserDelete(user: getData!) : String
 }

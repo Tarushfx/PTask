@@ -13,7 +13,7 @@ async function userUpdate(_, { user }) {
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
   await User.updateOne({_id: user._id}, {$set: {name: user.name , password: user.password }});
-  return await User.findOne({_id: user._id})
+  return "Updated";
 }
 
 async function userDelete(_, { user }) {
@@ -27,13 +27,6 @@ async function userDelete(_, { user }) {
 module.exports = { userData, userUpdate, userDelete };
 
 
-// mutation update($user: UserUpdateInputs!){
-//   UserUpdate(user: $user){
-//     name
-//   }
-// }
 
-// mutation delete($user: getData!) {
-//   UserDelete(user: $user)
-// }
+
 

@@ -16,7 +16,7 @@ const NavBar = (props) => {
           </div>
         </span>
         <div className="inbox-calendar">
-          <input type="checkbox" className="inbox-calendar-checkbox"></input>
+          <input type="checkbox" className="inbox-calendar-checkbox"/>
           <div className="toggle-page">
             <span>Dashboard</span>
           </div>

@@ -1,25 +1,69 @@
 import React, { useState } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import authservice from "../../services/authservice";
+import authservice from "../../services/authservice.js";
 import jwt from 'jsonwebtoken';
+import graphQLFetch from "../graphQLFetch.js";
 
-const SettingModal = () => {
+const SettingModal = (props) => {
 
-  function handleSubmit(e){
+  async function update(user){
+    const query = `mutation update($user: UserUpdateInputs!){
+      UserUpdate(user: $user)
+    }`;
+
+    const data = await graphQLFetch(query, {user: user})
+    if(data.UserUpdate === "Updated"){
+      props.loadData();
+    }
+
+  }
+
+  async function handleSubmit(e){
     e.preventDefault();
     const form = document.forms.UpdateUser;
     const token = authservice.getToken();
     const id = jwt.decode(token)._id;
-    // try {
-    //   if(form.password.value === form.confirmPassword.value && form.password.value.length >= 6)
-    // }catch (err){
-    //
-    // }
+    try {
+      if(form.password.value === form.confirmPassword.value && form.password.value.length >= 6){
+        const user = {
+          _id: id,
+          name: form.name.value,
+          password: form.password.value,
+        }
+        await update(user)
+      }
+      else {
+        throw new Error("Password dont match");
+      }
+    }catch (err){
+      console.log(err.message);
+    }
+    await (() => $('#settingModal').modal('hide'))();
+
+    authservice.clearToken();
+    window.location = '/';
 
   }
 
   async function deleteUser(){
+    const token = authservice.getToken();
+    const id = jwt.decode(token)._id;
+    const query = `mutation delete($user: getData!) {
+      UserDelete(user: $user)
+    }`;
 
+    const user = {
+      _id: id
+    };
+
+    const data = await graphQLFetch(query, {user: user});
+    if(data.UserDelete === "Deleted Successfully"){
+      authservice.clearToken();
+      window.location = '/'
+    }
+    else{
+      props.loadData();
+    }
   }
 
   return (
@@ -56,7 +100,7 @@ const SettingModal = () => {
 
               <div className="form-group row">
                 <button type="button" className="btn-danger btn-sm ml-auto" onClick={deleteUser}>Delete Account</button>
-                <button type="submit" className="btn-success btn-sm ml-2">Update Account</button>
+                <button type="submit" className="btn-success btn-sm ml-2" id="update">Update Account</button>
               </div>
             </form>
           </div>
