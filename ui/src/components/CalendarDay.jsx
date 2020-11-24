@@ -1,6 +1,4 @@
-
-
-import React from 'react';
+import React from "react";
 
 const CalendarDay = (props) => {
   const data = (
@@ -21,11 +19,11 @@ const CalendarDay = (props) => {
     </React.Fragment>
   );
 
-  let classes = props.work ? 'day project-market' : 'day';
-  if (!props.thisMonth) classes += 'not-work';
+  let classes = props.work ? "day project-market" : "day";
+  if (!props.thisMonth) classes += "not-work";
   return (
     <div className={classes}>
-      {props.day}
+      <span className="text-center">{props.day}</span>
       {props.work && data}
     </div>
   );

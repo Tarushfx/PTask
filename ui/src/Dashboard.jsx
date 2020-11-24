@@ -11,10 +11,10 @@ import graphQLFetch from "./graphQLFetch.js";
 import authservice from "../services/authservice.js";
 
 class Dashboard extends React.Component {
-
+  // state = { user: {} };
   constructor() {
     super();
-    this.state = {user: {}};
+    this.state = { user: {} };
   }
 
   async loadData() {
@@ -33,31 +33,30 @@ class Dashboard extends React.Component {
     }`;
 
     const token = authservice.getToken();
-    const decodedToken = jwt.decode(token)
-    const id = {_id: decodedToken._id}
-    const data = await graphQLFetch(query,{user: id})
-    if(data) {
-      this.setState({user: data.userData})
-      console.log(this.state.user.name);
+    const decodedToken = jwt.decode(token);
+    const id = { _id: decodedToken._id };
+    const data = await graphQLFetch(query, { user: id });
+    if (data) {
+      this.setState({ user: data.userData });
+      // console.log(this.state.user.name);
     }
   }
 
   async componentDidMount() {
     await this.loadData();
-
   }
 
   render() {
-    return(
+    return (
       <div className="Container">
         {/* <SimpleNotif /> */}
-        <ProfileBar user={this.state.user}/>
-        <MainArea/>
-        <AddTaskModal/>
-        <SettingModal/>
+        <ProfileBar user={this.state.user} />
+        <MainArea user={this.state.user} />
+        <AddTaskModal />
+        <SettingModal />
       </div>
     );
   }
-};
+}
 
 export default Dashboard;

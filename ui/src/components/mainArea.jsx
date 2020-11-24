@@ -4,8 +4,8 @@ import NavBar from "./navBar.jsx";
 const MainArea = (props) => {
   return (
     <div className="main-area">
-      <NavBar />
-      <MainContainer />
+      <NavBar user={props.user} />
+      <MainContainer user={props.user} />
     </div>
   );
 };

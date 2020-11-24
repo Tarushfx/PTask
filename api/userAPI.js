@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const { UserSchema } = require('./models/user.model');
-const userFunctions = require('./user.js');
-const User = mongoose.model('users', UserSchema);
+const mongoose = require("mongoose");
+const { UserSchema } = require("./models/user.model");
+const userFunctions = require("./user.js");
+const User = mongoose.model("users", UserSchema);
 
 async function userData(_, { user }) {
   console.log(user);
@@ -18,4 +18,4 @@ async function userData(_, { user }) {
 //
 // }
 //
-// module.exports = { userData };
+module.exports = { userData };
