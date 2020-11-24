@@ -137,8 +137,9 @@ img {
 .notify.alert {
   position: relative;
 }
+/* messages */
 .notify.alert:before {
-  content: "2";
+  content: "199";
   font-size: 9px;
   font-weight: 700;
   position: absolute;
@@ -153,8 +154,9 @@ img {
   right: 0px;
   color: #fff;
 }
+/* notification */
 .notify.alert:last-child:before {
-  content: "5";
+  content: "1";
 }
 
 .progress {

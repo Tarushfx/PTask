@@ -1,50 +1,205 @@
-import React from 'react';
-import '../css/style.css';
-
+import React from "react";
+import Joi from "joi-browser";
+import "../css/style.css";
+import Input from "./input.jsx";
+import _ from "lodash";
 export default class UserAdd extends React.Component {
+  state = {
+    signIn: {
+      data: {
+        email: "",
+        password: "",
+      },
+      errors: {},
+    },
+    signUp: {
+      data: {
+        name: "",
+        email: "",
+        password: "",
+        confirmpswd: "",
+      },
+      errors: {},
+    },
+  };
   constructor() {
     super();
     this.handleSubmitSignUp = this.handleSubmitSignUp.bind(this);
     this.handleSubmitSignIn = this.handleSubmitSignIn.bind(this);
   }
+  signInSchema = {
+    email: Joi.string().required().label("E-mail"),
+    password: Joi.string().required().min(6).label("Password"),
+  };
+  handleSignInChange = ({ currentTarget: input }) => {
+    // console.log("hi");
+    const signIn = { ...this.state.signIn };
+    signIn.data[input.name] = input.value;
 
-  handleSubmitSignUp(e) {
-    e.preventDefault();
-    const form = document.forms.signup;
-    try {
-      if (form.password.value === form.confirmpswd.value) {
-        const user = {
-          name: form.name.value,
-          email: form.email.value,
-          password: form.password.value,
-        };
-        // eslint-disable-next-line react/destructuring-assignment
-        this.props.createUser(user);
-      } else {
-        console.log("Passwords don't match");
-        throw new Error('Passwords dont match');
-      }
-    } catch (err) {
-      alert('Error:', e.message);
+    // const errors = { ...this.state.signIn.errors };
+    const error = this.validateSignInProperty(input);
+    // console.log(error);
+    if (error) signIn.errors[input.name] = error;
+    else delete signIn.errors[input.name];
+
+    this.setState({
+      signIn,
+    });
+  };
+
+  validateSignIn = () => {
+    const errors = {};
+    const settings = { abortEarly: false };
+    const { error } = Joi.validate(
+      this.state.signIn.data,
+      this.signInSchema,
+      settings
+    );
+
+    if (!error) {
+      return null;
     }
 
-    form.name.value = '';
-    form.email.value = '';
-    form.password.value = '';
-    form.confirmpswd.value = '';
-  }
+    //to get all errors
+    for (let item of error.signIn.data)
+      errors[item.path[0]] = !errors[item.path[0]]
+        ? item.message
+        : `${errors[item.path[0]]} , ${item.message}`;
 
+    // console.log(errors);
+    return errors;
+  };
+
+  validateSignInProperty = ({ name, value }) => {
+    const proprertyObject = { [name]: value };
+    const propertySchema = { [name]: this.signInSchema[name] };
+    // console.log(proprertyObject, propertySchema);
+    const { error } = Joi.validate(proprertyObject, propertySchema);
+    // console.log(error.details);
+    // comparing the passwords
+    // const confirm = this.confirmPasswords(name, value);
+    if (error) return error.details[0].message;
+    // if (confirm) return confirm;
+    return null;
+  };
   handleSubmitSignIn(e) {
     e.preventDefault();
-    const form = document.forms.signin;
-    const user = {
-      email: form.email.value,
-      password: form.password.value,
-    };
-    this.props.login(user);
 
-    form.email.value = '';
-    form.password.value = '';
+    // const form = document.forms.signin;
+    const signUp = { ...this.state.signIn };
+    signUp.errors = this.validateSignIn();
+    this.setState({ signUp });
+
+    const user = { ...this.state.signIn.data };
+    this.props.login(_.pick(user, ["email", "password"]));
+
+    form.email.value = "";
+    form.password.value = "";
+  }
+
+  signUpSchema = {
+    name: Joi.string().required().min(5).label("Name"),
+    email: Joi.string().required().label("E-mail"),
+    password: Joi.string().required().min(6).label("Password"),
+    confirmpswd: Joi.string().required().label("Confirm Password"),
+  };
+
+  handleSignUpChange = ({ currentTarget: input }) => {
+    const signUp = { ...this.state.signUp };
+    signUp.data[input.name] = input.value;
+
+    // const errors = { ...this.state.errors };
+    const error = this.validateSignUpProperty(input);
+    // console.log(error);
+    if (error) signUp.errors[input.name] = error;
+    else delete signUp.errors[input.name];
+
+    this.setState({ signUp });
+  };
+  validateSignUp = () => {
+    const errors = {};
+    const settings = { abortEarly: false };
+    const { error } = Joi.validate(
+      this.state.signUp.data,
+      this.signUpSchema,
+      settings
+    );
+    const confirm = this.confirmPasswords(
+      "confirmPassword",
+      this.state.signUp.data["confirmPassword"]
+    );
+    if (confirm && this.state.signUp.data["confirmPassword"])
+      errors["confirmPassword"] = errors["confirmPassword"]
+        ? `${errors["confirmPassword"]} , ${confirm}`
+        : confirm;
+    // console.log(confirm);
+    if (!error) {
+      return confirm;
+    }
+
+    //to get all errors
+    for (let item of error.signUp.data)
+      errors[item.path[0]] = !errors[item.path[0]]
+        ? item.message
+        : `${errors[item.path[0]]} , ${item.message}`;
+
+    // console.log(errors);
+    return errors;
+  };
+  confirmPasswords = (name, value) => {
+    if (name === "confirmpswd")
+      if (value !== this.state.signUp.data.password)
+        return "The passwsords do not match!!!";
+    return null;
+  };
+
+  validateSignUpProperty = ({ name, value }) => {
+    const proprertyObject = { [name]: value };
+    const propertySchema = { [name]: this.signUpSchema[name] };
+    const { error } = Joi.validate(proprertyObject, propertySchema);
+    // comparing the passwords
+    const confirm = this.confirmPasswords(name, value);
+    // console.log(confirm);
+    if (error) return error.details[0].message;
+    if (confirm) return confirm;
+    return null;
+  };
+  handleSubmitSignUp(e) {
+    e.preventDefault();
+    // const form = document.forms.signup;
+
+    try {
+      const signUp = { ...this.state.signUp };
+      signUp.errors = this.validateSignUp();
+      this.setState({ signUp });
+      console.log(signUp);
+      // if (form.password.value === form.confirmpswd.value) {
+      //   const user = {
+      //     name: form.name.value,
+      //     email: form.email.value,
+      //     password: form.password.value,
+      //   };
+      //   // eslint-disable-next-line react/destructuring-assignment
+      //   this.props.createUser(user);
+      // } else {
+      //   console.log("Passwords don't match");
+      //   throw new Error("Passwords dont match");
+      // }
+      const user = _.pick(this.state.signUp.data, [
+        "name",
+        "email",
+        "password",
+      ]);
+      console.log(user);
+      this.props.createUser(user);
+    } catch (err) {
+      console.log("Error:", err);
+    }
+
+    form.name.value = "";
+    form.email.value = "";
+    form.password.value = "";
+    form.confirmpswd.value = "";
   }
 
   render() {
@@ -52,36 +207,102 @@ export default class UserAdd extends React.Component {
       <div className="container">
         <div className="forms-container">
           <div className="signin-signup">
-            <form onSubmit={this.handleSubmitSignIn} className="sign-in-form" name="signin">
+            <form
+              onSubmit={this.handleSubmitSignIn}
+              className="sign-in-form"
+              name="signin"
+            >
               <h2 className="title">Sign in</h2>
-              <div className="input-field">
+              {/* <div className="input-field">
                 <i className="fas fa-user" />
                 <input type="text" placeholder="Email" name="email" />
-              </div>
-              <div className="input-field">
+              </div> */}
+              {/* <div className="input-field">
                 <i className="fas fa-lock" />
                 <input type="password" placeholder="Password" name="password" />
-              </div>
+              </div> */}
+              <Input
+                placeholder="E-mail"
+                name="email"
+                type="email"
+                error={this.state.signIn.errors}
+                label="E-mail"
+                onChange={this.handleSignInChange}
+                form="SignIn"
+              />
+              <Input
+                placeholder="Password"
+                name="password"
+                type="password"
+                error={this.state.signIn.errors}
+                label="Password"
+                onChange={this.handleSignInChange}
+                form="SignIn"
+              />
               <button className="btn solid">Sign In </button>
             </form>
-            <form onSubmit={this.handleSubmitSignUp} className="sign-up-form" name="signup">
+            <form
+              onSubmit={this.handleSubmitSignUp}
+              className="sign-up-form"
+              name="signup"
+            >
               <h2 className="title">Sign up</h2>
-              <div className="input-field">
+              {/* <div className="input-field">
                 <i className="fas fa-user" />
                 <input type="text" placeholder="Full Name" name="name" />
-              </div>
-              <div className="input-field">
+              </div> */}
+              <Input
+                placeholder="Full Name"
+                name="name"
+                type="text"
+                error={this.state.signUp.errors}
+                label="Name"
+                onChange={this.handleSignUpChange}
+                form="SignUp"
+              />
+              {/* <div className="input-field">
                 <i className="fas fa-envelope" />
                 <input type="email" placeholder="Email" name="email" />
-              </div>
-              <div className="input-field">
+              </div> */}
+              <Input
+                placeholder="E-mail"
+                name="email"
+                type="email"
+                error={this.state.signUp.errors}
+                label="E-mail"
+                onChange={this.handleSignUpChange}
+                form="SignUp"
+              />
+              {/* <div className="input-field">
                 <i className="fas fa-lock" />
                 <input type="password" placeholder="Password" name="password" />
-              </div>
-              <div className="input-field">
+              </div> */}
+              <Input
+                placeholder="Password"
+                name="password"
+                type="password"
+                error={this.state.signUp.errors}
+                label="Password"
+                onChange={this.handleSignUpChange}
+                form="SignUp"
+              />
+              {/* <div className="input-field">
                 <i className="fas fa-lock" />
-                <input type="password" placeholder="Confirm Password" name="confirmpswd" />
-              </div>
+                <input
+                  type="password"
+                  placeholder="Confirm Password"
+                  name="confirmpswd"
+                />
+              </div> */}
+              <Input
+                placeholder="Confirm Password"
+                name="confirmpswd"
+                type="password"
+                error={this.state.signUp.errors}
+                label="Password"
+                onChange={this.handleSignUpChange}
+                form="SignUp"
+              />
               <button className="btn">Sign Up </button>
             </form>
           </div>
@@ -92,8 +313,8 @@ export default class UserAdd extends React.Component {
             <div className="content">
               <h3>New here ?</h3>
               <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-                ex ratione. Aliquid!
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Debitis, ex ratione. Aliquid!
               </p>
               <button className="btn transparent" id="sign-up-btn">
                 Sign up
