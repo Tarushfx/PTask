@@ -74,4 +74,4 @@ async function logIn(_, { user }) {
   }
 }
 
-module.exports = { add, logIn };
+module.exports = { add, logIn, hashpassword };

@@ -1,10 +1,36 @@
 import React, { useState } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-
+import authservice from "../../services/authservice.js";
+import jwt from 'jsonwebtoken';
+import graphQLFetch from "../graphQLFetch.js";
 
 const AddTaskModal = () => {
-  function handleSubmitTask() {
+  async function addTask(task){
+    const query = `mutation addTask($task : TaskInput!){
+      addTask(task: $task){
+        title created description state
+      }
+    }`;
 
+    console.log(task);
+    const data = await graphQLFetch(query, {task: task});
+    if(data){
+      console.log(data);
+    }
+  }
+
+  async function handleSubmitTask(e) {
+    e.preventDefault();
+    const form = document.forms.taskAdd;
+    const token = authservice.getToken();
+    const id = jwt.decode(token)._id;
+    const task = {
+      _id: id,
+      title: form.title.value,
+      description: form.desc.value,
+    };
+    await addTask(task);
+    form.title.value = ''; form.desc.value='';
   }
 
   return (
@@ -16,7 +42,7 @@ const AddTaskModal = () => {
             <button type="button" className="close" data-dismiss="modal">&times;</button>
           </div>
           <div className="modal-body">
-            <form>
+            <form name="taskAdd" onSubmit={handleSubmitTask}>
               <div className="form-group">
                 <label htmlFor="title" className="col-md-2 col-form-label">
                   Title

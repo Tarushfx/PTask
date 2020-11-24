@@ -33,7 +33,7 @@ const Notifications = (notifArray) => {
 };
 const CloseButton = ({ closeToast }) => (
   <i className="material-icons" onClick={closeToast}>
-    <button type="button" class="close " aria-label="Close">
+    <button type="button" className="close" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </i>

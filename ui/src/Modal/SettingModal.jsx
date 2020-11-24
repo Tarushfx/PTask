@@ -13,23 +13,30 @@ const SettingModal = () => {
           <div className="modal-body">
             <form>
               <div className="form-group">
-                <label htmlFor="title" className="col-md-2 col-form-label">
-                  Title
+                <label htmlFor="name" className="col-md-2 col-form-label">
+                  Name
                 </label>
                 <div className="col-md-10">
-                  <input type="text" className="form-control form-control-sm mr-1" name="title" id="title" placeholder="Title" />
+                  <input type="text" className="form-control form-control-sm mr-1" name="name" id="name" placeholder="Name" />
                 </div>
               </div>
               <div className="form-group">
-                <label htmlFor="desc" className="col-md-2 col-form-label">Description</label>
+                <label htmlFor="password" className="col-md-6 col-form-label">New Password</label>
                 <div className="col-md-12">
-                  <textarea name="desc" rows="6" className="form-control mr-1" id="desc" placeholder="Description"></textarea>
+                  <input type="password" className="form-control form-control-sm mr-1" name="password" placeholder="New Password"/>
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="confirmPassword" className="col-md-6 col-form-label">Confirm New Password</label>
+                <div className="col-md-12">
+                  <input type="password" className="form-control form-control-sm mr-1" name="confirmPassword" placeholder="New Password"/>
                 </div>
               </div>
 
               <div className="form-group row">
-                <button type="button" className="btn-danger btn-sm ml-auto" data-dismiss="modal">Cancel</button>
-                <button type="submit" className="btn-success btn-sm ml-2">Add Task</button>
+                <button type="button" className="btn-danger btn-sm ml-auto">Delete Account</button>
+                <button type="submit" className="btn-success btn-sm ml-2">Update Account</button>
               </div>
             </form>
           </div>
