@@ -17,3 +17,6 @@ $(".inbox-calendar").click(function () {
   $(".inbox-container").toggleClass("hide");
   $(".mail-detail").toggleClass("hide");
 });
+
+
+

@@ -1,7 +1,7 @@
 import React from "react";
 import authService from "../../services/authservice";
 import Toast from "./Notification/Notifications.jsx";
-import _ from "lodash";
+import _ from 'lodash';
 const array = [
   { text: "Notification1", type: 1 },
   { text: "Notification2", type: 2 },
@@ -10,35 +10,30 @@ const array = [
 ];
 
 class ProfileBar extends React.Component {
+
   signOut() {
     authService.clearToken();
     window.location = "/";
   }
 
   constructor(props) {
-    super(props);
-    this.user = this.props.user;
-    this.tasks = !_.isEmpty(this.user) ? this.props.user.tasks : null;
-    this.total = this.tasks ? this.tasks.length : "N/A";
-    this.completed = this.tasks
-      ? this.tasks.filter((task) => task.state == "completed")
-      : "N/A";
-    this.incomplete = this.tasks
-      ? this.tasks.filter((task) => task.state == "notStarted")
-      : "N/A";
-
-    this.projectArray = !_.isEmpty(this.user) ? this.user.projects : [];
-    console.log(this.user, this.tasks, this.projectArray);
+    super();
   }
   render() {
+    let user = this.props.user;
+    let tasks = user.tasks ? user.tasks : [];
+    let total = tasks ? tasks.length : 0;
+    let complete = tasks.filter(task => task.state === "completed").length;
+    let incomplete = tasks.filter(task => task.state === "notStarted").length;
+    let projectArray = user.projects ? user.projects : [];
     return (
       <div className="user-profile-area">
         <div className="task-manager"> Task Manager </div>
         <div className="side-wrapper">
           <div className="user-profile">
             <img src="images/User-Icon.jpg" alt="" className="user-photo" />
-            <div className="user-name">{this.user.name}</div>
-            <div className="user-mail">{this.user.email}</div>
+            <div className="user-name">{user.name}</div>
+            <div className="user-mail">{user.email}</div>
           </div>
           <div className="user-notification">
             <div className="notify">
@@ -79,17 +74,17 @@ class ProfileBar extends React.Component {
 
           <div className="task-status">
             <div className="task-stat">
-              <div className="task-number">{this.completed}</div>
+              <div className="task-number">{complete}</div>
               <div className="task-condition">Completed</div>
               <div className="task-tasks">tasks</div>
             </div>
             <div className="task-stat">
-              <div className="task-number">{this.incomplete}</div>
+              <div className="task-number">{incomplete}</div>
               <div className="task-condition">To do</div>
               <div className="task-tasks">tasks</div>
             </div>
             <div className="task-stat">
-              <div className="task-number">{this.total}</div>
+              <div className="task-number">{total}</div>
               <div className="task-condition">Total</div>
               <div className="task-tasks">tasks</div>
             </div>
@@ -98,7 +93,7 @@ class ProfileBar extends React.Component {
         <div className="side-wrapper">
           <div className="project-title">Projects</div>
           <div className="project-name">
-            {this.projectArray.map((item) => (
+            {projectArray.map((item) => (
               <div className="project-department">{item}</div>
             ))}
             <div className="project-department">Hello</div>

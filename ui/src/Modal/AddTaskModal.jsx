@@ -4,7 +4,7 @@ import authservice from "../../services/authservice.js";
 import jwt from 'jsonwebtoken';
 import graphQLFetch from "../graphQLFetch.js";
 
-const AddTaskModal = () => {
+const AddTaskModal = (props) => {
   async function addTask(task){
     const query = `mutation addTask($task : TaskInput!){
       addTask(task: $task){
@@ -31,6 +31,11 @@ const AddTaskModal = () => {
     };
     await addTask(task);
     form.title.value = ''; form.desc.value='';
+    console.log("not called");
+    await (() => $('#taskModal').modal('hide'))();
+    console.log("here")
+    await props.loadData();
+    console.log("render")
   }
 
   return (
@@ -60,7 +65,7 @@ const AddTaskModal = () => {
 
               <div className="form-group row">
                 <button type="button" className="btn-danger btn-sm ml-auto" data-dismiss="modal">Cancel</button>
-                <button type="submit" className="btn-success btn-sm ml-2">Add Task</button>
+                <button type="submit" className="btn-success btn-sm ml-2" id="taskSubmit">Add Task</button>
               </div>
             </form>
           </div>

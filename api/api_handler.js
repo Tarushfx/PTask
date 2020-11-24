@@ -18,6 +18,8 @@ const resolvers = {
     setAboutMessage: about.setMessage,
     UserAdd: user.add,
     addTask: taskAPI.addTask,
+    UserUpdate: userAPI.userUpdate,
+    UserDelete: userAPI.userDelete,
   },
   GraphQLDate,
 };

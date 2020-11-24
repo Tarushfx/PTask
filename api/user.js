@@ -39,10 +39,8 @@ async function validate(user) {
 
 async function hashpassword(user) {
   const newUser = user;
-  console.log(newUser);
   const salt = await bcrypt.genSalt(10);
   newUser.password = await bcrypt.hash(newUser.password, salt);
-  console.log(newUser);
   return newUser;
 }
 

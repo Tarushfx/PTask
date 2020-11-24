@@ -15,6 +15,7 @@ class Dashboard extends React.Component {
   constructor() {
     super();
     this.state = { user: {} };
+    this.loadData = this.loadData.bind(this);
   }
 
   async loadData() {
@@ -38,7 +39,7 @@ class Dashboard extends React.Component {
     const data = await graphQLFetch(query, { user: id });
     if (data) {
       this.setState({ user: data.userData });
-      // console.log(this.state.user.name);
+      console.log(this.state.user);
     }
   }
 
@@ -52,8 +53,8 @@ class Dashboard extends React.Component {
         {/* <SimpleNotif /> */}
         <ProfileBar user={this.state.user} />
         <MainArea user={this.state.user} />
-        <AddTaskModal />
-        <SettingModal />
+        <AddTaskModal loadData={this.loadData}/>
+        <SettingModal loadData={this.loadData}/>
       </div>
     );
   }
