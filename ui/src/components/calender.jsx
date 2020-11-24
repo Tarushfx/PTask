@@ -10,11 +10,11 @@ function getCalendarArray(props) {
   const month = props.date.getMonth();
   const year = props.date.getFullYear();
   const startDay = new Date(new Date().setDate(0)).getDay();
-  // console.log(startDay);
+
   function daysInMonth(iMonth, iYear) {
     return 32 - new Date(iYear, iMonth, 32).getDate();
   }
-  // console.log(daysInMonth(month, year));
+
   const daysInPrevMonth = daysInMonth(
     month === 0 ? 12 : month - 1,
     month === 0 ? year - 1 : year
@@ -45,7 +45,7 @@ const Calender = (props) => {
     element.classList.remove("active");
   }
 
-  const array = getCalendarArray(props);
+  const tempArray = getCalendarArray(props);
 
   const monthNames = [
     "January",
@@ -72,6 +72,10 @@ const Calender = (props) => {
     "Saturday",
   ];
 
+  let taskArray = props.user.tasks ? props.user.tasks : [];
+
+  // date = date !== "Invalid Date" ? date : "";
+  let finalArray = [];
   return (
     <div className="calendar-container">
       <div className="calender-tab anim-y">
@@ -100,18 +104,23 @@ const Calender = (props) => {
           {daysArray.map((dayOfWeek) => (
             <div className="days">{dayOfWeek}</div>
           ))}
-          {array[0].map((day, index, array) => (
-            // db read
-            <CalenderDay day={day} work={false} thisMonth={false} />
-          ))}
-          {array[1].map((day, index, array) => (
-            // db read
-            <CalenderDay day={day} work thisMonth />
-          ))}
-          {array[2].map((day, index, array) => (
-            // db read
-            <CalenderDay day={day} work={false} thisMonth={false} />
-          ))}
+          {tempArray[0].map((day, index, array) => {
+            finalArray.push({ day: day, thisMonth: false });
+          })}
+          {tempArray[1].map((day, index, array) => {
+            finalArray.push({ day: day, thisMonth: true });
+          })}
+          {tempArray[2].map((day, index, array) => {
+            finalArray.push({ day: day, thisMonth: false });
+          })}
+          {taskArray.map((task) => {})}
+          {finalArray.map((day) => {
+            let tasksOnADay = taskArray.filter((task) => {
+              let date = new Date(Date.parse(task.created)).getDate();
+              return date === day.day && day.thisMonth == true;
+            });
+            return <CalenderDay day={day} tasksOnADay={tasksOnADay} />;
+          })}
         </div>
       </div>
     </div>

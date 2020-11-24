@@ -8,7 +8,7 @@ const MainContainer = (props) => {
     <div className="main-container">
       <Inbox user={props.user} />
       <Mail user={props.user} />
-      <Calender date={new Date("2020-11-01")} user={props.user} />
+      <Calender date={new Date()} user={props.user} />
     </div>
   );
 };

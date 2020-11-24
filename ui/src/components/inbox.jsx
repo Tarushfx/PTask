@@ -3,27 +3,31 @@ import MsgItem from "./msgItem.jsx";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 const Inbox = (props) => {
-  const taskArray = props.user ? props.user.tasks : [];
-  const array = [1, 2, 3, 4];
+  let taskArray = props.user.tasks ? props.user.tasks : [];
+  console.log(taskArray);
+  let array = [1, 2, 3, 4];
   return (
     <div className="inbox-container">
       <div className="inbox">
-        {array.map((msgItem, index) => (
+        {taskArray.length !== 0 &&
+          taskArray
+            .reverse()
+            .map((task, index) => (
+              <MsgItem
+                classes="msg selected-bg anim-y"
+                key={index}
+                index={index}
+                {...task}
+              />
+            ))}
+        {taskArray.length === 0 && (
           <MsgItem
             classes="msg selected-bg anim-y"
-            key={index}
-            index={index}
-            title="Hello"
+            key="0"
+            index="0"
+            title="No tasks added yet"
           />
-        ))}
-        {array.map((task, index) => (
-          <MsgItem
-            classes="msg selected-bg anim-y"
-            key={index}
-            index={index}
-            {...task}
-          />
-        ))}
+        )}
       </div>
 
       <div className="add-task">
