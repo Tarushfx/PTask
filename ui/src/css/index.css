@@ -15,6 +15,12 @@
   --main-container-bg: #f0f0f7;
 }
 
+.plusIcon{
+  margin-left: 10px;
+  padding: 6px;
+  border: none;
+}
+
 *::before,
 *::after {
   box-sizing: content-box;

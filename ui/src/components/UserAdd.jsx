@@ -196,10 +196,10 @@ export default class UserAdd extends React.Component {
       console.log("Error:", err);
     }
 
-    form.name.value = "";
-    form.email.value = "";
-    form.password.value = "";
-    form.confirmpswd.value = "";
+    // form.name.value = "";
+    // form.email.value = "";
+    // form.password.value = "";
+    // form.confirmpswd.value = "";
   }
 
   render() {
@@ -313,7 +313,7 @@ export default class UserAdd extends React.Component {
                 Sign up
               </button>
             </div>
-            <img src="img/log.svg" className="image" alt="" />
+            <img src="images/log.svg" className="image" alt="" />
           </div>
           <div className="panel right-panel">
             <div className="content">
@@ -326,7 +326,7 @@ export default class UserAdd extends React.Component {
                 Sign in
               </button>
             </div>
-            <img src="img/register.svg" className="image" alt="" />
+            <img src="images/register.svg" className="image" alt="" />
           </div>
         </div>
       </div>

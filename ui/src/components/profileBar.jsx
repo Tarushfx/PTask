@@ -23,8 +23,8 @@ class ProfileBar extends React.Component {
     let user = this.props.user;
     let tasks = user.tasks ? user.tasks : [];
     let total = tasks ? tasks.length : 0;
-    let complete = tasks.filter(task => task.state === "completed").length;
-    let incomplete = tasks.filter(task => task.state === "notStarted").length;
+    let complete = tasks.filter(task => task.state === "Completed").length;
+    let incomplete = tasks.filter(task => task.state === "InProgress").length;
     let projectArray = user.projects ? user.projects : [];
     return (
       <div className="user-profile-area">
@@ -91,11 +91,17 @@ class ProfileBar extends React.Component {
           </div>
         </div>
         <div className="side-wrapper">
-          <div className="project-title">Projects</div>
+          <div className="project-title">Projects
+            <button className="badge badge-sm badge-pill badge-primary plusIcon"
+               data-toggle="modal"
+               data-target="#projectModal">
+              <i className="fa fa-plus"></i>
+            </button>
+          </div>
           <div className="project-name">
-            {projectArray.map((item) => (
-              <div className="project-department">{item}</div>
-            ))}
+            {/*{projectArray.map((item) => (*/}
+            {/*  <div className="project-department">{item.name}</div>*/}
+            {/*))}*/}
             <div className="project-department">Hello</div>
           </div>
         </div>

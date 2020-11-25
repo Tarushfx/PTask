@@ -11,10 +11,14 @@ const TaskSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  deadline: {
+    type: Date,
+    default: Date.now
+  },
   state: {
     type: String,
-    enum: ["notStarted", "inProgress", "completed"],
-    default: "notStarted",
+    enum: ["InProgress", "Completed"],
+    default: "InProgress",
   },
   description: String,
 });
@@ -32,8 +36,8 @@ const ProjectSchema = new mongoose.Schema({
   },
   state: {
     type: String,
-    enum: ["notStarted", "inProgress", "completed"],
-    default: "notStarted",
+    enum: ["InProgress", "Completed"],
+    default: "InProgress",
   },
   description: String,
 });

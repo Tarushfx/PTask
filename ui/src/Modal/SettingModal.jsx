@@ -6,6 +6,18 @@ import graphQLFetch from "../graphQLFetch.js";
 import ModalInput from "../components/modalInput.jsx";
 
 const SettingModal = (props) => {
+
+  async function usernameUpdate(user) {
+    const query = `mutation update($user: UserUpdateNameInputs!) {
+      UserUpdateName(user: $user)
+    }`;
+
+    const data = await graphQLFetch(query, {user: user});
+    if(data.UserUpdateName === "Updated"){
+      props.loadData()
+    }
+  }
+
   async function update(user) {
     const query = `mutation update($user: UserUpdateInputs!){
       UserUpdate(user: $user)
@@ -22,27 +34,48 @@ const SettingModal = (props) => {
     const form = document.forms.UpdateUser;
     const token = authservice.getToken();
     const id = jwt.decode(token)._id;
+    const name = jwt.decode(token).name;
     try {
-      if (
+      if(form.password.value === ''){
+        const user = {
+          _id: id,
+        }
+        if(form.name.value === ''){
+          user.name = name;
+        }
+        else{
+          user.name = form.name.value;
+        }
+        await usernameUpdate(user);
+      }
+      else if (
         form.password.value === form.confirmPassword.value &&
         form.password.value.length >= 6
       ) {
         const user = {
           _id: id,
-          name: form.name.value,
           password: form.password.value,
         };
+
+        if(form.name.value !== '') {
+          user.name = form.name.value
+        } else {
+          user.name= name
+        }
         await update(user);
+
+        authservice.clearToken();
+        window.location = "/";
       } else {
-        throw new Error("Password dont match");
+        throw new Error("Something Went Wrong");
       }
     } catch (err) {
       console.log(err.message);
     }
     await (() => $("#settingModal").modal("hide"))();
-
-    authservice.clearToken();
-    window.location = "/";
+    form.name.value = '';
+    form.password.value = '';
+    form.confirmPassword.value = '';
   }
 
   async function deleteUser() {

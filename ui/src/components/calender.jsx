@@ -167,8 +167,8 @@ const Calender = (props) => {
           ))}
           {finalArray.map((day) => {
             let tasksOnADay = taskArray.filter((task) => {
-              let date = new Date(Date.parse(task.created)).getDate();
-              let month = new Date(Date.parse(task.created)).getMonth();
+              let date = new Date(Date.parse(task.deadline)).getDate();
+              let month = new Date(Date.parse(task.deadline)).getMonth();
               return (
                 date === day.day &&
                 day.thisMonth == true &&

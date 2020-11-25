@@ -1,9 +1,8 @@
 scalar GraphQLDate
 
 enum State {
-  notStarted
-  inProgress
-  completed
+  InProgress
+  Completed
 }
 
 type Team {
@@ -22,6 +21,7 @@ type Project {
 type Task {
   title: String!
   created: GraphQLDate!
+  deadline: GraphQLDate!
   state: State!
   description: String
 }
@@ -44,6 +44,11 @@ type User {
   token: String
 }
 
+input UserUpdateNameInputs {
+  _id: ID!
+  name: String!
+}
+
 input UserUpdateInputs {
   _id: ID!
   name: String!
@@ -51,6 +56,13 @@ input UserUpdateInputs {
 }
 
 input TaskInput {
+  _id: ID!
+  title: String!
+  deadline: GraphQLDate
+  description: String
+}
+
+input ProjectInput {
   _id: ID!
   title: String!
   description: String
@@ -78,9 +90,11 @@ type Query {
 }
 
 type Mutation {
-    setAboutMessage(message: String!): String!
-    UserAdd(user: UserInputs!): User!
-    addTask(task: TaskInput!): Task!
-    UserUpdate(user: UserUpdateInputs!): String
-    UserDelete(user: getData!) : String
+  setAboutMessage(message: String!): String!
+  UserAdd(user: UserInputs!): User!
+  addTask(task: TaskInput!): Task
+  addProject(project: ProjectInput!): Project
+  UserUpdate(user: UserUpdateInputs!): String
+  UserUpdateName(user: UserUpdateNameInputs!): String
+  UserDelete(user: getData!) : String
 }

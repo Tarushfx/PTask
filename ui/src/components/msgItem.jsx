@@ -1,7 +1,7 @@
 import React from "react";
 
 const MsgItem = (props) => {
-  let date = new Date(Date.parse(props.created)).toDateString();
+  let date = new Date(Date.parse(props.deadline)).toDateString();
   date = date !== "Invalid Date" ? date : "";
   return (
     <div className={props.classes}>

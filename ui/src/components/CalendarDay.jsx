@@ -5,10 +5,13 @@ const CalendarDay = (props) => {
   let title = [],
     state = [],
     created = [],
-    description = [];
+    description = [],
+    deadline = [];
   tasksOnADay.map((task) => {
     title.push(task.title);
     state.push(task.state);
+    created.push(task.created);
+    deadline.push(task.deadline)
     description.push(task.description);
   });
   // console.log(title);

@@ -9,6 +9,7 @@ import "./css/index.css";
 import Notifications from "./components/Notification/Notifications.jsx";
 import graphQLFetch from "./graphQLFetch.js";
 import authservice from "../services/authservice.js";
+import AddProjectModal from "./Modal/AddProjectModal.jsx";
 
 class Dashboard extends React.Component {
   // state = { user: {} };
@@ -25,7 +26,7 @@ class Dashboard extends React.Component {
           title created state description
         }
         tasks{
-          title created state description
+          title created state description deadline
         }
         team{
           title description members
@@ -55,6 +56,7 @@ class Dashboard extends React.Component {
         <MainArea user={this.state.user} />
         <AddTaskModal loadData={this.loadData}/>
         <SettingModal loadData={this.loadData}/>
+        <AddProjectModal loadData={this.loadData} />
       </div>
     );
   }

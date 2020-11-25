@@ -24,7 +24,12 @@ async function userDelete(_, { user }) {
   return "Unsuccessful";
 }
 
-module.exports = { userData, userUpdate, userDelete };
+async function userUpdateName(_, { user }) {
+  await User.updateOne({_id: user._id }, {$set: { name: user.name }});
+  return "Updated";
+}
+
+module.exports = { userData, userUpdate, userDelete, userUpdateName };
 
 
 
