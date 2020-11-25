@@ -90,17 +90,6 @@ const AddTaskModal = (props) => {
                 name="desc"
                 key="desc"
               />
-              {/* <ModalInput
-                placeholder="Description"
-                type="textarea"
-                id="desc"
-                name="desc"
-                key="desc"
-              /> */}
-
-              {/* <div className="form-group">
-                
-              </div> */}
 
               <div className="form-group row">
                 <button

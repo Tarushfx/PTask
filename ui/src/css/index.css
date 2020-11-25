@@ -506,7 +506,12 @@ img {
 .mail-icons svg:first-child {
   margin-left: 0;
 }
-
+.modal-header h3 {
+  margin: auto;
+}
+.modal-header .close {
+  margin-left: 0px;
+}
 .mail-contents {
   padding: 30px;
 }
