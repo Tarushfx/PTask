@@ -72,9 +72,9 @@ const AddTaskModal = (props) => {
                 mode="input"
                 placeholder="Deadline"
                 type="datetime-local"
-                id="dealine"
-                name="dealine"
-                key="dealine"
+                id="deadline"
+                name="deadline"
+                key="deadline"
               />
               <ModalInput
                 mode="textarea"
@@ -84,17 +84,6 @@ const AddTaskModal = (props) => {
                 name="dealine"
                 key="dealine"
               />
-              {/* <ModalInput
-                placeholder="Description"
-                type="textarea"
-                id="desc"
-                name="desc"
-                key="desc"
-              /> */}
-
-              {/* <div className="form-group">
-                
-              </div> */}
 
               <div className="form-group row">
                 <button
