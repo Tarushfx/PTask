@@ -8,7 +8,6 @@ const Input = (props) => {
         <i className="fas fa-lock" />
         <input
           placeholder={props.placeholder}
-          onChange={props.handleChange}
           type={props.type}
           id={id}
           onChange={props.onChange}

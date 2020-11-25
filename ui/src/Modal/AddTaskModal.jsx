@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from "react";
+import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import authservice from "../../services/authservice.js";
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 import graphQLFetch from "../graphQLFetch.js";
+import ModalInput from "../components/modalInput.jsx";
 
 const AddTaskModal = (props) => {
-  async function addTask(task){
+  const formData = useState({
+    title: "",
+    description: "",
+    deadline: "",
+  });
+  async function addTask(task) {
     const query = `mutation addTask($task : TaskInput!){
       addTask(task: $task){
         title created description state
@@ -13,8 +19,8 @@ const AddTaskModal = (props) => {
     }`;
 
     console.log(task);
-    const data = await graphQLFetch(query, {task: task});
-    if(data){
+    const data = await graphQLFetch(query, { task: task });
+    if (data) {
       console.log(data);
     }
   }
@@ -30,42 +36,81 @@ const AddTaskModal = (props) => {
       description: form.desc.value,
     };
     await addTask(task);
-    form.title.value = ''; form.desc.value='';
+    form.title.value = "";
+    form.desc.value = "";
     console.log("not called");
-    await (() => $('#taskModal').modal('hide'))();
-    console.log("here")
+    await (() => $("#taskModal").modal("hide"))();
+    console.log("here");
     await props.loadData();
-    console.log("render")
+    console.log("render");
   }
 
   return (
     <div id="taskModal" className="modal fade" role="dialog">
-      <div className="modal-dialog modal-md modal-dialog-centered" role="content">
+      <div
+        className="modal-dialog modal-md modal-dialog-centered"
+        role="content"
+      >
         <div className="modal-content">
           <div className="modal-header">
             <h3 className="modal-title">Add a Task</h3>
-            <button type="button" className="close" data-dismiss="modal">&times;</button>
+            <button type="button" className="close" data-dismiss="modal">
+              &times;
+            </button>
           </div>
           <div className="modal-body">
             <form name="taskAdd" onSubmit={handleSubmitTask}>
-              <div className="form-group">
-                <label htmlFor="title" className="col-md-2 col-form-label">
-                  Title
-                </label>
-                <div className="col-md-10">
-                  <input type="text" className="form-control form-control-sm mr-1" name="title" id="title" placeholder="Title" />
-                </div>
-              </div>
-              <div className="form-group">
-                <label htmlFor="desc" className="col-md-2 col-form-label">Description</label>
-                <div className="col-md-12">
-                  <textarea name="desc" rows="6" className="form-control mr-1" id="desc" placeholder="Description"></textarea>
-                </div>
-              </div>
+              <ModalInput
+                mode="input"
+                placeholder="Title"
+                type="text"
+                id="title"
+                name="title"
+                key="title"
+              />
+              <ModalInput
+                mode="input"
+                placeholder="Deadline"
+                type="datetime-local"
+                id="dealine"
+                name="dealine"
+                key="dealine"
+              />
+              <ModalInput
+                mode="textarea"
+                placeholder="Deadline"
+                type="datetime"
+                id="dealine"
+                name="dealine"
+                key="dealine"
+              />
+              {/* <ModalInput
+                placeholder="Description"
+                type="textarea"
+                id="desc"
+                name="desc"
+                key="desc"
+              /> */}
+
+              {/* <div className="form-group">
+                
+              </div> */}
 
               <div className="form-group row">
-                <button type="button" className="btn-danger btn-sm ml-auto" data-dismiss="modal">Cancel</button>
-                <button type="submit" className="btn-success btn-sm ml-2" id="taskSubmit">Add Task</button>
+                <button
+                  type="button"
+                  className="add-button ml-2"
+                  data-dismiss="modal"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="add-button ml-2"
+                  id="taskSubmit"
+                >
+                  Add Task
+                </button>
               </div>
             </form>
           </div>

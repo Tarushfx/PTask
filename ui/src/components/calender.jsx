@@ -2,28 +2,29 @@ import React, { useState } from "react";
 import CalenderDay from "./CalendarDay.jsx";
 
 const Calender = (props) => {
-  const [dateState, setDateState] = useState(new Date("2020-12-15"));
+  const [dateState, setDateState] = useState(new Date());
   console.log(dateState);
 
-  function changeStyleButtonActive() {
-    const element = document.getElementById("addTaskButton");
-    element.classList.add("active");
+  function changeStyleButton({ currentTarget: button }) {
+    // const element = document.getElementById("addTaskButton");
+    button.classList.toggle("active");
   }
 
-  function changeStyleButtonUnactive() {
-    const element = document.getElementById("addTaskButton");
-    element.classList.remove("active");
-  }
+  // function changeStyleButtonUnactive() {
+  //   // const element = document.getElementById("addTaskButton");
+  //   // element.classList.remove("active");
+  //   e.currentTarget.classList.("active");
+  // }
 
   function getCalendarArray(date) {
+    const dayDate = new Date(date.getTime());
     const thisMonthArray = [];
     const prevMonthArray = [];
     const nextMonthArray = [];
     // const day = date.getDay();
-    const dayDate = date;
-    const month = date.getMonth();
-    const year = date.getFullYear();
-    const startDay = new Date(dayDate.setDate(0)).getDay();
+    const month = dayDate.getMonth();
+    const year = dayDate.getFullYear();
+    const startDay = new Date(dayDate.setDate(1)).getDay();
 
     function daysInMonth(iMonth, iYear) {
       return 32 - new Date(iYear, iMonth, 32).getDate();
@@ -94,21 +95,68 @@ const Calender = (props) => {
       <div className="calender-tab anim-y">
         <div className="month-change">
           <div className="current-month">
-            {console.log(dateState.getMonth())}
+            {monthNames[dateState.getMonth()]}
           </div>
           <div className="current-year">{dateState.getFullYear()}</div>
         </div>
         <div className="week-month">
           <button
-            className=" button button-task"
+            className="button button-task"
+            onClick={() =>
+              setDateState(
+                new Date(
+                  dateState.setFullYear(
+                    dateState.getMonth() === 0
+                      ? dateState.getFullYear() - 1
+                      : dateState.getFullYear(),
+                    dateState.getMonth() === 0 ? 11 : dateState.getMonth() - 1,
+                    1
+                  )
+                )
+              )
+            }
+            onMouseEnter={changeStyleButton}
+            onMouseLeave={changeStyleButton}
+            id="preMonthButton"
+          >
+            <i class="fas fa-angle-left"></i>
+            Previous Month
+          </button>
+          <button
+            className="button button-task"
+            onMouseEnter={changeStyleButton}
+            onMouseLeave={changeStyleButton}
+            onClick={() =>
+              setDateState(
+                new Date(
+                  dateState.setFullYear(
+                    dateState.getMonth() === 11
+                      ? dateState.getFullYear() + 1
+                      : dateState.getFullYear(),
+                    dateState.getMonth() === 11 ? 0 : dateState.getMonth() + 1,
+                    1
+                  )
+                )
+              )
+            }
+            id="nextMonthButton"
+          >
+            Next Month
+            <i class="fas fa-angle-right"></i>
+          </button>
+          {/* use this button */}
+
+          <button
+            className="button button-task"
             data-toggle="modal"
             data-target="#taskModal"
-            onMouseEnter={changeStyleButtonActive}
-            onMouseLeave={changeStyleButtonUnactive}
+            onMouseEnter={changeStyleButton}
+            onMouseLeave={changeStyleButton}
             id="addTaskButton"
           >
             Add task
           </button>
+
           {/* use this button */}
         </div>
       </div>
@@ -120,7 +168,12 @@ const Calender = (props) => {
           {finalArray.map((day) => {
             let tasksOnADay = taskArray.filter((task) => {
               let date = new Date(Date.parse(task.created)).getDate();
-              return date === day.day && day.thisMonth == true;
+              let month = new Date(Date.parse(task.created)).getMonth();
+              return (
+                date === day.day &&
+                day.thisMonth == true &&
+                month === dateState.getMonth()
+              );
             });
             return <CalenderDay day={day} tasksOnADay={tasksOnADay} />;
           })}

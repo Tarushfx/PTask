@@ -69,7 +69,7 @@ form.sign-in-form {
 
 .input-field {
   max-width: 380px;
-  width: 100%;
+  width: 320px;
   background-color: #f0f0f0;
   margin-top: 10px;
   height: 55px;
@@ -79,6 +79,16 @@ form.sign-in-form {
   padding: 0 0.4rem;
   position: relative;
 }
+.input-field-textarea textarea {
+  min-height: 55px;
+  background-color: #f0f0f0;
+  border: 0px;
+  border-radius: 20px;
+  width: 320px;
+}
+/* .input-field-textarea {
+  margin-top: 6.4px;
+} */
 
 .input-field i {
   text-align: center;

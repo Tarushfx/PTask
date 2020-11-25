@@ -1,9 +1,10 @@
-$(".mail-choice").change(function () {
-  if ($(this).is(":checked")) {
-    $(this).parent().addClass("selected-bg");
-  } else {
-    $(this).parent().removeClass("selected-bg");
-  }
+$(".mail-choice").click(function () {
+  $(this).parent().toggleClass("selected-bg");
+  // if ($(this).is(":checked")) {
+
+  // } else {
+  //   $(this).parent().removeClass("selected-bg");
+  // }
 });
 
 const colorInput = document.getElementById("colorpicker");
@@ -17,6 +18,3 @@ $(".inbox-calendar").click(function () {
   $(".inbox-container").toggleClass("hide");
   $(".mail-detail").toggleClass("hide");
 });
-
-
-
