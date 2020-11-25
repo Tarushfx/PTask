@@ -4,12 +4,39 @@ import authservice from "../../services/authservice.js";
 import jwt from "jsonwebtoken";
 import graphQLFetch from "../graphQLFetch.js";
 import ModalInput from "../components/modalInput.jsx";
+import Joi from "joi-browser";
 
 const AddProjectModal = (props) => {
-  const formData = useState({
+  const [formData, setFormData] = useState({
     title: "",
-    description: "",
+    desc: "",
   });
+  const [formErrors, setFormErrors] = useState({});
+  const schema = {
+    title: Joi.string().min(5).required(),
+    desc: Joi.string().min(5).required(),
+  };
+  const handleChange = ({ currentTarget: input }) => {
+    let formDataNew = { ...formData };
+    let formErrorsNew = { ...formErrors };
+
+    formDataNew[input.name] = input.value;
+
+    let error = validateProperty(input);
+
+    if (error) formErrorsNew[input.name] = error;
+    else delete formErrorsNew[input.name];
+
+    setFormErrors(formErrorsNew);
+    setFormData(formDataNew);
+  };
+  const validateProperty = ({ name, value }) => {
+    const proprertyObject = { [name]: value };
+    const propertySchema = { [name]: schema[name] };
+    const { error } = Joi.validate(proprertyObject, propertySchema);
+    if (error) return error.details[0].message;
+    return null;
+  };
 
   async function addProject(project) {
     const query = `mutation addP($project: ProjectInput!){
@@ -52,7 +79,14 @@ const AddProjectModal = (props) => {
         <div className="modal-content">
           <div className="modal-header">
             <h3 className="modal-title">Add a Project</h3>
-            <button type="button" className="close" data-dismiss="modal">
+            <button
+              type="button"
+              className="close"
+              data-dismiss="modal"
+              onClick={() => {
+                setFormErrors({});
+              }}
+            >
               &times;
             </button>
           </div>
@@ -65,25 +99,20 @@ const AddProjectModal = (props) => {
                 id="title"
                 name="title"
                 key="title"
+                iconType="title"
+                onChange={handleChange}
+                error={formErrors}
               />
               <ModalInput
                 mode="textarea"
+                placeholder="Description"
                 type="text"
                 id="desc"
                 name="desc"
                 key="desc"
+                onChange={handleChange}
+                error={formErrors}
               />
-              {/* <ModalInput
-                placeholder="Description"
-                type="textarea"
-                id="desc"
-                name="desc"
-                key="desc"
-              /> */}
-
-              {/* <div className="form-group">
-
-              </div> */}
 
               <div className="form-group row">
                 <button

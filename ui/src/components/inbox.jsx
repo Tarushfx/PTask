@@ -5,7 +5,7 @@ import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 const Inbox = (props) => {
   let taskArray = props.user.tasks ? props.user.tasks : [];
   console.log(taskArray);
-  let array = [1, 2, 3, 4];
+
   return (
     <div className="inbox-container">
       <div className="inbox">

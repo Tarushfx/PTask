@@ -126,6 +126,17 @@ const Calender = (props) => {
             className="button button-task"
             onMouseEnter={changeStyleButton}
             onMouseLeave={changeStyleButton}
+            id="addTaskButton"
+            onClick={() => {
+              setDateState(new Date());
+            }}
+          >
+            Reset Month
+          </button>
+          <button
+            className="button button-task"
+            onMouseEnter={changeStyleButton}
+            onMouseLeave={changeStyleButton}
             onClick={() =>
               setDateState(
                 new Date(

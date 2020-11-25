@@ -222,6 +222,7 @@ export default class UserAdd extends React.Component {
                 label="E-mail"
                 onChange={this.handleSignInChange}
                 form="SignIn"
+                iconType="email"
               />
               <Input
                 placeholder="Password"
@@ -231,6 +232,7 @@ export default class UserAdd extends React.Component {
                 label="Password"
                 onChange={this.handleSignInChange}
                 form="SignIn"
+                iconType="password"
               />
               <button className="btn solid">Sign In </button>
             </form>
@@ -252,6 +254,7 @@ export default class UserAdd extends React.Component {
                 label="Name"
                 onChange={this.handleSignUpChange}
                 form="SignUp"
+                iconType="title"
               />
               {/* <div className="input-field">
                 <i className="fas fa-envelope" />
@@ -265,6 +268,7 @@ export default class UserAdd extends React.Component {
                 label="E-mail"
                 onChange={this.handleSignUpChange}
                 form="SignUp"
+                iconType="email"
               />
               {/* <div className="input-field">
                 <i className="fas fa-lock" />
@@ -278,6 +282,7 @@ export default class UserAdd extends React.Component {
                 label="Password"
                 onChange={this.handleSignUpChange}
                 form="SignUp"
+                iconType="password"
               />
               {/* <div className="input-field">
                 <i className="fas fa-lock" />
@@ -295,6 +300,7 @@ export default class UserAdd extends React.Component {
                 label="Password"
                 onChange={this.handleSignUpChange}
                 form="SignUp"
+                iconType="password"
               />
               <button className="btn">Sign Up </button>
             </form>

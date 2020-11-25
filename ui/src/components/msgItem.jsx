@@ -10,6 +10,9 @@ const MsgItem = (props) => {
         name="msg"
         id={`mail-${props.index}`}
         className="mail-choice"
+        onClick={(id) => {
+          // change state in db
+        }}
       />
       <label htmlFor={`mail-${props.index}`}></label>
       <div className="msg-content">

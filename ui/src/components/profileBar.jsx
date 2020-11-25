@@ -1,7 +1,7 @@
 import React from "react";
 import authService from "../../services/authservice";
 import Toast from "./Notification/Notifications.jsx";
-import _ from 'lodash';
+import _ from "lodash";
 const array = [
   { text: "Notification1", type: 1 },
   { text: "Notification2", type: 2 },
@@ -10,7 +10,6 @@ const array = [
 ];
 
 class ProfileBar extends React.Component {
-
   signOut() {
     authService.clearToken();
     window.location = "/";
@@ -23,8 +22,8 @@ class ProfileBar extends React.Component {
     let user = this.props.user;
     let tasks = user.tasks ? user.tasks : [];
     let total = tasks ? tasks.length : 0;
-    let complete = tasks.filter(task => task.state === "Completed").length;
-    let incomplete = tasks.filter(task => task.state === "InProgress").length;
+    let complete = tasks.filter((task) => task.state === "Completed").length;
+    let incomplete = tasks.filter((task) => task.state === "InProgress").length;
     let projectArray = user.projects ? user.projects : [];
     return (
       <div className="user-profile-area">
@@ -91,17 +90,22 @@ class ProfileBar extends React.Component {
           </div>
         </div>
         <div className="side-wrapper">
-          <div className="project-title">Projects
-            <button className="badge badge-sm badge-pill badge-primary plusIcon"
-               data-toggle="modal"
-               data-target="#projectModal">
+          <div className="project-title">
+            Projects
+            <button
+              className="badge badge-sm badge-pill badge-primary plusIcon"
+              data-toggle="modal"
+              data-target="#projectModal"
+            >
               <i className="fa fa-plus"></i>
             </button>
           </div>
           <div className="project-name">
-            {/*{projectArray.map((item) => (*/}
-            {/*  <div className="project-department">{item.name}</div>*/}
-            {/*))}*/}
+            {projectArray.map((item) => (
+              <div className="project-department">
+                {item.title}-{item.description}
+              </div>
+            ))}
             <div className="project-department">Hello</div>
           </div>
         </div>

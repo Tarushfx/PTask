@@ -4,17 +4,49 @@ import authservice from "../../services/authservice.js";
 import jwt from "jsonwebtoken";
 import graphQLFetch from "../graphQLFetch.js";
 import ModalInput from "../components/modalInput.jsx";
-
+import Joi from "joi-browser";
 const SettingModal = (props) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [formErrors, setFormErrors] = useState({});
+  const schema = {
+    name: Joi.string().min(5).required(),
+    password: Joi.string().required(),
+    confirmPassword: Joi.string().required(),
+  };
+  const handleChange = ({ currentTarget: input }) => {
+    let formDataNew = { ...formData };
+    let formErrorsNew = { ...formErrors };
+
+    formDataNew[input.name] = input.value;
+
+    let error = validateProperty(input);
+
+    if (error) formErrorsNew[input.name] = error;
+    else delete formErrorsNew[input.name];
+
+    setFormErrors(formErrorsNew);
+    setFormData(formDataNew);
+  };
+  const validateProperty = ({ name, value }) => {
+    const proprertyObject = { [name]: value };
+    const propertySchema = { [name]: schema[name] };
+    const { error } = Joi.validate(proprertyObject, propertySchema);
+    if (error) return error.details[0].message;
+    return null;
+  };
 
   async function usernameUpdate(user) {
     const query = `mutation update($user: UserUpdateNameInputs!) {
       UserUpdateName(user: $user)
     }`;
 
-    const data = await graphQLFetch(query, {user: user});
-    if(data.UserUpdateName === "Updated"){
-      props.loadData()
+    const data = await graphQLFetch(query, { user: user });
+    if (data.UserUpdateName === "Updated") {
+      props.loadData();
     }
   }
 
@@ -36,19 +68,17 @@ const SettingModal = (props) => {
     const id = jwt.decode(token)._id;
     const name = jwt.decode(token).name;
     try {
-      if(form.password.value === ''){
+      if (form.password.value === "") {
         const user = {
           _id: id,
-        }
-        if(form.name.value === ''){
+        };
+        if (form.name.value === "") {
           user.name = name;
-        }
-        else{
+        } else {
           user.name = form.name.value;
         }
         await usernameUpdate(user);
-      }
-      else if (
+      } else if (
         form.password.value === form.confirmPassword.value &&
         form.password.value.length >= 6
       ) {
@@ -57,10 +87,10 @@ const SettingModal = (props) => {
           password: form.password.value,
         };
 
-        if(form.name.value !== '') {
-          user.name = form.name.value
+        if (form.name.value !== "") {
+          user.name = form.name.value;
         } else {
-          user.name= name
+          user.name = name;
         }
         await update(user);
 
@@ -73,9 +103,9 @@ const SettingModal = (props) => {
       console.log(err.message);
     }
     await (() => $("#settingModal").modal("hide"))();
-    form.name.value = '';
-    form.password.value = '';
-    form.confirmPassword.value = '';
+    form.name.value = "";
+    form.password.value = "";
+    form.confirmPassword.value = "";
   }
 
   async function deleteUser() {
@@ -107,26 +137,19 @@ const SettingModal = (props) => {
         <div className="modal-content">
           <div className="modal-header">
             <h3 className="modal-title">Settings</h3>
-            <button type="button" className="close" data-dismiss="modal">
+            <button
+              type="button"
+              className="close"
+              data-dismiss="modal"
+              onClick={() => {
+                setFormErrors({});
+              }}
+            >
               &times;
             </button>
           </div>
           <div className="modal-body">
             <form name="UpdateUser" onSubmit={handleSubmit}>
-              {/* <div className="form-group">
-                <label htmlFor="name" className="col-md-2 col-form-label">
-                  Name
-                </label>
-                <div className="col-md-10">
-                  <input
-                    type="text"
-                    className="form-control form-control-sm mr-1"
-                    name="name"
-                    id="name"
-                    placeholder="Name"
-                  />
-                </div>
-              </div> */}
               <ModalInput
                 mode="input"
                 placeholder="Name"
@@ -134,20 +157,11 @@ const SettingModal = (props) => {
                 id="name"
                 name="name"
                 key="name"
+                iconType="title"
+                onChange={handleChange}
+                error={formErrors}
               />
-              {/* <div className="form-group">
-                <label htmlFor="password" className="col-md-6 col-form-label">
-                  New Password
-                </label>
-                <div className="col-md-12">
-                  <input
-                    type="password"
-                    className="form-control form-control-sm mr-1"
-                    name="password"
-                    placeholder="New Password"
-                  />
-                </div>
-              </div> */}
+
               <ModalInput
                 mode="input"
                 placeholder="Password"
@@ -155,23 +169,11 @@ const SettingModal = (props) => {
                 id="password"
                 name="password"
                 key="password"
+                iconType="password"
+                onChange={handleChange}
+                error={formErrors}
               />
-              {/* <div className="form-group">
-                <label
-                  htmlFor="confirmPassword"
-                  className="col-md-6 col-form-label"
-                >
-                  Confirm New Password
-                </label>
-                <div className="col-md-12">
-                  <input
-                    type="password"
-                    className="form-control form-control-sm mr-1"
-                    name="confirmPassword"
-                    placeholder="New Password"
-                  />
-                </div>
-              </div> */}
+
               <ModalInput
                 mode="input"
                 placeholder="Confirm Password"
@@ -179,6 +181,9 @@ const SettingModal = (props) => {
                 id="confirmPassword"
                 name="confirmPassword"
                 key="confirmPassword"
+                iconType="password"
+                onChange={handleChange}
+                error={formErrors}
               />
               <div className="form-group row">
                 <button
