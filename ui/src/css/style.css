@@ -69,9 +69,9 @@ form.sign-in-form {
 
 .input-field {
   max-width: 380px;
-  width: 100%;
+  width: 320px;
   background-color: #f0f0f0;
-  margin: 10px 0;
+  margin-top: 10px;
   height: 55px;
   border-radius: 55px;
   display: grid;
@@ -79,6 +79,16 @@ form.sign-in-form {
   padding: 0 0.4rem;
   position: relative;
 }
+.input-field-textarea textarea {
+  min-height: 55px;
+  background-color: #f0f0f0;
+  border: 0px;
+  border-radius: 20px;
+  width: 320px;
+}
+/* .input-field-textarea {
+  margin-top: 6.4px;
+} */
 
 .input-field i {
   text-align: center;
@@ -99,6 +109,42 @@ form.sign-in-form {
 }
 
 .input-field input::placeholder {
+  color: #aaa;
+  font-weight: 500;
+}
+
+.input-field-warn {
+  max-width: 380px;
+  width: 100%;
+  background-color: #dc3545b8;
+  margin: 0px;
+  height: 55px;
+  border-radius: 55px;
+  display: grid;
+  grid-template-columns: 15% 85%;
+  padding: 0 0.4rem;
+  position: relative;
+}
+
+.input-field-warn i {
+  text-align: center;
+  line-height: 55px;
+  color: #acacac;
+  transition: 0.5s;
+  font-size: 1.1rem;
+}
+.input-field-warn p {
+  background: none;
+  outline: none;
+  border: none;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #aaa;
+  align-self: center;
+  margin: 0;
+}
+.input-field-warn p::placeholder {
   color: #aaa;
   font-weight: 500;
 }

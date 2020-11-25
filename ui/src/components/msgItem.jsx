@@ -1,6 +1,8 @@
 import React from "react";
 
 const MsgItem = (props) => {
+  let date = new Date(Date.parse(props.created)).toDateString();
+  date = date !== "Invalid Date" ? date : "";
   return (
     <div className={props.classes}>
       <input
@@ -9,12 +11,13 @@ const MsgItem = (props) => {
         id={`mail-${props.index}`}
         className="mail-choice"
       />
-      <label htmlFor={`mail-${props.key}`}></label>
+      <label htmlFor={`mail-${props.index}`}></label>
       <div className="msg-content">
         <div className="msg-title">{props.title}</div>
-        <div className="msg-date">{props.date}</div>
+        <div className="msg-title">{props.state}</div>
+        <div className="msg-date">{date} </div>
       </div>
-      <img src="" alt="" className="members mail-members" />
+      <img src="images/User-Icon.jpg" alt="" className="members mail-members" />
     </div>
   );
 };

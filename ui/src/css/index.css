@@ -44,7 +44,7 @@ img {
 .Container {
   background-color: var(--theme-bg-color);
   display: flex;
-  max-width: 1600px;
+  max-width: 100%;
   height: 100vh;
   overflow: hidden;
   margin: 0 auto;
@@ -123,7 +123,7 @@ img {
   background-color: var(--button-bg-color);
   color: var(--button-color);
 }
-.alert{
+.alert {
   padding: 0rem 0rem;
   margin-bottom: 0rem;
 }
@@ -137,8 +137,9 @@ img {
 .notify.alert {
   position: relative;
 }
+/* messages */
 .notify.alert:before {
-  content: "2";
+  content: "199";
   font-size: 9px;
   font-weight: 700;
   position: absolute;
@@ -153,8 +154,9 @@ img {
   right: 0px;
   color: #fff;
 }
+/* notification */
 .notify.alert:last-child:before {
-  content: "5";
+  content: "1";
 }
 
 .progress {
@@ -194,7 +196,7 @@ img {
   margin-top: 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 .task-stat {
   text-align: center;
@@ -422,13 +424,15 @@ img {
   display: flex;
   align-items: center;
   background-color: var(--theme-bg-color);
-  animation: slideUp .45s .4s both;
+  animation: slideUp 0.45s 0.4s both;
 }
 .add-button {
   position: sticky;
   bottom: 10px;
   background-color: var(--button-color);
   border: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
   margin: auto;
   padding: 10px 30px;
   color: #fff;
@@ -438,11 +442,12 @@ img {
   flex-shrink: 0;
   z-index: 1;
   cursor: pointer;
+  max-width: 159px;
 }
 
 .mail-detail {
   display: flex;
-  animation: slideX .6s both;
+  animation: slideX 0.6s both;
   flex-direction: column;
   overflow: auto;
   background-color: var(--theme-bg-color);
@@ -464,7 +469,9 @@ img {
   margin-left: 10px;
   white-space: nowrap;
 }
-
+.button-task:focus {
+  outline: 0px;
+}
 @keyframes slideX {
   0% {
     opacity: 0;
@@ -787,10 +794,25 @@ img {
   transform: scale(1.3);
   border: 0;
   border-radius: 4px;
-  background-image: linear-gradient(to top, #6625dc, #7739e3, #874cea, #965df1, #a46ef8);
+  background-image: linear-gradient(
+    to top,
+    #6625dc,
+    #7739e3,
+    #874cea,
+    #965df1,
+    #a46ef8
+  );
   color: #fff;
   font-size: 15px;
+  overflow: auto;
 }
+#settingModal .form-group button {
+  margin-top: 15px;
+}
+textarea {
+  margin-top: 10px;
+}
+
 .day.project-market:hover .project-detail {
   color: #fff;
   font-size: 9px;
@@ -825,7 +847,14 @@ img {
   cursor: pointer;
 }
 .day.project-finance:hover {
-  background-image: linear-gradient(to top, #f7224b, #fa3d5d, #fd526e, #fe637e, #ff748e);
+  background-image: linear-gradient(
+    to top,
+    #f7224b,
+    #fa3d5d,
+    #fd526e,
+    #fe637e,
+    #ff748e
+  );
   transform: scale(1.3);
   border: 0;
   border-radius: 4px;
@@ -856,6 +885,7 @@ img {
 .hover-title {
   display: none;
   color: #fff;
+  text-align: right;
 }
 
 .popup-check {
@@ -1082,7 +1112,7 @@ img {
   }
 }
 .anim-y {
-  animation: slideUp .6s both;
+  animation: slideUp 0.6s both;
 }
 
 .anim-y:nth-child(2) {
@@ -1127,4 +1157,3 @@ img {
     opacity: 0;
   }
 }
-

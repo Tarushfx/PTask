@@ -1,64 +1,86 @@
 scalar GraphQLDate
 
 enum State {
-    notStarted
-    inProgress
-    completed
+  notStarted
+  inProgress
+  completed
+}
+
+type Team {
+  title: String!
+  members: [ID!]
+  description: String
 }
 
 type Project {
-    title: String!
-    created: GraphQLDate!
-    state: State!
-    description: String
+  title: String!
+  created: GraphQLDate!
+  state: State!
+  description: String
 }
 
 type Task {
-    title: String!
-    created: GraphQLDate!
-    state: State!
-    description: String
+  title: String!
+  created: GraphQLDate!
+  state: State!
+  description: String
 }
 
 type UserData {
-    _id: ID!
-    name: String!
-    email: String!
-    tasks: [Task]
-    projects: [Project]
-    likes: [String]
+  _id: ID!
+  name: String!
+  email: String!
+  tasks: [Task]
+  projects: [Project]
+  likes: [String]
+  team: Team
 }
 
 type User {
-    _id: ID!
-    name: String!
-    email: String!
-    password: String!
-    token: String
+  _id: ID!
+  name: String!
+  email: String!
+  password: String!
+  token: String
+}
+
+input UserUpdateInputs {
+  _id: ID!
+  name: String!
+  password: String!
+}
+
+input TaskInput {
+  _id: ID!
+  title: String!
+  description: String
 }
 
 input getData {
-    _id: ID!
+  _id: ID!
 }
 
 input UserInputs {
-    name: String!
-    email: String!
-    password: String!
+  name: String!
+  email: String!
+  password: String!
 }
 
 input UserLoginInputs {
-    email: String!,
-    password: String!
+  email: String!
+  password: String!
 }
 
-type Query{
-    about: String!
-    userData(user: getData!): UserData!
-    UserSignIn(user: UserLoginInputs!): User
+type Query {
+  about: String!
+  userData(user: getData!): UserData!
+  UserSignIn(user: UserLoginInputs!): User
 }
 
 type Mutation {
     setAboutMessage(message: String!): String!
     UserAdd(user: UserInputs!): User!
+    addTask(task: TaskInput!): Task!
+    UserUpdate(user: UserUpdateInputs!): String
+    UserDelete(user: getData!) : String
 }
