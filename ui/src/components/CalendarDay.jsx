@@ -2,20 +2,25 @@ import React from "react";
 
 const CalendarDay = (props) => {
   let tasksOnADay = props.tasksOnADay;
-  let title = [];
+  let title = [],
+    state = [],
+    created = [],
+    description = [];
   tasksOnADay.map((task) => {
     title.push(task.title);
+    state.push(task.state);
+    description.push(task.description);
   });
-  console.log(title.join("<br>"));
-  console.log(title.map((t) => <div className="project-detail">{t}</div>));
+  // console.log(title);
+  // console.log(title.map((t) => <div className="project-detail">{t}</div>));
   const data = (
     <React.Fragment>
-      {/* <div className="hover-title">xyz</div> */}
-      {title.map((t) => {
-        <div className="project-detail">{t}</div>;
-      })}
-      {/* <div className="project-detail">{title}</div> */}
-      <div className="popup-check">{props.created}</div>
+      {title.map((t, index) => (
+        <React.Fragment>
+          <div className="project-detail">{t}</div>
+          <div className="hover-title">{state[index]}</div>
+        </React.Fragment>
+      ))}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"

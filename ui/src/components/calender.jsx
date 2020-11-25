@@ -1,40 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import CalenderDay from "./CalendarDay.jsx";
 
-function getCalendarArray(props) {
-  const thisMonthArray = [];
-  const prevMonthArray = [];
-  const nextMonthArray = [];
-  const day = props.date.getDay();
-  const date = props.date.getDate();
-  const month = props.date.getMonth();
-  const year = props.date.getFullYear();
-  const startDay = new Date(new Date().setDate(0)).getDay();
-
-  function daysInMonth(iMonth, iYear) {
-    return 32 - new Date(iYear, iMonth, 32).getDate();
-  }
-
-  const daysInPrevMonth = daysInMonth(
-    month === 0 ? 12 : month - 1,
-    month === 0 ? year - 1 : year
-  );
-  for (let i = daysInPrevMonth - startDay; i < daysInPrevMonth; i++) {
-    prevMonthArray.push(i + 1);
-  }
-  for (let i = 0; i < daysInMonth(month, year); i++) {
-    thisMonthArray.push(i + 1);
-  }
-  const currentLength = thisMonthArray.length + prevMonthArray.length;
-  const arrayLength = currentLength > 35 ? 42 : 35;
-
-  for (let i = 0; i < arrayLength - currentLength; i++) {
-    nextMonthArray.push(i + 1);
-  }
-  return [prevMonthArray, thisMonthArray, nextMonthArray];
-}
-
 const Calender = (props) => {
+  const [dateState, setDateState] = useState(new Date("2020-12-15"));
+  console.log(dateState);
+
   function changeStyleButtonActive() {
     const element = document.getElementById("addTaskButton");
     element.classList.add("active");
@@ -45,7 +15,51 @@ const Calender = (props) => {
     element.classList.remove("active");
   }
 
-  const tempArray = getCalendarArray(props);
+  function getCalendarArray(date) {
+    const thisMonthArray = [];
+    const prevMonthArray = [];
+    const nextMonthArray = [];
+    // const day = date.getDay();
+    const dayDate = date;
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const startDay = new Date(dayDate.setDate(0)).getDay();
+
+    function daysInMonth(iMonth, iYear) {
+      return 32 - new Date(iYear, iMonth, 32).getDate();
+    }
+
+    const daysInPrevMonth = daysInMonth(
+      month === 0 ? 12 : month - 1,
+      month === 0 ? year - 1 : year
+    );
+    for (let i = daysInPrevMonth - startDay; i < daysInPrevMonth; i++) {
+      prevMonthArray.push(i + 1);
+    }
+    for (let i = 0; i < daysInMonth(month, year); i++) {
+      thisMonthArray.push(i + 1);
+    }
+
+    const currentLength = thisMonthArray.length + prevMonthArray.length;
+    const arrayLength = currentLength > 35 ? 42 : 35;
+
+    for (let i = 0; i < arrayLength - currentLength; i++) {
+      nextMonthArray.push(i + 1);
+    }
+    // return [prevMonthArray, thisMonthArray, nextMonthArray];
+    let finalArray = [];
+    prevMonthArray.map((day, index, array) => {
+      finalArray.push({ day: day, thisMonth: false });
+    });
+    thisMonthArray.map((day, index, array) => {
+      finalArray.push({ day: day, thisMonth: true });
+    });
+    nextMonthArray.map((day, index, array) => {
+      finalArray.push({ day: day, thisMonth: false });
+    });
+    console.log(month, year, startDay, daysInPrevMonth);
+    return finalArray;
+  }
 
   const monthNames = [
     "January",
@@ -72,18 +86,17 @@ const Calender = (props) => {
     "Saturday",
   ];
 
-  let taskArray = props.user.tasks ? props.user.tasks : [];
+  const finalArray = getCalendarArray(dateState);
 
-  // date = date !== "Invalid Date" ? date : "";
-  let finalArray = [];
+  let taskArray = props.user.tasks ? props.user.tasks : [];
   return (
     <div className="calendar-container">
       <div className="calender-tab anim-y">
         <div className="month-change">
           <div className="current-month">
-            {monthNames[props.date.getMonth()]}
+            {console.log(dateState.getMonth())}
           </div>
-          <div className="current-year">{props.date.getFullYear()}</div>
+          <div className="current-year">{dateState.getFullYear()}</div>
         </div>
         <div className="week-month">
           <button
@@ -104,16 +117,6 @@ const Calender = (props) => {
           {daysArray.map((dayOfWeek) => (
             <div className="days">{dayOfWeek}</div>
           ))}
-          {tempArray[0].map((day, index, array) => {
-            finalArray.push({ day: day, thisMonth: false });
-          })}
-          {tempArray[1].map((day, index, array) => {
-            finalArray.push({ day: day, thisMonth: true });
-          })}
-          {tempArray[2].map((day, index, array) => {
-            finalArray.push({ day: day, thisMonth: false });
-          })}
-          {taskArray.map((task) => {})}
           {finalArray.map((day) => {
             let tasksOnADay = taskArray.filter((task) => {
               let date = new Date(Date.parse(task.created)).getDate();
