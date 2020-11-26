@@ -28,7 +28,7 @@ const NavBar = (props) => {
           </svg>
           <input
             type="color"
-            value="#4d76fd"
+            value="#a397cf"
             className="colorpicker"
             id="colorpicker"
           ></input>

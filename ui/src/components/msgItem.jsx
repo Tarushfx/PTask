@@ -4,15 +4,12 @@ const MsgItem = (props) => {
   let date = new Date(Date.parse(props.deadline)).toDateString();
   date = date !== "Invalid Date" ? date : "";
   return (
-    <div className={props.classes}>
+    <div className={props.classes} id={props.index} onClick={props.onClick}>
       <input
         type="checkbox"
         name="msg"
         id={`mail-${props.index}`}
         className="mail-choice"
-        onClick={(id) => {
-          // change state in db
-        }}
       />
       <label htmlFor={`mail-${props.index}`}></label>
       <div className="msg-content">

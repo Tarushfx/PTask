@@ -106,7 +106,6 @@ class ProfileBar extends React.Component {
                 {item.title}-{item.description}
               </div>
             ))}
-            <div className="project-department">Hello</div>
           </div>
         </div>
         <div className="add-task">
