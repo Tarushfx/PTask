@@ -6,7 +6,7 @@ import Mail from "./mail.jsx";
 const MainContainer = (props) => {
   return (
     <div className="main-container">
-      <Inbox user={props.user} />
+      <Inbox user={props.user} loadData={props.loadData}/>
       <Mail user={props.user} />
       <Calender date={new Date()} user={props.user} />
     </div>

@@ -5,6 +5,20 @@ import graphQLFetch from "../graphQLFetch";
 
 const MsgItem = (props) => {
 
+
+  async function removeTask(){
+    const query = `mutation removeTask($task: TaskRemove!) {
+      TaskRemove(task: $task)
+    }`;
+    const task = {
+      _id: jwt.decode(authservice.getToken())._id,
+      task_id: props._id,
+    };
+
+    const data = await graphQLFetch(query, {task: task});
+    await props.loadData();
+  }
+
   async function updateTask(status){
     const query = `mutation updateTask($task: TaskUpdate!){
       TaskStateUpdate(task:$task)
@@ -28,6 +42,7 @@ const MsgItem = (props) => {
     // else if(data.TaskStateUpdate === "Updated" && status === 0){
     //   props.state = "InProgress";
     // }
+    await props.loadData();
   }
 
   async function handleChangeCheckbox() {
@@ -45,43 +60,25 @@ const MsgItem = (props) => {
   date = date !== "Invalid Date" ? date : "";
   return (
     <div className={props.classes}>
-      <InputSelect task={props} handleChangeCheckbox={handleChangeCheckbox} />
+      <input
+        type="checkbox"
+        name="msg"
+        id={`mail-${props._id}`}
+        className="mail-choice"
+        onClick={handleChangeCheckbox}
+      />
       <label htmlFor={`mail-${props._id}`}></label>
       <div className="msg-content">
         <div className="msg-title">{props.title}</div>
         <div className="msg-title">{props.state}</div>
         <div className="msg-date">{date} </div>
       </div>
-      <img src="images/User-Icon.jpg" alt="" className="members mail-members" />
+      <button className="badge badge-xs badge-pill badge-primary crossbutton" onClick={removeTask}>
+        <i className="fa fa-times-circle" />
+      </button>
     </div>
   );
 };
 
-
-const InputSelect = (props) => {
-  if(props.task.state === "Completed"){
-    return(
-      <input
-        type="checkbox"
-        name="msg"
-        id={`mail-${props.task._id}`}
-        className="mail-choice"
-        onClick={props.handleChangeCheckbox}
-        checked
-      />
-    )
-  }
-  else {
-    return (
-      <input
-        type="checkbox"
-        name="msg"
-        id={`mail-${props.task._id}`}
-        className="mail-choice"
-        onClick={props.handleChangeCheckbox}
-      />
-    )
-  }
-}
 
 export default MsgItem;

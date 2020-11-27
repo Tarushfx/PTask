@@ -18,6 +18,7 @@ const Inbox = (props) => {
                 key={index}
                 index={index}
                 {...task}
+                loadData={props.loadData}
               />
             ))}
         {taskArray.length === 0 && (
