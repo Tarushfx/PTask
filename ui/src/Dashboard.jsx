@@ -26,7 +26,7 @@ class Dashboard extends React.Component {
           title created state description
         }
         tasks{
-          title created state description deadline
+          _id title created state description deadline
         }
         team{
           title description members

@@ -19,6 +19,7 @@ type Project {
 }
 
 type Task {
+  _id: ID!
   title: String!
   created: GraphQLDate!
   deadline: GraphQLDate!
@@ -83,6 +84,17 @@ input UserLoginInputs {
   password: String!
 }
 
+input TaskUpdate {
+  _id: ID!
+  task_id: ID!
+  state: State!
+}
+
+input TaskRemove {
+  _id: ID!
+  task_id: ID!
+}
+
 type Query {
   about: String!
   userData(user: getData!): UserData!
@@ -97,4 +109,6 @@ type Mutation {
   UserUpdate(user: UserUpdateInputs!): String
   UserUpdateName(user: UserUpdateNameInputs!): String
   UserDelete(user: getData!) : String
+  TaskStateUpdate(task: TaskUpdate!): String
+  TaskRemove(task: TaskRemove!): String
 }

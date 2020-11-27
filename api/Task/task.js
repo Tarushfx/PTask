@@ -30,4 +30,34 @@ async function addTask(_, { task }) {
   }
 }
 
-module.exports = { addTask };
+async function updateTask(_, { task }) {
+  const data = await User.findOne({ _id: task._id });
+  const taskArray = data.tasks
+  const index = taskArray.findIndex(x => x._id == task.task_id );
+  const foundTask = taskArray[index];
+  foundTask.state = task.state;
+  const savedUser = await User.create(data);
+  console.log(savedUser);
+  if(savedUser){
+    return "Updated";
+  }
+  else {
+    return "Not Updated"
+  }
+}
+
+async function removeTask(_ ,{ task }) {
+  const data = await User.findOne({ _id: task._id })
+  const taskArray = data.tasks.filter(x => x._id != task.task_id);
+  data.tasks = taskArray;
+  const savedUser = await User.create(data);
+  console.log(savedUser);
+  if(savedUser){
+    return "Removed";
+  }
+  else {
+    return "Not Removed";
+  }
+}
+
+module.exports = { addTask, updateTask, removeTask };
