@@ -2,7 +2,7 @@ import React from "react";
 
 const Mail = (props) => {
   return (
-    <div className="mail-detail">
+    <div className="mail-detail hide">
       <div className="mail-detail-header">
         <div className="mail-detail-profile">
           <img

@@ -4,13 +4,45 @@ import authservice from "../../services/authservice.js";
 import jwt from "jsonwebtoken";
 import graphQLFetch from "../graphQLFetch.js";
 import ModalInput from "../components/modalInput.jsx";
+import Joi from "joi-browser";
 
 const AddTaskModal = (props) => {
-  const formData = useState({
+  // let date = new Date();
+  // console.log(date.toLocaleDateString());
+
+  const [formData, setFormData] = useState({
     title: "",
-    description: "",
     deadline: "",
+    desc: "",
   });
+  const [formErrors, setFormErrors] = useState({});
+  const schema = {
+    title: Joi.string().min(5).required(),
+    deadline: Joi.date().min(new Date()),
+    desc: Joi.string().min(5),
+  };
+  const handleChange = ({ currentTarget: input }) => {
+    let formDataNew = { ...formData };
+    let formErrorsNew = { ...formErrors };
+
+    formDataNew[input.name] = input.value;
+
+    let error = validateProperty(input);
+
+    if (error) formErrorsNew[input.name] = error;
+    else delete formErrorsNew[input.name];
+
+    setFormErrors(formErrorsNew);
+    setFormData(formDataNew);
+  };
+  const validateProperty = ({ name, value }) => {
+    const proprertyObject = { [name]: value };
+    const propertySchema = { [name]: schema[name] };
+    const { error } = Joi.validate(proprertyObject, propertySchema);
+    if (error) return error.details[0].message;
+    return null;
+  };
+
   async function addTask(task) {
     const query = `mutation addTask($task : TaskInput!){
       addTask(task: $task){
@@ -36,10 +68,9 @@ const AddTaskModal = (props) => {
       title: form.title.value,
       description: form.desc.value,
     };
-    if(date === ''){
+    if (date === "") {
       task.deadline = new Date();
-    }
-    else{
+    } else {
       task.deadline = new Date(date);
     }
     await addTask(task);
@@ -61,7 +92,14 @@ const AddTaskModal = (props) => {
         <div className="modal-content">
           <div className="modal-header">
             <h3 className="modal-title">Add a Task</h3>
-            <button type="button" className="close" data-dismiss="modal">
+            <button
+              type="button"
+              className="close"
+              data-dismiss="modal"
+              onClick={() => {
+                setFormErrors({});
+              }}
+            >
               &times;
             </button>
           </div>
@@ -74,6 +112,9 @@ const AddTaskModal = (props) => {
                 id="title"
                 name="title"
                 key="title"
+                iconType="title"
+                onChange={handleChange}
+                error={formErrors}
               />
               <ModalInput
                 mode="input"
@@ -82,13 +123,20 @@ const AddTaskModal = (props) => {
                 id="deadline"
                 name="deadline"
                 key="deadline"
+                iconType="date"
+                onChange={handleChange}
+                error={formErrors}
               />
               <ModalInput
                 mode="textarea"
+                placeholder="Description"
                 type="text"
                 id="desc"
                 name="desc"
                 key="desc"
+                iconType="password"
+                onChange={handleChange}
+                error={formErrors}
               />
 
               <div className="form-group row">

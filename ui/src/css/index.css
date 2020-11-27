@@ -9,11 +9,16 @@
   --title-color: #979dc3;
   --body-font: "Jost", sans-serif;
   --button-bg-color: #eaeefc;
-  --button-color: #4d76fd;
+  --button-color: #a397cfe3;
   --unselected-mail: #f1f2f7;
   --calendar-border-color: #cbcfe0;
   --main-container-bg: #f0f0f7;
 }
+html {
+  --notif-bell-content: "0";
+  --notif-msg-content: "0";
+}
+
 
 .crossbutton{
   margin-left: auto;
@@ -22,6 +27,7 @@
 }
 
 .plusIcon{
+
   margin-left: 10px;
   padding: 6px;
   border: none;
@@ -151,7 +157,23 @@ img {
 }
 /* messages */
 .notify.alert:before {
-  content: "199";
+  content: var(--notif-msg-content);
+  font-size: 9px;
+  font-weight: 700;
+  position: absolute;
+  background-color: #ff537b;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  top: -3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 0px;
+  color: #fff;
+}
+.notify.alert:after {
+  content: var(--notif-msg-content);
   font-size: 9px;
   font-weight: 700;
   position: absolute;
@@ -168,7 +190,10 @@ img {
 }
 /* notification */
 .notify.alert:last-child:before {
-  content: "1";
+  content: var(--notif-bell-content);
+}
+.notify.alert:last-child:after {
+  content: var(--notif-bell-content);
 }
 
 .progress {
@@ -620,6 +645,9 @@ img {
 }
 .mail-doc-icons svg:not(:last-child) {
   margin-right: 8px;
+}
+button:focus {
+  outline: 0px;
 }
 
 .mail-textarea {

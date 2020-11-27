@@ -59,7 +59,7 @@ const MsgItem = (props) => {
   let date = new Date(Date.parse(props.deadline)).toDateString();
   date = date !== "Invalid Date" ? date : "";
   return (
-    <div className={props.classes}>
+    <div className={props.classes} id={props.index} onClick={props.onClick}>
       <input
         type="checkbox"
         name="msg"
