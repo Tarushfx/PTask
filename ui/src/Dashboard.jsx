@@ -12,7 +12,6 @@ import authservice from "../services/authservice.js";
 import AddProjectModal from "./Modal/AddProjectModal.jsx";
 
 class Dashboard extends React.Component {
-  // state = { user: {} };
   constructor() {
     super();
     this.state = { user: {} };
@@ -51,11 +50,10 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div className="Container">
-        {/* <SimpleNotif /> */}
         <ProfileBar user={this.state.user} />
         <MainArea user={this.state.user} />
-        <AddTaskModal loadData={this.loadData}/>
-        <SettingModal loadData={this.loadData}/>
+        <AddTaskModal loadData={this.loadData} />
+        <SettingModal loadData={this.loadData} />
         <AddProjectModal loadData={this.loadData} />
       </div>
     );

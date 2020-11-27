@@ -6,15 +6,8 @@ const Calender = (props) => {
   console.log(dateState);
 
   function changeStyleButton({ currentTarget: button }) {
-    // const element = document.getElementById("addTaskButton");
     button.classList.toggle("active");
   }
-
-  // function changeStyleButtonUnactive() {
-  //   // const element = document.getElementById("addTaskButton");
-  //   // element.classList.remove("active");
-  //   e.currentTarget.classList.("active");
-  // }
 
   function getCalendarArray(date) {
     const dayDate = new Date(date.getTime());

@@ -17,11 +17,11 @@ const Inbox = (props) => {
     <div className="inbox-container">
       <div className="inbox">
         {taskArray.length !== 0 &&
-          reverseArray(taskArray).map((task, index) => (
+          reverseArray(taskArray).map((task, index, array) => (
             <MsgItem
               classes="msg selected-bg anim-y"
-              key={index}
-              index={index}
+              key={array.length - 1 - index}
+              index={array.length - 1 - index}
               {...task}
               onClick={props.onMessageSelect}
             />

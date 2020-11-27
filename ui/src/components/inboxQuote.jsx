@@ -6,7 +6,6 @@ const InboxQuote = (props) => {
   return (
     <React.Fragment>
       <MsgDesc task={props.task} user={props.user} />
-      {/* <Mail user={props.user} /> */}
       <div className="w-100 quote-inbox-content" id="quote-inbox-content">
         <div className="quote-content">
           <Quote quote={props.quote} />
