@@ -5,10 +5,13 @@ const CalendarDay = (props) => {
   let title = [],
     state = [],
     created = [],
-    description = [];
+    description = [],
+    deadline = [];
   tasksOnADay.map((task) => {
     title.push(task.title);
     state.push(task.state);
+    created.push(task.created);
+    deadline.push(task.deadline);
     description.push(task.description);
   });
   // console.log(title);
@@ -33,8 +36,11 @@ const CalendarDay = (props) => {
       />
     </React.Fragment>
   );
-
-  let classes = tasksOnADay.length !== 0 ? "project-market" : "";
+  let clasArray = ["project-market", "project-finance"];
+  let classes =
+    tasksOnADay.length !== 0
+      ? clasArray[Math.floor(Math.random() * clasArray.length)]
+      : "";
   if (!props.day.thisMonth) classes += "not-work";
   return (
     <div className={`day ${classes}`}>

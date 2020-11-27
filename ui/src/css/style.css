@@ -85,6 +85,11 @@ form.sign-in-form {
   border: 0px;
   border-radius: 20px;
   width: 320px;
+  padding: 15px;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #333;
 }
 /* .input-field-textarea {
   margin-top: 6.4px;
@@ -115,7 +120,7 @@ form.sign-in-form {
 
 .input-field-warn {
   max-width: 380px;
-  width: 100%;
+  width: 320px;
   background-color: #dc3545b8;
   margin: 0px;
   height: 55px;
@@ -124,6 +129,7 @@ form.sign-in-form {
   grid-template-columns: 15% 85%;
   padding: 0 0.4rem;
   position: relative;
+  height: fit-content;
 }
 
 .input-field-warn i {

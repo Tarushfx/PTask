@@ -6,7 +6,8 @@ const GraphQLDate = require('./graphql_date');
 const about = require('./about');
 const user = require('./user');
 const userAPI = require('./userAPI');
-const taskAPI = require('./Task/task.js')
+const taskAPI = require('./Task/task.js');
+const projectAPI = require("./Project/project.js");
 
 const resolvers = {
   Query: {
@@ -18,7 +19,9 @@ const resolvers = {
     setAboutMessage: about.setMessage,
     UserAdd: user.add,
     addTask: taskAPI.addTask,
+    addProject: projectAPI.addProject,
     UserUpdate: userAPI.userUpdate,
+    UserUpdateName: userAPI.userUpdateName,
     UserDelete: userAPI.userDelete,
   },
   GraphQLDate,

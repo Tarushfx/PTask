@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
-const Joi = require("joi");
-const jwt = require("jsonwebtoken");
+import mongoose from "mongoose";
+import Joi from "joi";
+import jwt from "jsonwebtoken";
 
 const TaskSchema = new mongoose.Schema({
   title: {
@@ -11,14 +11,10 @@ const TaskSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  deadline: {
-    type: Date,
-    default: Date.now
-  },
   state: {
     type: String,
-    enum: ["InProgress", "Completed"],
-    default: "InProgress",
+    enum: ["notStarted", "inProgress", "completed"],
+    default: "notStarted",
   },
   description: String,
 });
@@ -36,8 +32,8 @@ const ProjectSchema = new mongoose.Schema({
   },
   state: {
     type: String,
-    enum: ["InProgress", "Completed"],
-    default: "InProgress",
+    enum: ["notStarted", "inProgress", "completed"],
+    default: "notStarted",
   },
   description: String,
 });
@@ -50,7 +46,6 @@ const UserSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
   },
   password: {
     type: String,
@@ -87,4 +82,4 @@ UserSchema.methods.generateAuthToken = function () {
   return token;
 };
 
-module.exports = { UserSchema, joiSchema };
+export default { UserSchema, joiSchema };

@@ -6,15 +6,8 @@ const Calender = (props) => {
   console.log(dateState);
 
   function changeStyleButton({ currentTarget: button }) {
-    // const element = document.getElementById("addTaskButton");
     button.classList.toggle("active");
   }
-
-  // function changeStyleButtonUnactive() {
-  //   // const element = document.getElementById("addTaskButton");
-  //   // element.classList.remove("active");
-  //   e.currentTarget.classList.("active");
-  // }
 
   function getCalendarArray(date) {
     const dayDate = new Date(date.getTime());
@@ -126,6 +119,17 @@ const Calender = (props) => {
             className="button button-task"
             onMouseEnter={changeStyleButton}
             onMouseLeave={changeStyleButton}
+            id="addTaskButton"
+            onClick={() => {
+              setDateState(new Date());
+            }}
+          >
+            Reset Month
+          </button>
+          <button
+            className="button button-task"
+            onMouseEnter={changeStyleButton}
+            onMouseLeave={changeStyleButton}
             onClick={() =>
               setDateState(
                 new Date(
@@ -167,8 +171,8 @@ const Calender = (props) => {
           ))}
           {finalArray.map((day) => {
             let tasksOnADay = taskArray.filter((task) => {
-              let date = new Date(Date.parse(task.created)).getDate();
-              let month = new Date(Date.parse(task.created)).getMonth();
+              let date = new Date(Date.parse(task.deadline)).getDate();
+              let month = new Date(Date.parse(task.deadline)).getMonth();
               return (
                 date === day.day &&
                 day.thisMonth == true &&

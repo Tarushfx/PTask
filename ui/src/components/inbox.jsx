@@ -5,21 +5,27 @@ import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 const Inbox = (props) => {
   let taskArray = props.user.tasks ? props.user.tasks : [];
   console.log(taskArray);
-  let array = [1, 2, 3, 4];
+
+  function reverseArray(arr) {
+    var newArray = [];
+    for (var i = arr.length - 1; i >= 0; i--) {
+      newArray.push(arr[i]);
+    }
+    return newArray;
+  }
   return (
     <div className="inbox-container">
       <div className="inbox">
         {taskArray.length !== 0 &&
-          taskArray
-            .reverse()
-            .map((task, index) => (
-              <MsgItem
-                classes="msg selected-bg anim-y"
-                key={index}
-                index={index}
-                {...task}
-              />
-            ))}
+          reverseArray(taskArray).map((task, index, array) => (
+            <MsgItem
+              classes="msg selected-bg anim-y"
+              key={array.length - 1 - index}
+              index={array.length - 1 - index}
+              {...task}
+              onClick={props.onMessageSelect}
+            />
+          ))}
         {taskArray.length === 0 && (
           <MsgItem
             classes="msg selected-bg anim-y"

@@ -6,20 +6,15 @@ import graphQLFetch from "../graphQLFetch.js";
 import ModalInput from "../components/modalInput.jsx";
 import Joi from "joi-browser";
 
-const AddTaskModal = (props) => {
-  // let date = new Date();
-  // console.log(date.toLocaleDateString());
-
+const AddProjectModal = (props) => {
   const [formData, setFormData] = useState({
     title: "",
-    deadline: "",
     desc: "",
   });
   const [formErrors, setFormErrors] = useState({});
   const schema = {
     title: Joi.string().min(5).required(),
-    deadline: Joi.date().min(new Date()),
-    desc: Joi.string().min(5),
+    desc: Joi.string().min(5).required(),
   };
   const handleChange = ({ currentTarget: input }) => {
     let formDataNew = { ...formData };
@@ -43,55 +38,47 @@ const AddTaskModal = (props) => {
     return null;
   };
 
-  async function addTask(task) {
-    const query = `mutation addTask($task : TaskInput!){
-      addTask(task: $task){
-        title created description state
+  async function addProject(project) {
+    const query = `mutation addP($project: ProjectInput!){
+      addProject(project: $project){
+        title created state
       }
     }`;
 
-    console.log(task);
-    const data = await graphQLFetch(query, { task: task });
+    console.log(project);
+    const data = await graphQLFetch(query, { project: project });
     if (data) {
       console.log(data);
     }
   }
 
-  async function handleSubmitTask(e) {
+  async function handleSubmitProject(e) {
     e.preventDefault();
-    const form = document.forms.taskAdd;
+    const form = document.forms.projectAdd;
     const token = authservice.getToken();
     const id = jwt.decode(token)._id;
-    const date = form.deadline.value;
-    const task = {
+    const project = {
       _id: id,
       title: form.title.value,
       description: form.desc.value,
     };
-    if (date === "") {
-      task.deadline = new Date();
-    } else {
-      task.deadline = new Date(date);
-    }
-    await addTask(task);
+
+    await addProject(project);
     form.title.value = "";
     form.desc.value = "";
-    console.log("not called");
-    await (() => $("#taskModal").modal("hide"))();
-    console.log("here");
+    await (() => $("#projectModal").modal("hide"))();
     await props.loadData();
-    console.log("render");
   }
 
   return (
-    <div id="taskModal" className="modal fade" role="dialog">
+    <div id="projectModal" className="modal fade" role="dialog">
       <div
         className="modal-dialog modal-md modal-dialog-centered"
         role="content"
       >
         <div className="modal-content">
           <div className="modal-header">
-            <h3 className="modal-title">Add a Task</h3>
+            <h3 className="modal-title">Add a Project</h3>
             <button
               type="button"
               className="close"
@@ -104,7 +91,7 @@ const AddTaskModal = (props) => {
             </button>
           </div>
           <div className="modal-body">
-            <form name="taskAdd" onSubmit={handleSubmitTask}>
+            <form name="projectAdd" onSubmit={handleSubmitProject}>
               <ModalInput
                 mode="input"
                 placeholder="Title"
@@ -117,24 +104,12 @@ const AddTaskModal = (props) => {
                 error={formErrors}
               />
               <ModalInput
-                mode="input"
-                placeholder="Deadline"
-                type="datetime-local"
-                id="deadline"
-                name="deadline"
-                key="deadline"
-                iconType="date"
-                onChange={handleChange}
-                error={formErrors}
-              />
-              <ModalInput
                 mode="textarea"
                 placeholder="Description"
                 type="text"
                 id="desc"
                 name="desc"
                 key="desc"
-                iconType="password"
                 onChange={handleChange}
                 error={formErrors}
               />
@@ -150,9 +125,9 @@ const AddTaskModal = (props) => {
                 <button
                   type="submit"
                   className="add-button ml-2"
-                  id="taskSubmit"
+                  id="projectSubmit"
                 >
-                  Add Task
+                  Add Project
                 </button>
               </div>
             </form>
@@ -163,4 +138,4 @@ const AddTaskModal = (props) => {
   );
 };
 
-export default AddTaskModal;
+export default AddProjectModal;
