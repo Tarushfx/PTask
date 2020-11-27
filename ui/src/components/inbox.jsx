@@ -17,6 +17,7 @@ const Inbox = (props) => {
     <div className="inbox-container">
       <div className="inbox">
         {taskArray.length !== 0 &&
+
           reverseArray(taskArray).map((task, index, array) => (
             <MsgItem
               classes="msg selected-bg anim-y"
@@ -24,8 +25,10 @@ const Inbox = (props) => {
               index={array.length - 1 - index}
               {...task}
               onClick={props.onMessageSelect}
+              loadData={props.loadData}
             />
           ))}
+
         {taskArray.length === 0 && (
           <MsgItem
             classes="msg selected-bg anim-y"

@@ -31,8 +31,10 @@ const MainContainer = (props) => {
   };
   return (
     <div className="main-container">
-      <Inbox user={props.user} onMessageSelect={onMessageSelect} />
+
+      <Inbox user={props.user} onMessageSelect={onMessageSelect} loadData={props.loadData}/>
       <InboxQuote quote={quote} task={taskState} />
+
       <Calender date={new Date()} user={props.user} />
     </div>
   );

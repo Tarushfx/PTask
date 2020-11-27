@@ -5,7 +5,7 @@ const MainArea = (props) => {
   return (
     <div className="main-area">
       <NavBar user={props.user} />
-      <MainContainer user={props.user} />
+      <MainContainer user={props.user} loadData={props.loadData}/>
     </div>
   );
 };

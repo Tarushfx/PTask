@@ -23,6 +23,8 @@ const resolvers = {
     UserUpdate: userAPI.userUpdate,
     UserUpdateName: userAPI.userUpdateName,
     UserDelete: userAPI.userDelete,
+    TaskStateUpdate: taskAPI.updateTask,
+    TaskRemove: taskAPI.removeTask,
   },
   GraphQLDate,
 };

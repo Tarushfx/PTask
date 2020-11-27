@@ -19,7 +19,15 @@ html {
   --notif-msg-content: "0";
 }
 
-.plusIcon {
+
+.crossbutton{
+  margin-left: auto;
+  padding: 6px;
+  border: none;
+}
+
+.plusIcon{
+
   margin-left: 10px;
   padding: 6px;
   border: none;

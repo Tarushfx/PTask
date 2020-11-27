@@ -25,7 +25,7 @@ class Dashboard extends React.Component {
           title created state description
         }
         tasks{
-          title created state description deadline
+          _id title created state description deadline
         }
         team{
           title description members
@@ -51,9 +51,12 @@ class Dashboard extends React.Component {
     return (
       <div className="Container">
         <ProfileBar user={this.state.user} />
-        <MainArea user={this.state.user} />
-        <AddTaskModal loadData={this.loadData} />
-        <SettingModal loadData={this.loadData} />
+
+        <MainArea user={this.state.user} loadData={this.loadData}/>
+        <AddTaskModal loadData={this.loadData}/>
+        <SettingModal loadData={this.loadData}/>
+
+
         <AddProjectModal loadData={this.loadData} />
       </div>
     );
