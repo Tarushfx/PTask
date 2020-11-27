@@ -17,7 +17,6 @@ const Inbox = (props) => {
     <div className="inbox-container">
       <div className="inbox">
         {taskArray.length !== 0 &&
-
           reverseArray(taskArray).map((task, index, array) => (
             <MsgItem
               classes="msg selected-bg anim-y"
@@ -30,12 +29,10 @@ const Inbox = (props) => {
           ))}
 
         {taskArray.length === 0 && (
-          <MsgItem
-            classes="msg selected-bg anim-y"
-            key="0"
-            index="0"
-            title="No tasks added yet"
-          />
+          <div className="msg selected-bg anim-y">
+            <input type="checkbox" name="msg" className="mail-choice" />
+            <div className="msg-title">No Tasks Added yet</div>
+          </div>
         )}
       </div>
 
