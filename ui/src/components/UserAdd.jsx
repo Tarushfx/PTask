@@ -173,18 +173,6 @@ export default class UserAdd extends React.Component {
       signUp.errors = this.validateSignUp();
       this.setState({ signUp });
       console.log(signUp);
-      // if (form.password.value === form.confirmpswd.value) {
-      //   const user = {
-      //     name: form.name.value,
-      //     email: form.email.value,
-      //     password: form.password.value,
-      //   };
-      //   // eslint-disable-next-line react/destructuring-assignment
-      //   this.props.createUser(user);
-      // } else {
-      //   console.log("Passwords don't match");
-      //   throw new Error("Passwords dont match");
-      // }
       const user = _.pick(this.state.signUp.data, [
         "name",
         "email",
@@ -196,10 +184,10 @@ export default class UserAdd extends React.Component {
       console.log("Error:", err);
     }
 
-    // form.name.value = "";
-    // form.email.value = "";
-    // form.password.value = "";
-    // form.confirmpswd.value = "";
+    form.name.value = "";
+    form.email.value = "";
+    form.password.value = "";
+    form.confirmpswd.value = "";
   }
 
   render() {
@@ -242,10 +230,7 @@ export default class UserAdd extends React.Component {
               name="signup"
             >
               <h2 className="title">Sign up</h2>
-              {/* <div className="input-field">
-                <i className="fas fa-user" />
-                <input type="text" placeholder="Full Name" name="name" />
-              </div> */}
+
               <Input
                 placeholder="Full Name"
                 name="name"
@@ -256,10 +241,7 @@ export default class UserAdd extends React.Component {
                 form="SignUp"
                 iconType="title"
               />
-              {/* <div className="input-field">
-                <i className="fas fa-envelope" />
-                <input type="email" placeholder="Email" name="email" />
-              </div> */}
+
               <Input
                 placeholder="E-mail"
                 name="email"
@@ -270,10 +252,7 @@ export default class UserAdd extends React.Component {
                 form="SignUp"
                 iconType="email"
               />
-              {/* <div className="input-field">
-                <i className="fas fa-lock" />
-                <input type="password" placeholder="Password" name="password" />
-              </div> */}
+
               <Input
                 placeholder="Password"
                 name="password"
@@ -284,14 +263,7 @@ export default class UserAdd extends React.Component {
                 form="SignUp"
                 iconType="password"
               />
-              {/* <div className="input-field">
-                <i className="fas fa-lock" />
-                <input
-                  type="password"
-                  placeholder="Confirm Password"
-                  name="confirmpswd"
-                />
-              </div> */}
+
               <Input
                 placeholder="Confirm Password"
                 name="confirmpswd"

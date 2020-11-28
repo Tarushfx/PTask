@@ -1,7 +1,7 @@
-import React from 'react';
-import UserAdd from './components/UserAdd.jsx';
-import graphQLFetch from './graphQLFetch.js';
-import authService from '../services/authservice.js';
+import React from "react";
+import UserAdd from "./components/UserAdd.jsx";
+import graphQLFetch from "./graphQLFetch.js";
+import authService from "../services/authservice.js";
 
 export default class Login extends React.Component {
   constructor() {
@@ -19,8 +19,8 @@ export default class Login extends React.Component {
     const data = await graphQLFetch(query, { user });
     if (data.UserAdd) {
       authService.setTokenSignUp(data);
-      console.log('User Created');
-      window.location = '/';
+      console.log("User Created");
+      window.location = "/";
     }
   }
 
@@ -33,11 +33,11 @@ export default class Login extends React.Component {
     const data = await graphQLFetch(query, { user });
     if (data.UserSignIn) {
       authService.setTokenSignin(data);
-      console.log('Sign in Done');
-      window.location = '/';
+      console.log("Sign in Done");
+      window.location = "/";
     } else {
       authService.clearToken();
-      console.log('Unsuccessful');
+      console.log("Unsuccessful");
     }
   }
 

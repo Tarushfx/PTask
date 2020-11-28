@@ -1,30 +1,11 @@
-$(".mail-choice").click(function () {
-  $(this).parent().toggleClass("selected-bg");
-});
-
-const colorInput = document.getElementById("colorpicker");
-
-colorInput.addEventListener("input", (e) => {
-  document.body.style.setProperty("--button-color", e.target.value);
-  colorInput.value = e.target.value;
-});
-
-$(".inbox-calendar").click(function () {
-  if ($(".calendar-container").hasClass("calendar-show")) {
-    unmountCalendar("#quote-inbox-content");
-  } else {
-    displayCalendar();
-    unmountQuote();
-    unmountTaskContent();
-  }
-});
-const displayCalendar = () => {
+const displayCalender = () => {
+  console.log("1234");
   $(".calendar-container").addClass("calendar-show");
   $(".inbox-container").addClass("hide");
   $("#quote-inbox-content").addClass("hide");
   $(".mail-contents").addClass("hide");
 };
-const unmountCalendar = (show) => {
+const unmountCalender = (show) => {
   $(".calendar-container").removeClass("calendar-show");
   $(".inbox-container").removeClass("hide");
   $(show).removeClass("hide");
@@ -53,3 +34,14 @@ const unmountTaskContent = () => {
 };
 const displayMessageContainer = () => {};
 const unmountMessageContainer = () => {};
+
+export default {
+  displayCalender,
+  displayMessageContainer,
+  displayQuote,
+  displayTaskContent,
+  unmountCalender,
+  unmountMessageContainer,
+  unmountQuote,
+  unmountTaskContent,
+};
