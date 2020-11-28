@@ -10,7 +10,7 @@ const QuoteSchema = new mongoose.Schema({
     default: "anonymous",
   },
   tags: {
-    type: Array,
+    type: [String],
   },
 });
 export default QuoteSchema;

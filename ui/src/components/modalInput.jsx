@@ -5,6 +5,7 @@ const ModalInput = (props) => {
     password: <i className="fas fa-lock" />,
     date: <i class="far fa-clock"></i>,
     error: <i className="fas fa-exclamation-triangle" />,
+    interests: <i className="fa fa-thumbs-up" />
   };
 
   return (

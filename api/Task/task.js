@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { UserSchema } = -require("../models/user.model.js");
+const { UserSchema } = require("../models/user.model.js");
 
 const dateRegex = new RegExp('^\\d\\d\\d\\d-\\d\\d-\\d\\d');
 
