@@ -116,6 +116,11 @@ input NotifUpdate {
   status: Boolean!
 }
 
+input LikesInput{
+  _id: ID!
+  likes: [String!]!
+}
+
 type Query {
   about: String!
   userData(user: getData!): UserData!
@@ -134,4 +139,5 @@ type Mutation {
   TaskRemove(task: TaskRemove!): String
   NotifAdd(notif: NotifAdd!): String
   NotifUpdate(notif: NotifUpdate!): String
+  addLikes(likes: LikesInput!):String
 }

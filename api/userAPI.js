@@ -30,7 +30,14 @@ async function userUpdateName(_, { user }) {
   return "Updated";
 }
 
-module.exports = { userData, userUpdate, userDelete, userUpdateName };
+async function addLikes(_, { likes }) {
+  await User.updateOne({_id: likes._id }, {$set: {likes: likes.likes}})
+  return "Updated";
+}
+
+
+
+module.exports = { userData, userUpdate, userDelete, userUpdateName,addLikes };
 
 
 

@@ -28,6 +28,7 @@ const resolvers = {
     TaskRemove: taskAPI.removeTask,
     NotifAdd: notifAPI.notifAdd,
     NotifUpdate: notifAPI.notifUpdate,
+    addLikes:userAPI.addLikes,
   },
   GraphQLDate,
 };
