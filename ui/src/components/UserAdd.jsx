@@ -174,18 +174,6 @@ export default class UserAdd extends React.Component {
       signUp.errors = this.validateSignUp();
       this.setState({ signUp });
       console.log(signUp);
-      // if (form.password.value === form.confirmpswd.value) {
-      //   const user = {
-      //     name: form.name.value,
-      //     email: form.email.value,
-      //     password: form.password.value,
-      //   };
-      //   // eslint-disable-next-line react/destructuring-assignment
-      //   this.props.createUser(user);
-      // } else {
-      //   console.log("Passwords don't match");
-      //   throw new Error("Passwords dont match");
-      // }
       const user = _.pick(this.state.signUp.data, [
         "name",
         "email",
@@ -202,6 +190,7 @@ export default class UserAdd extends React.Component {
     e.preventDefault();
     document.getElementById("likes").click();
     const form = document.forms.signup;
+
     form.name.value = "";
     form.email.value = "";
     form.password.value = "";
@@ -220,7 +209,6 @@ export default class UserAdd extends React.Component {
                 name="signin"
               >
                 <h2 className="title">Sign in</h2>
-
                 <Input
                   placeholder="E-mail"
                   name="email"

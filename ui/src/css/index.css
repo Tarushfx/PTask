@@ -19,15 +19,24 @@ html {
   --notif-msg-content: "0";
 }
 
-
-.crossbutton{
-  margin-left: auto;
-  padding: 6px;
-  border: none;
+.fa-times-circle {
+  color: var(--button-color);
 }
 
-.plusIcon{
+.crossbutton {
+  display: flex;
+  /* margin-left: auto; */
+  border: none;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+}
+.msg-content {
+  /* margin-right: auto; */
+  width: 100%;
+}
 
+.plusIcon {
   margin-left: 10px;
   padding: 6px;
   border: none;

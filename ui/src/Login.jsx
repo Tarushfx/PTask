@@ -4,7 +4,6 @@ import graphQLFetch from './graphQLFetch.js';
 import authService from '../services/authservice.js';
 import jwt from 'jsonwebtoken';
 
-
 export default class Login extends React.Component {
   constructor() {
     super();
@@ -22,6 +21,7 @@ export default class Login extends React.Component {
 
     if (data.UserAdd) {
       authService.setTokenSignUp(data);
+
       const likesQuery = `mutation addLike($likes: LikesInput!){
         addLikes(likes: $likes)
       }`;
@@ -47,11 +47,11 @@ export default class Login extends React.Component {
     const data = await graphQLFetch(query, { user });
     if (data.UserSignIn) {
       authService.setTokenSignin(data);
-      console.log('Sign in Done');
-      window.location = '/';
+      console.log("Sign in Done");
+      window.location = "/";
     } else {
       authService.clearToken();
-      console.log('Unsuccessful');
+      console.log("Unsuccessful");
     }
   }
 
