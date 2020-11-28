@@ -2,6 +2,20 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 const jwt = require("jsonwebtoken");
 
+const NotificationSchema = new mongoose.Schema({
+  text :{
+    type: String,
+    required: true,
+  },
+  type: {
+    type: Number,
+  },
+  status: {
+    type: Boolean,
+    default: true,
+  }
+});
+
 const TaskSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -22,6 +36,7 @@ const TaskSchema = new mongoose.Schema({
   },
   description: String,
 });
+
 const ProjectSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -67,6 +82,7 @@ const UserSchema = new mongoose.Schema({
       },
     ],
   },
+  notifications: [NotificationSchema],
 });
 
 const joiSchema = Joi.object({

@@ -21,7 +21,7 @@ const displayAToast = ({ text, type }) => {
     case 4:
       return toast.info("🦄 Wow so easy!  " + text, settings);
     default:
-      return toast.dark("🦄 Wow so easy!  " + text, settings);
+      return toast("🦄 Wow so easy!  " + text, settings);
   }
 };
 const Notifications = (notifArray) => {

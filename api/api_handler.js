@@ -8,6 +8,7 @@ const user = require('./user');
 const userAPI = require('./userAPI');
 const taskAPI = require('./Task/task.js');
 const projectAPI = require("./Project/project.js");
+const notifAPI = require("./Notification/notification")
 
 const resolvers = {
   Query: {
@@ -25,6 +26,8 @@ const resolvers = {
     UserDelete: userAPI.userDelete,
     TaskStateUpdate: taskAPI.updateTask,
     TaskRemove: taskAPI.removeTask,
+    NotifAdd: notifAPI.notifAdd,
+    NotifUpdate: notifAPI.notifUpdate,
   },
   GraphQLDate,
 };

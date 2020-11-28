@@ -6,6 +6,7 @@ const User = mongoose.model('users', UserSchema);
 
 async function userData(_, { user }) {
   const data = await User.findOne({ _id: user._id });
+  console.log(data);
   return data;
 }
 
