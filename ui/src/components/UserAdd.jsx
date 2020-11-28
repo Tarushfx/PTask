@@ -3,6 +3,8 @@ import Joi from "joi-browser";
 import "../css/style.css";
 import Input from "./input.jsx";
 import _ from "lodash";
+import LikesModal from "../Modal/LikesModal.jsx";
+
 export default class UserAdd extends React.Component {
   state = {
     signIn: {
@@ -26,6 +28,7 @@ export default class UserAdd extends React.Component {
     super();
     this.handleSubmitSignUp = this.handleSubmitSignUp.bind(this);
     this.handleSubmitSignIn = this.handleSubmitSignIn.bind(this);
+    this.handleSubmitSignUpHelper = this.handleSubmitSignUpHelper.bind(this);
   }
   signInSchema = {
     email: Joi.string().required().label("E-mail"),
@@ -164,10 +167,8 @@ export default class UserAdd extends React.Component {
     if (confirm) return confirm;
     return null;
   };
-  handleSubmitSignUp(e) {
-    e.preventDefault();
-    // const form = document.forms.signup;
 
+  async handleSubmitSignUpHelper(likes){
     try {
       const signUp = { ...this.state.signUp };
       signUp.errors = this.validateSignUp();
@@ -179,10 +180,16 @@ export default class UserAdd extends React.Component {
         "password",
       ]);
       console.log(user);
-      this.props.createUser(user);
+      await this.props.createUser(user, likes);
     } catch (err) {
       console.log("Error:", err);
     }
+  }
+
+  handleSubmitSignUp(e) {
+    e.preventDefault();
+    document.getElementById("likes").click();
+    const form = document.forms.signup;
 
     form.name.value = "";
     form.email.value = "";
@@ -192,122 +199,141 @@ export default class UserAdd extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="forms-container">
-          <div className="signin-signup">
-            <form
-              onSubmit={this.handleSubmitSignIn}
-              className="sign-in-form"
-              name="signin"
-            >
-              <h2 className="title">Sign in</h2>
+      <React.Fragment>
+        <div className="container">
+          <div className="forms-container">
+            <div className="signin-signup">
+              <form
+                onSubmit={this.handleSubmitSignIn}
+                className="sign-in-form"
+                name="signin"
+              >
+                <h2 className="title">Sign in</h2>
+                <Input
+                  placeholder="E-mail"
+                  name="email"
+                  type="email"
+                  error={this.state.signIn.errors}
+                  label="E-mail"
+                  onChange={this.handleSignInChange}
+                  form="SignIn"
+                  iconType="email"
+                />
+                <Input
+                  placeholder="Password"
+                  name="password"
+                  type="password"
+                  error={this.state.signIn.errors}
+                  label="Password"
+                  onChange={this.handleSignInChange}
+                  form="SignIn"
+                  iconType="password"
+                />
+                <button className="btn solid">Sign In </button>
+              </form>
+              <form
+                onSubmit={this.handleSubmitSignUp}
+                className="sign-up-form"
+                name="signup"
+              >
+                <h2 className="title">Sign up</h2>
+                {/* <div className="input-field">
+                <i className="fas fa-user" />
+                <input type="text" placeholder="Full Name" name="name" />
+              </div> */}
+                <Input
+                  placeholder="Full Name"
+                  name="name"
+                  type="text"
+                  error={this.state.signUp.errors}
+                  label="Name"
+                  onChange={this.handleSignUpChange}
+                  form="SignUp"
+                  iconType="title"
+                />
+                {/* <div className="input-field">
+                <i className="fas fa-envelope" />
+                <input type="email" placeholder="Email" name="email" />
+              </div> */}
+                <Input
+                  placeholder="E-mail"
+                  name="email"
+                  type="email"
+                  error={this.state.signUp.errors}
+                  label="E-mail"
+                  onChange={this.handleSignUpChange}
+                  form="SignUp"
+                  iconType="email"
+                />
+                {/* <div className="input-field">
+                <i className="fas fa-lock" />
+                <input type="password" placeholder="Password" name="password" />
+              </div> */}
+                <Input
+                  placeholder="Password"
+                  name="password"
+                  type="password"
+                  error={this.state.signUp.errors}
+                  label="Password"
+                  onChange={this.handleSignUpChange}
+                  form="SignUp"
+                  iconType="password"
+                />
+                {/* <div className="input-field">
+                <i className="fas fa-lock" />
+                <input
+                  type="password"
+                  placeholder="Confirm Password"
+                  name="confirmpswd"
+                />
+              </div> */}
+                <Input
+                  placeholder="Confirm Password"
+                  name="confirmpswd"
+                  type="password"
+                  error={this.state.signUp.errors}
+                  label="Password"
+                  onChange={this.handleSignUpChange}
+                  form="SignUp"
+                  iconType="password"
+                />
+                <button id="likes" style={{display: 'none'}} data-target="#likesModal" data-toggle="modal"></button>
+                <button className="btn">Sign Up </button>
+              </form>
+            </div>
+          </div>
 
-              <Input
-                placeholder="E-mail"
-                name="email"
-                type="email"
-                error={this.state.signIn.errors}
-                label="E-mail"
-                onChange={this.handleSignInChange}
-                form="SignIn"
-                iconType="email"
-              />
-              <Input
-                placeholder="Password"
-                name="password"
-                type="password"
-                error={this.state.signIn.errors}
-                label="Password"
-                onChange={this.handleSignInChange}
-                form="SignIn"
-                iconType="password"
-              />
-              <button className="btn solid">Sign In </button>
-            </form>
-            <form
-              onSubmit={this.handleSubmitSignUp}
-              className="sign-up-form"
-              name="signup"
-            >
-              <h2 className="title">Sign up</h2>
-
-              <Input
-                placeholder="Full Name"
-                name="name"
-                type="text"
-                error={this.state.signUp.errors}
-                label="Name"
-                onChange={this.handleSignUpChange}
-                form="SignUp"
-                iconType="title"
-              />
-
-              <Input
-                placeholder="E-mail"
-                name="email"
-                type="email"
-                error={this.state.signUp.errors}
-                label="E-mail"
-                onChange={this.handleSignUpChange}
-                form="SignUp"
-                iconType="email"
-              />
-
-              <Input
-                placeholder="Password"
-                name="password"
-                type="password"
-                error={this.state.signUp.errors}
-                label="Password"
-                onChange={this.handleSignUpChange}
-                form="SignUp"
-                iconType="password"
-              />
-
-              <Input
-                placeholder="Confirm Password"
-                name="confirmpswd"
-                type="password"
-                error={this.state.signUp.errors}
-                label="Password"
-                onChange={this.handleSignUpChange}
-                form="SignUp"
-                iconType="password"
-              />
-              <button className="btn">Sign Up </button>
-            </form>
+          <div className="panels-container">
+            <div className="panel left-panel">
+              <div className="content">
+                <h3>New here ?</h3>
+                <p>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Debitis, ex ratione. Aliquid!
+                </p>
+                <button className="btn transparent" id="sign-up-btn" >
+                  Sign up
+                </button>
+              </div>
+              <img src="images/log.svg" className="image" alt="" />
+            </div>
+            <div className="panel right-panel">
+              <div className="content">
+                <h3>One of us ?</h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+                  laboriosam ad deleniti.
+                </p>
+                <button className="btn transparent" id="sign-in-btn">
+                  Sign in
+                </button>
+              </div>
+              <img src="images/register.svg" className="image" alt="" />
+            </div>
           </div>
         </div>
-
-        <div className="panels-container">
-          <div className="panel left-panel">
-            <div className="content">
-              <h3>New here ?</h3>
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Debitis, ex ratione. Aliquid!
-              </p>
-              <button className="btn transparent" id="sign-up-btn">
-                Sign up
-              </button>
-            </div>
-            <img src="images/log.svg" className="image" alt="" />
-          </div>
-          <div className="panel right-panel">
-            <div className="content">
-              <h3>One of us ?</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-                laboriosam ad deleniti.
-              </p>
-              <button className="btn transparent" id="sign-in-btn">
-                Sign in
-              </button>
-            </div>
-            <img src="images/register.svg" className="image" alt="" />
-          </div>
-        </div>
-      </div>
+        <LikesModal call={this.handleSubmitSignUpHelper}/>
+      </React.Fragment>
     );
   }
 }

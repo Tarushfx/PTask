@@ -20,15 +20,34 @@ class Dashboard extends React.Component {
 
   async loadData() {
     const query = `query userdata($user: getData!) {
-      userData(user :$user){
-        _id name email projects {
-          title created state description
+      userData(user: $user) {
+        _id
+        name
+        email
+        projects {
+          title
+          created
+          state
+          description
         }
-        tasks{
-          _id title created state description deadline
+        tasks {
+          _id
+          title
+          created
+          state
+          description
+          deadline
         }
-        team{
-          title description members
+        team {
+          title
+          description
+          members
+        }
+        notifications {
+          _id
+          text
+          type_
+          status
         }
       }
     }`;

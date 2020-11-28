@@ -6,6 +6,7 @@ const User = mongoose.model('users', UserSchema);
 
 async function userData(_, { user }) {
   const data = await User.findOne({ _id: user._id });
+  console.log(data);
   return data;
 }
 
@@ -29,7 +30,14 @@ async function userUpdateName(_, { user }) {
   return "Updated";
 }
 
-module.exports = { userData, userUpdate, userDelete, userUpdateName };
+async function addLikes(_, { likes }) {
+  await User.updateOne({_id: likes._id }, {$set: {likes: likes.likes}})
+  return "Updated";
+}
+
+
+
+module.exports = { userData, userUpdate, userDelete, userUpdateName,addLikes };
 
 
 

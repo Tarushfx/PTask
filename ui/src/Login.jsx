@@ -1,7 +1,8 @@
-import React from "react";
-import UserAdd from "./components/UserAdd.jsx";
-import graphQLFetch from "./graphQLFetch.js";
-import authService from "../services/authservice.js";
+import React from 'react';
+import UserAdd from './components/UserAdd.jsx';
+import graphQLFetch from './graphQLFetch.js';
+import authService from '../services/authservice.js';
+import jwt from 'jsonwebtoken';
 
 export default class Login extends React.Component {
   constructor() {
@@ -10,17 +11,30 @@ export default class Login extends React.Component {
     this.login = this.login.bind(this);
   }
 
-  async createUser(user) {
+  async createUser(user, likes) {
     const query = `mutation UserAdd($user: UserInputs!) {
       UserAdd(user: $user) {
         _id token
       }
     }`;
     const data = await graphQLFetch(query, { user });
+
     if (data.UserAdd) {
       authService.setTokenSignUp(data);
-      console.log("User Created");
-      window.location = "/";
+
+      const likesQuery = `mutation addLike($likes: LikesInput!){
+        addLikes(likes: $likes)
+      }`;
+
+      const id = jwt.decode(authService.getToken())._id;
+      const likevar = {
+        _id: id,
+        likes: likes
+      };
+
+      await graphQLFetch(likesQuery, {likes: likevar})
+      console.log('User Created');
+      window.location = '/';
     }
   }
 
