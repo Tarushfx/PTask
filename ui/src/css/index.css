@@ -21,6 +21,7 @@ html {
 .msg.selected-bg.anim-y {
   width: 100%;
   max-width: 420px;
+  background-color: var(--theme-bg-color);
 }
 .fa-times-circle {
   color: var(--button-color);
@@ -37,7 +38,7 @@ html {
   justify-content: center;
 }
 .msg-content {
-  /* margin-right: auto; */
+  max-width: 275px;
   width: 100%;
 }
 
@@ -386,6 +387,7 @@ img {
 .msg-title {
   font-weight: 600;
   font-size: 14px;
+  overflow-wrap: break-word;
 }
 .msg-date {
   font-size: 11px;
@@ -394,9 +396,9 @@ img {
   margin-top: 5px;
 }
 
-.selected-bg {
+/* .selected-bg {
   background-color: var(--theme-bg-color);
-}
+} */
 
 .msg-department {
   display: flex;
@@ -500,6 +502,7 @@ img {
   z-index: 1;
   cursor: pointer;
   max-width: 159px;
+  margin: auto;
 }
 
 .mail-detail {
@@ -563,23 +566,12 @@ img {
 .modal-header .close {
   margin-left: 0px;
 }
-.mail-contents {
-  padding: 30px;
-}
-.mail-contents-subject {
-  display: flex;
-  align-items: center;
-}
-.mail-contents-title {
-  font-weight: 700;
-  font-size: 17px;
-  margin-left: 5px;
-}
 
 .mail {
   padding-left: 55px;
   font-size: 14px;
   color: var(--main-light-color);
+  color: #333;
 }
 .mail-time {
   font-weight: 600;
@@ -594,8 +586,10 @@ img {
 .mail-inside {
   padding: 20px 0 30px;
   border-bottom: 1px solid var(--border-color);
-  color: var(--main-color);
+  width: 100%;
   line-height: 1.8em;
+  color: #222;
+  font-weight: 500;
 }
 .mail-checklist {
   padding: 20px 0;

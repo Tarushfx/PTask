@@ -168,7 +168,7 @@ export default class UserAdd extends React.Component {
     return null;
   };
 
-  async handleSubmitSignUpHelper(likes){
+  async handleSubmitSignUpHelper(likes) {
     try {
       const signUp = { ...this.state.signUp };
       signUp.errors = this.validateSignUp();
@@ -297,7 +297,12 @@ export default class UserAdd extends React.Component {
                   form="SignUp"
                   iconType="password"
                 />
-                <button id="likes" style={{display: 'none'}} data-target="#likesModal" data-toggle="modal"></button>
+                <button
+                  id="likes"
+                  style={{ display: "none" }}
+                  data-target="#likesModal"
+                  data-toggle="modal"
+                ></button>
                 <button className="btn">Sign Up </button>
               </form>
             </div>
@@ -308,10 +313,10 @@ export default class UserAdd extends React.Component {
               <div className="content">
                 <h3>New here ?</h3>
                 <p>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Debitis, ex ratione. Aliquid!
+                  Join us! to experience a personalised manager for all your
+                  work.
                 </p>
-                <button className="btn transparent" id="sign-up-btn" >
+                <button className="btn transparent" id="sign-up-btn">
                   Sign up
                 </button>
               </div>
@@ -320,10 +325,7 @@ export default class UserAdd extends React.Component {
             <div className="panel right-panel">
               <div className="content">
                 <h3>One of us ?</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-                  laboriosam ad deleniti.
-                </p>
+                <p>Hop on the wagon! We gon' create history.</p>
                 <button className="btn transparent" id="sign-in-btn">
                   Sign in
                 </button>
@@ -332,7 +334,7 @@ export default class UserAdd extends React.Component {
             </div>
           </div>
         </div>
-        <LikesModal call={this.handleSubmitSignUpHelper}/>
+        <LikesModal call={this.handleSubmitSignUpHelper} />
       </React.Fragment>
     );
   }

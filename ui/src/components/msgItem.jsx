@@ -21,6 +21,18 @@ const MsgItem = (props) => {
     $(".mail-contents").addClass("hide");
   }
 
+  async function handleChangeCheckbox() {
+    const id = "mail-" + String(props._id);
+    const checkbox = document.getElementById(id);
+    if (checkbox.checked == true) {
+      await updateTask(1);
+    } else {
+      await updateTask(0);
+    }
+    // on completion show quote
+    $("#quote-inbox-content").removeClass("hide");
+    $(".mail-contents").addClass("hide");
+  }
   async function updateTask(status) {
     const query = `mutation updateTask($task: TaskUpdate!){
       TaskStateUpdate(task:$task)
@@ -44,19 +56,6 @@ const MsgItem = (props) => {
     //   props.state = "InProgress";
     // }
     await props.loadData();
-  }
-
-  async function handleChangeCheckbox() {
-    const id = "mail-" + String(props._id);
-    const checkbox = document.getElementById(id);
-    if (checkbox.checked == true) {
-      await updateTask(1);
-    } else {
-      await updateTask(0);
-    }
-    // on completion show quote
-    $("#quote-inbox-content").removeClass("hide");
-    $(".mail-contents").addClass("hide");
   }
 
   let date = new Date(Date.parse(props.deadline)).toDateString();

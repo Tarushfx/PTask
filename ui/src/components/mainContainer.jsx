@@ -23,6 +23,7 @@ const MainContainer = (props) => {
   let filterArray = props.taskFilter == true ? getCompleted() : getIncomplete();
   console.log(filterArray);
   let taskViewState = false;
+  let buttonID = "";
   let onMessageSelect = ({ currentTarget: input }) => {
     console.log(input.id.split("-")[1]);
     if (!taskViewState) taskViewState = true;
@@ -32,6 +33,8 @@ const MainContainer = (props) => {
       $(".mail-contents").removeClass("hide");
       $("#quote-inbox-content").addClass("hide");
       console.log(taskTarget);
+      buttonID = input.parentElement.children[0].id.split("-")[1];
+      console.log(buttonID);
     }
   };
   return (
@@ -42,8 +45,14 @@ const MainContainer = (props) => {
         loadData={props.loadData}
         navbarTaskChange={props.navbarTaskChange}
         filterArray={filterArray}
+        // handleChangeCheckbox={handleChangeCheckbox}
       />
-      <InboxQuote quote={props.quote} task={taskState} user={props.user} />
+      <InboxQuote
+        quote={props.quote}
+        task={taskState}
+        user={props.user}
+        buttonID={buttonID}
+      />
 
       <Calender date={new Date()} user={props.user} />
     </div>

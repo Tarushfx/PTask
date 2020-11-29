@@ -1,5 +1,5 @@
 import React from "react";
-
+import { handleChangeCheckbox } from "./msgItem.jsx";
 const MsgDesc = (props) => {
   const clockSVG = (
     <svg
@@ -19,49 +19,61 @@ const MsgDesc = (props) => {
     </svg>
   );
   return (
-    <div className="mail-contents hide">
-      <div className="mail-contents-subject">
-        <input
-          type="checkbox"
-          name="msg"
-          id="//"
-          className="mail-choice"
-        ></input>
-        <label htmlFor="//"></label>
-        <div className="mail-contents-title">{props.task.title}</div>
-      </div>
-      <div className="mail">
-        <div className="mail-time">
-          Deadline:&nbsp;
-          {clockSVG}
-          {new Date(Date.parse(props.task.deadline)).toDateString()}
-        </div>
-        <div className="mail-inside">{props.task.description}</div>
-        <div className="mail-assign">
-          <div className="assignee mail-time">
-            <strong>You &nbsp;</strong> created this task on:&nbsp;
-            {clockSVG}
-            <span className="assign-date">
-              {new Date(Date.parse(props.task.created)).toDateString()}
-            </span>
+    <React.Fragment>
+      <div className="mail-contents hide">
+        <div className="msg-desc">
+          <div className="mail-contents-subject">
+            <input
+              type="checkbox"
+              name="msg"
+              id={props.buttonID}
+              className="mail-choice"
+              onClick={handleChangeCheckbox}
+            ></input>
+            <label htmlFor={props.buttonID}></label>
+            <div className="mail-contents-title">{props.task.title}</div>
+          </div>
+          <div className="mail">
+            <div className="mail-time">
+              Deadline:&nbsp;
+              {clockSVG}
+              {new Date(Date.parse(props.task.deadline)).toDateString()}
+            </div>
+            <div className="mail-inside">{props.task.description}</div>
+            <div className="mail-assign">
+              <div className="assignee mail-time">
+                <strong>You &nbsp;</strong> created this task on:&nbsp;
+                {clockSVG}
+                <span className="assign-date">
+                  {new Date(Date.parse(props.task.created)).toDateString()}
+                </span>
+              </div>
+            </div>
+            <div className="mail-checklist">
+              <input
+                type="checkbox"
+                name="msg"
+                id="disabled-button"
+                className="mail-choice"
+                checked
+                disabled
+              ></input>
+              {props.task.state == "Completed" && (
+                <label htmlFor="disabled-button">
+                  You completed this task.
+                </label>
+              )}
+              <div className="mail-checklist-date"></div>
+            </div>
           </div>
         </div>
-        <div className="mail-checklist">
-          <input
-            type="checkbox"
-            name="msg"
-            id="disabled-button"
-            className="mail-choice"
-            checked
-            disabled
-          ></input>
-          {props.task.state == "Completed" && (
-            <label htmlFor="disabled-button">You completed this task.</label>
-          )}
-          <div className="mail-checklist-date"></div>
+        <div className="edit-msg-desc">
+          <button className="add-button">Edit Task Description</button>
+          <button className="add-button">Create Notification</button>
         </div>
+        <div className="msg-desc-bottom"></div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

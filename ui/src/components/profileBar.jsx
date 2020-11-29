@@ -145,30 +145,6 @@ class ProfileBar extends React.Component {
 }
 
 export default ProfileBar;
-{
-  //   const [notifArray, setNotifArray] = useState([]);
-  //   // const updateNotifNumber = () => {
-  //   // };
-  //   useEffect(() => {
-  //     setNotifArray(taskArray);
-  //     console.log("1234");
-  //     console.log(notifArray);
-  //   }, []);
-  //   useEffect(updateNotifNumber);
-  //   const showNotif = () => {
-  //     console.log(notifArray);
-  //     Toast.Notifications(notifArray);
-  //     setNotifArray([]);
-  //     console.log("1");
-  //     updateNotifNumber();
-  //     console.log("2");
-  //   };
-  //   const pushNotif = (notif) => {
-  //     setNotifArray(notifArray.push(notif));
-  //   };
-}
-
-// export default ProfileBar;
 
 {
   /* <div className="side-wrapper">

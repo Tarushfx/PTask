@@ -31,13 +31,19 @@ const Inbox = (props) => {
               {...task}
               onMessageSelect={props.onMessageSelect}
               loadData={props.loadData}
+              // handleChangeCheckbox={props.handleChangeCheckbox}
             />
           ))}
 
         {props.filterArray.length === 0 && (
           <div className="msg selected-bg anim-y">
             <input type="checkbox" name="msg" className="mail-choice" />
-            <div className="msg-title">No Tasks Added yet</div>
+            <div className="msg-title">
+              {document.querySelector("#taskCheckBox") &&
+              document.querySelector("#taskCheckBox").checked
+                ? "No Tasks Completed yet!"
+                : "Wow so Empty! Add some Tasks!"}
+            </div>
           </div>
         )}
       </div>
