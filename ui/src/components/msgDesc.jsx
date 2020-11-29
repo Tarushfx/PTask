@@ -1,5 +1,7 @@
 import React from "react";
+
 import EditTaskModal from "../Modal/EditTaskModal.jsx";
+
 const MsgDesc = (props) => {
   const clockSVG = (
     <svg
@@ -23,13 +25,18 @@ const MsgDesc = (props) => {
       <div className="mail-contents hide">
         <div className="msg-desc">
           <div className="mail-contents-subject">
-            <input
+            {/* <input
               type="checkbox"
               name="msg"
               id={props.buttonID}
               className="mail-choice"
-            />
+
+            ></input>
+            <label htmlFor={props.buttonID}></label> */}
+
+            
             <label htmlFor={props.buttonID}/>
+
             <div className="mail-contents-title">{props.task.title}</div>
           </div>
           <div className="mail">
