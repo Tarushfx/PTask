@@ -2,18 +2,19 @@ import React from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import authservice from "../../../services/authservice.js";
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 import graphQLFetch from "../../graphQLFetch.js";
+import "../../css/toast.css";
 
 /*
-* notif = {
-*   text: ,
-*   type: ,
-*   status: ,
-* }
-*/
+ * notif = {
+ *   text: ,
+ *   type: ,
+ *   status: ,
+ * }
+ */
 
-async function pushNotifications(notif){
+async function pushNotifications(notif) {
   const query = `mutation notifAdd($notif: NotifAdd!) {
     NotifAdd(notif: $notif)
   }`;
@@ -23,7 +24,7 @@ async function pushNotifications(notif){
   const addedNotif = {
     _id: id,
     text: notif.text,
-    type_: notif.type,
+    type: notif.type,
     status: notif.status,
   };
 
@@ -31,11 +32,11 @@ async function pushNotifications(notif){
 }
 
 /*
-* notif = {
-*   id: , (this id is notification id)
-*   status: ,
-* }
-*/
+ * notif = {
+ *   id: , (this id is notification id)
+ *   status: ,
+ * }
+ */
 
 async function updateNotificationStatus(notif) {
   const query = `mutation notifUpdate($notif: NotifUpdate!){
@@ -48,16 +49,16 @@ async function updateNotificationStatus(notif) {
     _id: id,
     notif_id: notif.id,
     status: notif.status,
-  }
+  };
 
-  await graphQLFetch(query, {notif: updatedNotif})
+  await graphQLFetch(query, { notif: updatedNotif });
 }
 
 /*
-* notif = {
-*   id: , (this id is notification id)
-* }
-*/
+ * notif = {
+ *   id: , (this id is notification id)
+ * }
+ */
 
 async function removeNotification(notif) {
   const query = `mutation notifRemove($notif: NotifRemove!){
@@ -69,10 +70,9 @@ async function removeNotification(notif) {
   const removedNotif = {
     _id: id,
     notif_id: notif._id,
-  }
+  };
 
-  await graphQLFetch(query, {notif: removedNotif});
-
+  await graphQLFetch(query, { notif: removedNotif });
 }
 
 const settings = {
@@ -83,11 +83,17 @@ const settings = {
   pauseOnHover: true,
   draggable: true,
   progress: undefined,
+  onClose: ({ text, id }) => console.log(text, id),
 };
+// design for the notification
+const NotifyComponent = (props) => {
+  return <div className="12">{props.text}</div>;
+};
+
 const displayAToast = ({ text, type }) => {
   switch (type) {
     case 1:
-      return toast.dark("🦄 Wow so easy!  " + text, settings);
+      return toast("🦄 Wow so easy!  " + text, settings);
     case 2:
       return toast("🦄 Wow so easy!  " + text, settings);
     case 3:
@@ -95,7 +101,10 @@ const displayAToast = ({ text, type }) => {
     case 4:
       return toast.info("🦄 Wow so easy!  " + text, settings);
     default:
-      return toast("🦄 Wow so easy!  " + text, settings);
+      return toast(
+        <NotifyComponent text={`"🦄 Wow so easy!  " + ${text}`} />,
+        settings
+      );
   }
 };
 const Notifications = (notifArray) => {
@@ -112,12 +121,18 @@ const CloseButton = ({ closeToast }) => (
     </button>
   </i>
 );
-const Container = <ToastContainer closeButton={CloseButton} />;
+const Container = (
+  <ToastContainer
+    closeButton={CloseButton}
+    pauseOnFocusLoss={true}
+    role="alert"
+  />
+);
 export default {
   Notifications,
   displayAToast,
   Container,
   pushNotifications,
   updateNotificationStatus,
-  removeNotification
+  removeNotification,
 };

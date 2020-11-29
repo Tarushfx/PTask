@@ -1,5 +1,5 @@
 import React from "react";
-import { handleChangeCheckbox } from "./msgItem.jsx";
+
 const MsgDesc = (props) => {
   const clockSVG = (
     <svg
@@ -23,14 +23,13 @@ const MsgDesc = (props) => {
       <div className="mail-contents hide">
         <div className="msg-desc">
           <div className="mail-contents-subject">
-            <input
+            {/* <input
               type="checkbox"
               name="msg"
               id={props.buttonID}
               className="mail-choice"
-              onClick={handleChangeCheckbox}
             ></input>
-            <label htmlFor={props.buttonID}></label>
+            <label htmlFor={props.buttonID}></label> */}
             <div className="mail-contents-title">{props.task.title}</div>
           </div>
           <div className="mail">

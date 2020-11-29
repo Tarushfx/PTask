@@ -1,6 +1,7 @@
 import React from "react";
 import MsgItem from "./msgItem.jsx";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import Example from "../test.jsx";
 
 const Inbox = (props) => {
   let taskArray = props.user.tasks ? props.user.tasks : [];
@@ -46,6 +47,7 @@ const Inbox = (props) => {
             </div>
           </div>
         )}
+        <Example />
       </div>
 
       <div className="add-task">

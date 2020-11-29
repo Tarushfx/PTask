@@ -6,8 +6,11 @@ import _ from "lodash";
 class ProfileBar extends React.Component {
   constructor(props) {
     super(props);
+    this.props = props;
     this.getTasks = this.getTasks.bind(this);
     this.showNotif = this.showNotif.bind(this);
+    this.getNotifs = this.getNotifs.bind(this);
+    this.updateNotifNumber = this.updateNotifNumber.bind(this);
   }
   signOut() {
     authService.clearToken();
@@ -19,6 +22,28 @@ class ProfileBar extends React.Component {
       "--notif-bell-content",
       `"${no}"`
     );
+  }
+
+  getNotifs() {
+    let notifs = this.props.user.notifications;
+    console.log(notifs);
+    console.log(
+      notifs &&
+        notifs
+          .filter((notif) => notif.status == true)
+          .map((notif) => notif.text)
+    );
+    this.updateNotifNumber(
+      notifs && notifs.filter((notif) => notif.status == true).length
+    );
+
+    console.log();
+    // Toast.pushNotifications({
+    //   type: 1,
+    //   status: true,
+    //   text: "xyz",
+    // });
+    return notifs ? notifs.filter((notif) => notif.status == true) : [];
   }
   getTasks() {
     let user = this.props.user;
@@ -45,13 +70,15 @@ class ProfileBar extends React.Component {
   }
 
   showNotif() {
+    console.log(this.getNotifs());
     Toast.Notifications(
-      this.getTasks().map((task) => {
-        return { text: task.title, type: 1 };
+      this.getNotifs().map((notif) => {
+        return notif;
       })
     );
   }
   render() {
+    this.getNotifs();
     return (
       <div className="user-profile-area">
         <div className="task-manager"> Task Manager </div>

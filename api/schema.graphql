@@ -5,7 +5,7 @@ enum State {
   Completed
 }
 
-type Notifications{
+type Notifications {
   _id: ID!
   text: String!
   type_: Int
@@ -112,8 +112,8 @@ input ProjectRemove {
 input NotifAdd {
   _id: ID!
   text: String!
-  type_: Int
-  status: Boolean = true
+  type: Int!
+  status: Boolean!
 }
 
 input NotifUpdate {
@@ -127,7 +127,7 @@ input NotifRemove {
   notif_id: ID!
 }
 
-input LikesInput{
+input LikesInput {
   _id: ID!
   likes: [String!]!
 }
@@ -153,7 +153,7 @@ type Mutation {
   addProject(project: ProjectInput!): Project
   UserUpdate(user: UserUpdateInputs!): String
   UserUpdateName(user: UserUpdateNameInputs!): String
-  UserDelete(user: getData!) : String
+  UserDelete(user: getData!): String
   TaskStateUpdate(task: TaskUpdate!): String
   TaskUpdate(task: TaskUpdateInput!): String
   TaskRemove(task: TaskRemove!): String
@@ -161,5 +161,5 @@ type Mutation {
   NotifAdd(notif: NotifAdd!): String
   NotifUpdate(notif: NotifUpdate!): String
   NotifRemove(notif: NotifRemove!): String
-  addLikes(likes: LikesInput!):String
+  addLikes(likes: LikesInput!): String
 }
