@@ -3,18 +3,19 @@ const NavBar = (props) => {
   return (
     <React.Fragment>
       <div className="header">
-        <span className="msg selected-bg anim-y p-0 m-0 pt-2">
+        <div className="msg selected-bg p-0 m-0 pt-2 border-0">
           <input
             type="checkbox"
             name="msg"
             id="taskCheckBox"
             className="mail-choice"
+            onClick={props.navbarTaskChange}
           />
           <label htmlFor="taskCheckBox" />
           <div className="msg-content">
             <div className="msg-title">Tasks</div>
           </div>
-        </span>
+        </div>
         <div className="inbox-calendar">
           <input type="checkbox" className="inbox-calendar-checkbox" />
           <div className="toggle-page">

@@ -119,11 +119,11 @@ class ProfileBar extends React.Component {
           <div className="project-title">
             Projects
             <button
-              className="badge badge-sm badge-pill badge-primary plusIcon"
+              className="plusIcon"
               data-toggle="modal"
               data-target="#projectModal"
             >
-              <i className="fa fa-plus"></i>
+              <i class="fas fa-plus-circle fa-lg"></i>
             </button>
           </div>
           <div className="project-name">
@@ -145,30 +145,6 @@ class ProfileBar extends React.Component {
 }
 
 export default ProfileBar;
-{
-  //   const [notifArray, setNotifArray] = useState([]);
-  //   // const updateNotifNumber = () => {
-  //   // };
-  //   useEffect(() => {
-  //     setNotifArray(taskArray);
-  //     console.log("1234");
-  //     console.log(notifArray);
-  //   }, []);
-  //   useEffect(updateNotifNumber);
-  //   const showNotif = () => {
-  //     console.log(notifArray);
-  //     Toast.Notifications(notifArray);
-  //     setNotifArray([]);
-  //     console.log("1");
-  //     updateNotifNumber();
-  //     console.log("2");
-  //   };
-  //   const pushNotif = (notif) => {
-  //     setNotifArray(notifArray.push(notif));
-  //   };
-}
-
-// export default ProfileBar;
 
 {
   /* <div className="side-wrapper">

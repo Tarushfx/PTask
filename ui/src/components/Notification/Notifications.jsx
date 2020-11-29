@@ -1,6 +1,80 @@
 import React from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import authservice from "../../../services/authservice.js";
+import jwt from 'jsonwebtoken';
+import graphQLFetch from "../../graphQLFetch.js";
+
+/*
+* notif = {
+*   text: ,
+*   type: ,
+*   status: ,
+* }
+*/
+
+async function pushNotifications(notif){
+  const query = `mutation notifAdd($notif: NotifAdd!) {
+    NotifAdd(notif: $notif)
+  }`;
+
+  const id = jwt.decode(authservice.getToken())._id;
+
+  const addedNotif = {
+    _id: id,
+    text: notif.text,
+    type_: notif.type,
+    status: notif.status,
+  };
+
+  await graphQLFetch(query, { notif: addedNotif });
+}
+
+/*
+* notif = {
+*   id: , (this id is notification id)
+*   status: ,
+* }
+*/
+
+async function updateNotificationStatus(notif) {
+  const query = `mutation notifUpdate($notif: NotifUpdate!){
+    NotifUpdate(notif: $notif)
+  }`;
+
+  const id = jwt.decode(authservice.getToken())._id;
+
+  const updatedNotif = {
+    _id: id,
+    notif_id: notif.id,
+    status: notif.status,
+  }
+
+  await graphQLFetch(query, {notif: updatedNotif})
+}
+
+/*
+* notif = {
+*   id: , (this id is notification id)
+* }
+*/
+
+async function removeNotification(notif) {
+  const query = `mutation notifRemove($notif: NotifRemove!){
+    NotifRemove(notif: $notif)
+  }`;
+
+  const id = jwt.decode(authservice.getToken())._id;
+
+  const removedNotif = {
+    _id: id,
+    notif_id: notif._id,
+  }
+
+  await graphQLFetch(query, {notif: removedNotif});
+
+}
+
 const settings = {
   position: "top-right",
   autoClose: false,
@@ -43,4 +117,7 @@ export default {
   Notifications,
   displayAToast,
   Container,
+  pushNotifications,
+  updateNotificationStatus,
+  removeNotification
 };

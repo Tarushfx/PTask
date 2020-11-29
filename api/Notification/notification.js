@@ -22,9 +22,6 @@ async function notifAdd(_, { notif }) {
   }
 }
 
-// mutation notifAdd($notif: NotifAdd!) {
-//   NotifAdd(notif: $notif)
-// }
 
 async function notifUpdate(_, { notif }){
   const data = await User.findOne({_id: notif._id});
@@ -32,7 +29,7 @@ async function notifUpdate(_, { notif }){
   const index = notifArray.findIndex(x => x._id == notif.notif_id);
   const foundNotif = notifArray[index];
   foundNotif.status = notif.status;
-  const savedUser = User.create(data);
+  const savedUser = await User.create(data);
   if(savedUser){
     return "Updated";
   }
@@ -41,12 +38,18 @@ async function notifUpdate(_, { notif }){
   }
 }
 
-// mutation notifAdd($notif: NotifUpdate!){
-//   NotifUpdate(notif: $notif)
-// }
 
 async function notifRemove(_, { notif }){
-
+  const data = await User.findOne({_id: notif._id});
+  const notifArray = data.notifications;
+  data.notifications = notifArray.filter(x => x._id != notif.notif_id);
+  const savedUser = await User.create(data);
+  if(savedUser){
+    return "Removed";
+  }
+  else {
+    return "Something went wrong";
+  }
 }
 
-module.exports = { notifAdd, notifUpdate };
+module.exports = { notifAdd, notifUpdate, notifRemove };
