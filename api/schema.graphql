@@ -8,7 +8,7 @@ enum State {
 type Notifications {
   _id: ID!
   text: String!
-  type_: Int
+  type: Int
   status: Boolean!
 }
 

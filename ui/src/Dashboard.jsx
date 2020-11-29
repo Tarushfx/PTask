@@ -47,7 +47,7 @@ class Dashboard extends React.Component {
         notifications {
           _id
           text
-          type_
+          type
           status
         }
       }

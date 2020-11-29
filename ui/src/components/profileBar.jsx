@@ -18,12 +18,18 @@ class ProfileBar extends React.Component {
   }
 
   updateNotifNumber(no) {
-    if (no)
+    if (no) {
+      (() => {
+        document.getElementById("notifButton") &&
+        !$("#notifButton").hasClass("alert")
+          ? $("#notifButton").addClass("alert")
+          : "";
+      })();
       document.documentElement.style.setProperty(
         "--notif-bell-content",
         `"${no}"`
       );
-    else if (!no) {
+    } else if (!no) {
       (() => {
         document.getElementById("notifButton") &&
           $("#notifButton").removeClass("alert");
@@ -37,6 +43,7 @@ class ProfileBar extends React.Component {
 
   getNotifs() {
     let notifs = this.props.user.notifications;
+    // console.log(n);
     console.log(notifs);
     console.log(
       notifs &&
@@ -76,11 +83,7 @@ class ProfileBar extends React.Component {
 
   async showNotif() {
     console.log(this.getNotifs());
-    Toast.Notifications(
-      this.getNotifs().map((notif) => {
-        return notif;
-      })
-    );
+    Toast.Notifications(this.getNotifs());
     await this.props.loadData();
     // this.updateNotifNumber(0);
   }

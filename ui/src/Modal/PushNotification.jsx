@@ -1,14 +1,12 @@
-import React from 'react';
+import React from "react";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 import ModalInput from "../components/modalInput.jsx";
 import authservice from "../../services/authservice.js";
-import Toast from "../components/Notification/Notifications.jsx"
-
+import Toast from "../components/Notification/Notifications.jsx";
 
 const PushNotification = (props) => {
-
-  async function handleSubmitAddReminder(e){
+  async function handleSubmitAddReminder(e) {
     e.preventDefault();
     const form = document.forms.addReminder;
 
@@ -18,36 +16,33 @@ const PushNotification = (props) => {
       _id: id,
       text: form.reminder.value,
       type: 4,
-      status: true
-    }
+      status: true,
+    };
+
+    form.reminder.value = "";
 
     await Toast.pushNotifications(notif);
 
-    await (() => $("#pushNotifModal").modal("hide"))()
+    await (() => $("#pushNotifModal").modal("hide"))();
+    await props.loadData();
   }
 
-  return(
-    <div id="pushNotifModal" className="modal fade" role="dialog" >
-      <div className="modal-dialog modal-md modal-dialog-centered"
-           role="content"
-           >
+  return (
+    <div id="pushNotifModal" className="modal fade" role="dialog">
+      <div
+        className="modal-dialog modal-md modal-dialog-centered"
+        role="content"
+      >
         <div className="modal-content">
           <div className="modal-header">
-            <h3 className="modal-title">
-              Add Reminder
-            </h3>
-            <button
-              type="button"
-              className="close"
-              data-dismiss="modal"
-            >
+            <h3 className="modal-title">Add Reminder</h3>
+            <button type="button" className="close" data-dismiss="modal">
               &times;
             </button>
           </div>
 
           <div className="modal-body">
             <form name="addReminder" onSubmit={handleSubmitAddReminder}>
-
               <ModalInput
                 mode="textarea"
                 placeholder="Reminder"
@@ -79,7 +74,7 @@ const PushNotification = (props) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default PushNotification;
