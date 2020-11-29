@@ -30,7 +30,7 @@ async function addTask(_, { task }) {
   }
 }
 
-async function updateTask(_, { task }) {
+async function updateTaskState(_, { task }) {
   const data = await User.findOne({ _id: task._id });
   const taskArray = data.tasks
   const index = taskArray.findIndex(x => x._id == task.task_id );
@@ -47,7 +47,7 @@ async function updateTask(_, { task }) {
 }
 
 async function removeTask(_ ,{ task }) {
-  const data = await User.findOne({ _id: task._id })
+  const data = await User.findOne({ _id: task._id });
   const taskArray = data.tasks.filter(x => x._id != task.task_id);
   data.tasks = taskArray;
   const savedUser = await User.create(data);
@@ -60,4 +60,25 @@ async function removeTask(_ ,{ task }) {
   }
 }
 
-module.exports = { addTask, updateTask, removeTask };
+async function updateTask(_, { task }) {
+  const data = await User.findOne({ _id: task._id });
+  const taskArray = data.tasks;
+  const index = taskArray.findIndex(x => x._id == task.task_id );
+  const foundTask = taskArray[index];
+  foundTask.description = task.description;
+  foundTask.deadline = new Date(task.deadline.toISOString());
+  foundTask.state = task.state;
+  const savedUser = await User.create(data);
+  if(savedUser){
+    return "Updated";
+  }
+  else {
+    return "Something went wrong"
+  }
+}
+
+// mutation taskUpdate($task: TaskUpdateInput!){
+//   TaskUpdate(task:$task)
+// }
+
+module.exports = { addTask, updateTaskState, updateTask, removeTask };
