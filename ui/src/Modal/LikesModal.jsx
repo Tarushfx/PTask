@@ -9,11 +9,13 @@ const LikesModal = (props) => {
     const form = document.forms.likes;
     const str = form.interests.value;
     const likes = str.split(" ");
-    const checkbox = document.getElementById("value1")
-    if(checkbox.checked){
-      likes.push(checkbox.value)
+    for(let i = 1; i <= 6; i++){
+      let id = "value" + String(i);
+      let checkbox = document.getElementById(id);
+      if(checkbox.checked){
+        likes.push(checkbox.value)
+      }
     }
-    console.log(str)
     await props.call(likes);
   }
 
@@ -43,11 +45,11 @@ const LikesModal = (props) => {
               />
               <div className="form-group row">
                 <input type="checkbox" value="value1" id="value1"/><label className="ml-1 mr-3">Value1</label>
-                <input type="checkbox" value="value2"/><label className="ml-1 mr-3">Value2</label>
-                <input type="checkbox" value="value3"/><label className="ml-1 mr-3">Value3</label>
-                <input type="checkbox" value="value4"/><label className="ml-1 mr-3">Value4</label>
-                <input type="checkbox" value="value5"/><label className="ml-1 mr-3">Value5</label>
-                <input type="checkbox" value="value6"/><label className="ml-1 mr-3">Value6</label>
+                <input type="checkbox" value="value2" id="value2"/><label className="ml-1 mr-3">Value2</label>
+                <input type="checkbox" value="value3" id="value3"/><label className="ml-1 mr-3">Value3</label>
+                <input type="checkbox" value="value4" id="value4"/><label className="ml-1 mr-3">Value4</label>
+                <input type="checkbox" value="value5" id="value5"/><label className="ml-1 mr-3">Value5</label>
+                <input type="checkbox" value="value6" id="value6"/><label className="ml-1 mr-3">Value6</label>
               </div>
               <div className="form-group row">
                 <button
