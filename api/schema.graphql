@@ -132,6 +132,14 @@ input LikesInput{
   likes: [String!]!
 }
 
+input TaskUpdateInput {
+  _id: ID!
+  task_id: ID!
+  deadline: GraphQLDate!
+  description: String!
+  state: State!
+}
+
 type Query {
   about: String!
   userData(user: getData!): UserData!
@@ -147,6 +155,7 @@ type Mutation {
   UserUpdateName(user: UserUpdateNameInputs!): String
   UserDelete(user: getData!) : String
   TaskStateUpdate(task: TaskUpdate!): String
+  TaskUpdate(task: TaskUpdateInput!): String
   TaskRemove(task: TaskRemove!): String
   ProjectRemove(project: ProjectRemove!): String
   NotifAdd(notif: NotifAdd!): String
