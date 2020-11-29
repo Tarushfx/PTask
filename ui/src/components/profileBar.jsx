@@ -119,11 +119,11 @@ class ProfileBar extends React.Component {
           <div className="project-title">
             Projects
             <button
-              className="badge badge-sm badge-pill badge-primary plusIcon"
+              className="plusIcon"
               data-toggle="modal"
               data-target="#projectModal"
             >
-              <i className="fa fa-plus"></i>
+              <i class="fas fa-plus-circle fa-lg"></i>
             </button>
           </div>
           <div className="project-name">

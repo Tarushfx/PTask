@@ -5,6 +5,7 @@ import graphQLFetch from "../graphQLFetch";
 
 const MsgItem = (props) => {
   async function removeTask() {
+    $(".msg, .selected-bg, .anim-y").fadeOut(10000);
     const query = `mutation removeTask($task: TaskRemove!) {
       TaskRemove(task: $task)
     }`;
@@ -15,6 +16,9 @@ const MsgItem = (props) => {
 
     const data = await graphQLFetch(query, { task: task });
     await props.loadData();
+    // $(".msg, .selected-bg, .anim-y").addClass("close-button-slide");
+    $("#quote-inbox-content").removeClass("hide");
+    $(".mail-contents").addClass("hide");
   }
 
   async function updateTask(status) {
@@ -50,6 +54,9 @@ const MsgItem = (props) => {
     } else {
       await updateTask(0);
     }
+    // on completion show quote
+    $("#quote-inbox-content").removeClass("hide");
+    $(".mail-contents").addClass("hide");
   }
 
   let date = new Date(Date.parse(props.deadline)).toDateString();
@@ -65,7 +72,11 @@ const MsgItem = (props) => {
         checked={props.state === "Completed" ? true : false}
       />
       <label htmlFor={`mail-${props._id}`}></label>
-      <div className="msg-content" onClick={props.onClick}>
+      <div
+        className="msg-content"
+        onClick={props.onMessageSelect}
+        id={`msg-${props.index}`}
+      >
         <div className="msg-title">{props.title}</div>
         <div className="msg-title">{props.state}</div>
         <div className="msg-date">{date} </div>

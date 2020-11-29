@@ -117,6 +117,7 @@ p#by {
   background-color: white;
   width: 100%;
   animation: slideUp 0.45s 0.4s both;
+  border-top: 1px solid var(--border-color);
 }
 .quote-content {
   display: flex;

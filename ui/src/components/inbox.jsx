@@ -5,6 +5,11 @@ import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 const Inbox = (props) => {
   let taskArray = props.user.tasks ? props.user.tasks : [];
   console.log(taskArray);
+  const getTotal = () => {
+    let user = props.user;
+    let tasks = user.tasks ? user.tasks : [];
+    return tasks ? tasks.length : 0;
+  };
 
   function reverseArray(arr) {
     var newArray = [];
@@ -13,22 +18,23 @@ const Inbox = (props) => {
     }
     return newArray;
   }
+
   return (
     <div className="inbox-container">
       <div className="inbox">
-        {taskArray.length !== 0 &&
-          reverseArray(taskArray).map((task, index, array) => (
+        {props.filterArray.length !== 0 &&
+          reverseArray(props.filterArray).map((task, index, array) => (
             <MsgItem
               classes="msg selected-bg anim-y"
               key={array.length - 1 - index}
               index={array.length - 1 - index}
               {...task}
-              onClick={props.onMessageSelect}
+              onMessageSelect={props.onMessageSelect}
               loadData={props.loadData}
             />
           ))}
 
-        {taskArray.length === 0 && (
+        {props.filterArray.length === 0 && (
           <div className="msg selected-bg anim-y">
             <input type="checkbox" name="msg" className="mail-choice" />
             <div className="msg-title">No Tasks Added yet</div>

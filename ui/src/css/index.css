@@ -18,11 +18,16 @@ html {
   --notif-bell-content: "0";
   --notif-msg-content: "0";
 }
-
+.msg.selected-bg.anim-y {
+  width: 100%;
+  max-width: 420px;
+}
 .fa-times-circle {
   color: var(--button-color);
 }
-
+.close-button-slide {
+  animation: 2s none 0 1 backwards none;
+}
 .crossbutton {
   display: flex;
   /* margin-left: auto; */
@@ -38,8 +43,15 @@ html {
 
 .plusIcon {
   margin-left: 10px;
-  padding: 6px;
   border: none;
+  border-radius: 50%;
+}
+
+.fa-plus-circle {
+  color: var(--button-color);
+}
+.header {
+  min-height: 70px;
 }
 
 *::before,
@@ -366,11 +378,10 @@ img {
 
 .msg {
   padding: 30px;
-  background-color: var(--unselected-mail);
   border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
-  transition: 0.4s ease;
+  transition: 2s ease;
 }
 .msg-title {
   font-weight: 600;

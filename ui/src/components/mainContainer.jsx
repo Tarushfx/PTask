@@ -2,36 +2,36 @@ import React, { useState } from "react";
 import Calender from "./calender.jsx";
 import Inbox from "./inbox.jsx";
 import InboxQuote from "./inboxQuote.jsx";
-import quotes from "../../public/quote.js";
 import "../css/quote.css";
 
 const MainContainer = (props) => {
   const [taskState, setTaskState] = useState({});
-  const likesArray = [
-    "motivation",
-    "life",
-    "positivity",
-    "optimism",
-    "inspiration",
-  ];
-  let quotetmp = quotes.filter((quote) => {
-    let common = likesArray.filter((value) => quote.tags.includes(value));
-    return common.legth !== 0;
-  });
-  let quote = quotetmp[Math.floor(Math.random() * quotetmp.length)];
-  // console.log(quote);
-  let taskArray = props.user.tasks ? props.user.tasks : [];
-  // console.log(taskArray);
+
+  // let taskArray = props.user.tasks ? props.user.tasks : [];
+
+  const getCompleted = () => {
+    let user = props.user;
+    let tasks = user.tasks ? user.tasks : [];
+    return tasks.filter((task) => task.state === "Completed");
+  };
+  const getIncomplete = () => {
+    let user = props.user;
+    let tasks = user.tasks ? user.tasks : [];
+    return tasks.filter((task) => task.state === "InProgress");
+  };
+  // console.log(props.user.tasks, taskArray);
+  let filterArray = props.taskFilter == true ? getCompleted() : getIncomplete();
+  console.log(filterArray);
   let taskViewState = false;
-  const onMessageSelect = ({ currentTarget: input }) => {
-    console.log(input.id);
+  let onMessageSelect = ({ currentTarget: input }) => {
+    console.log(input.id.split("-")[1]);
     if (!taskViewState) taskViewState = true;
     if (taskViewState) {
-      const taskTarget = { ...taskArray[input.id] };
+      const taskTarget = { ...filterArray[input.id.split("-")[1]] };
+      setTaskState(taskTarget);
       $(".mail-contents").removeClass("hide");
       $("#quote-inbox-content").addClass("hide");
       console.log(taskTarget);
-      setTaskState(taskTarget);
     }
   };
   return (
@@ -40,8 +40,10 @@ const MainContainer = (props) => {
         user={props.user}
         onMessageSelect={onMessageSelect}
         loadData={props.loadData}
+        navbarTaskChange={props.navbarTaskChange}
+        filterArray={filterArray}
       />
-      <InboxQuote quote={quote} task={taskState} />
+      <InboxQuote quote={props.quote} task={taskState} user={props.user} />
 
       <Calender date={new Date()} user={props.user} />
     </div>
