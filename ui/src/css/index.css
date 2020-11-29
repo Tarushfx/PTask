@@ -13,10 +13,11 @@
   --unselected-mail: #f1f2f7;
   --calendar-border-color: #cbcfe0;
   --main-container-bg: #f0f0f7;
+  --progress-bar-value: 100%;
 }
 html {
-  --notif-bell-content: "0";
-  --notif-msg-content: "0";
+  --notif-bell-content: "";
+  --notif-msg-content: "";
 }
 .msg.selected-bg.anim-y {
   width: 100%;
@@ -228,9 +229,9 @@ img {
 .progress-bar {
   background-color: var(--button-color);
   border-radius: 4px;
-  width: 100%;
+  width: var(--progress-bar-value);
   height: 100%;
-  animation: progressAnimation 6s;
+  animation: progressAnimation 2s;
   transition: 0.3s linear both;
   transition-property: width, background-color;
 }
@@ -248,7 +249,7 @@ img {
     background-color: #a2b6f5;
   }
   100% {
-    width: 35%;
+    width: var(--progress-bar-value);
   }
 }
 .task-status {

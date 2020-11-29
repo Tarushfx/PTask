@@ -70,11 +70,11 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div className="Container">
-        <ProfileBar user={this.state.user} />
+        <ProfileBar user={this.state.user} loadData={this.loadData} />
 
-        <MainArea user={this.state.user} loadData={this.loadData}/>
-        <AddTaskModal loadData={this.loadData}/>
-        <SettingModal loadData={this.loadData}/>
+        <MainArea user={this.state.user} loadData={this.loadData} />
+        <AddTaskModal loadData={this.loadData} />
+        <SettingModal loadData={this.loadData} />
         <AddProjectModal loadData={this.loadData} />
       </div>
     );

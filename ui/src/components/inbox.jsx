@@ -47,7 +47,7 @@ const Inbox = (props) => {
             </div>
           </div>
         )}
-        <Example />
+        {/* <Example /> */}
       </div>
 
       <div className="add-task">

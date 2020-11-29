@@ -74,7 +74,29 @@ async function removeNotification(notif) {
 
   await graphQLFetch(query, { notif: removedNotif });
 }
-
+let tempLength = "";
+const Notifications = (notifArray) => {
+  tempLength = notifArray.length;
+  if (notifArray.length !== 0) {
+    notifArray.forEach(function (notif) {
+      displayAToast(notif);
+    });
+  }
+};
+const updateNotifNumber = (no) => {
+  if (no)
+    document.documentElement.style.setProperty(
+      "--notif-bell-content",
+      `"${no}"`
+    );
+  else if (!no) {
+    (() => {
+      document.getElementById("notifButton") &&
+        $("#notifButton").removeClass("alert");
+    })();
+    console.log("1234");
+  }
+};
 const settings = {
   position: "top-right",
   autoClose: false,
@@ -83,37 +105,52 @@ const settings = {
   pauseOnHover: true,
   draggable: true,
   progress: undefined,
-  onClose: ({ text, id }) => console.log(text, id),
+  onOpen: () => console.log("logged"),
+  onClose: async ({ id }) => {
+    console.log(id);
+    await updateNotificationStatus({
+      id: id,
+      status: false,
+    });
+    tempLength--;
+    updateNotifNumber(tempLength);
+  },
 };
 // design for the notification
 const NotifyComponent = (props) => {
   return <div className="12">{props.text}</div>;
 };
 
-const displayAToast = ({ text, type }) => {
+const displayAToast = ({ text, type, status, _id: id }) => {
   switch (type) {
     case 1:
-      return toast("🦄 Wow so easy!  " + text, settings);
-    case 2:
-      return toast("🦄 Wow so easy!  " + text, settings);
-    case 3:
-      return toast.success("🦄 Wow so easy!  " + text, settings);
-    case 4:
-      return toast.info("🦄 Wow so easy!  " + text, settings);
-    default:
       return toast(
-        <NotifyComponent text={`"🦄 Wow so easy!  " + ${text}`} />,
+        <NotifyComponent text={`"🦄 Wow so easy!  " + ${text}`} id={id} />,
+        settings
+      );
+    case 2:
+      return toast.info(
+        <NotifyComponent text={`"🦄 Wow so easy!  " + ${text}`} id={id} />,
+        settings
+      );
+    case 3:
+      return toast.success(
+        <NotifyComponent text={`"🦄 Wow so easy!  " + ${text}`} id={id} />,
+        settings
+      );
+    case 4:
+      return toast.error(
+        <NotifyComponent text={`"🦄 Wow so easy!  " + ${text}`} id={id} />,
+        settings
+      );
+    default:
+      return toast.warn(
+        <NotifyComponent text={`"🦄 Wow so easy!  " + ${text}`} id={id} />,
         settings
       );
   }
 };
-const Notifications = (notifArray) => {
-  if (notifArray.length !== 0) {
-    notifArray.forEach(function (obj, index) {
-      displayAToast(obj);
-    });
-  }
-};
+
 const CloseButton = ({ closeToast }) => (
   <i className="material-icons" onClick={closeToast}>
     <button type="button" className="close" aria-label="Close">
