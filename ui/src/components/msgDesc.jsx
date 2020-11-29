@@ -1,6 +1,7 @@
 import React from "react";
 
 import EditTaskModal from "../Modal/EditTaskModal.jsx";
+import PushNotification from "../Modal/PushNotification.jsx";
 
 const MsgDesc = (props) => {
   const clockSVG = (
@@ -75,11 +76,12 @@ const MsgDesc = (props) => {
         </div>
         <div className="edit-msg-desc">
           <button className="add-button mr-4" data-target="#editTaskModal" data-toggle="modal">Edit Task</button>
-          <button className="add-button" data-target="#addNotifModal" data-toggle="modal">Add Reminder</button>
+          <button className="add-button" data-target="#pushNotifModal" data-toggle="modal">Add Reminder</button>
         </div>
         <div className="msg-desc-bottom"/>
       </div>
       <EditTaskModal loadData={props.loadData} task={props.task} />
+      <PushNotification loadData={props.loadData} task={props.task} />
     </React.Fragment>
   );
 };
