@@ -26,12 +26,12 @@ const ModalInput = (props) => {
       {props.mode === "textarea" && (
         <div className="input-field-textarea">
           <textarea
-            name="desc"
+            name={props.name}
             rows="6"
-            id="desc"
+            id={props.id}
             placeholder={props.placeholder}
             onChange={props.onChange}
-          ></textarea>
+          />
         </div>
       )}
       {props.error && props.error[props.name] && (

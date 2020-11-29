@@ -1,5 +1,5 @@
 import React from "react";
-import { handleChangeCheckbox } from "./msgItem.jsx";
+import EditTaskModal from "../Modal/EditTaskModal.jsx";
 const MsgDesc = (props) => {
   const clockSVG = (
     <svg
@@ -28,9 +28,8 @@ const MsgDesc = (props) => {
               name="msg"
               id={props.buttonID}
               className="mail-choice"
-              onClick={handleChangeCheckbox}
-            ></input>
-            <label htmlFor={props.buttonID}></label>
+            />
+            <label htmlFor={props.buttonID}/>
             <div className="mail-contents-title">{props.task.title}</div>
           </div>
           <div className="mail">
@@ -57,22 +56,23 @@ const MsgDesc = (props) => {
                 className="mail-choice"
                 checked
                 disabled
-              ></input>
-              {props.task.state == "Completed" && (
+              />
+              {props.task.state === "Completed" && (
                 <label htmlFor="disabled-button">
                   You completed this task.
                 </label>
               )}
-              <div className="mail-checklist-date"></div>
+              <div className="mail-checklist-date"/>
             </div>
           </div>
         </div>
         <div className="edit-msg-desc">
-          <button className="add-button">Edit Task Description</button>
-          <button className="add-button">Create Notification</button>
+          <button className="add-button mr-4" data-target="#editTaskModal" data-toggle="modal">Edit Task</button>
+          <button className="add-button" data-target="#addNotifModal" data-toggle="modal">Add Reminder</button>
         </div>
-        <div className="msg-desc-bottom"></div>
+        <div className="msg-desc-bottom"/>
       </div>
+      <EditTaskModal loadData={props.loadData} task={props.task} />
     </React.Fragment>
   );
 };
