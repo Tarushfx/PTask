@@ -135,6 +135,7 @@ input LikesInput {
 input TaskUpdateInput {
   _id: ID!
   task_id: ID!
+  title: String!
   deadline: GraphQLDate!
   description: String!
   state: State!
