@@ -25,6 +25,7 @@ class Dashboard extends React.Component {
         name
         email
         projects {
+          _id
           title
           created
           state

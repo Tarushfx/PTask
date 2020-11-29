@@ -19,6 +19,7 @@ type Team {
 }
 
 type Project {
+  _id: ID!
   title: String!
   created: GraphQLDate!
   state: State!
@@ -103,6 +104,11 @@ input TaskRemove {
   task_id: ID!
 }
 
+input ProjectRemove {
+  _id: ID!
+  project_id: ID!
+}
+
 input NotifAdd {
   _id: ID!
   text: String!
@@ -114,6 +120,11 @@ input NotifUpdate {
   _id: ID!
   notif_id: ID!
   status: Boolean!
+}
+
+input NotifRemove {
+  _id: ID!
+  notif_id: ID!
 }
 
 input LikesInput{
@@ -137,7 +148,9 @@ type Mutation {
   UserDelete(user: getData!) : String
   TaskStateUpdate(task: TaskUpdate!): String
   TaskRemove(task: TaskRemove!): String
+  ProjectRemove(project: ProjectRemove!): String
   NotifAdd(notif: NotifAdd!): String
   NotifUpdate(notif: NotifUpdate!): String
+  NotifRemove(notif: NotifRemove!): String
   addLikes(likes: LikesInput!):String
 }

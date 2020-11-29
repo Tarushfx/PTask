@@ -22,4 +22,22 @@ async function addProject(_, { project }) {
   }
 }
 
-module.exports = { addProject };
+async function removeProject(_ ,{ project }) {
+  const data = await User.findOne({ _id: project._id })
+  const projectArray = data.projects.filter(x => x._id != project.project_id);
+  data.projects = projectArray;
+  const savedUser = await User.create(data);
+  console.log(savedUser);
+  if(savedUser){
+    return "Removed";
+  }
+  else {
+    return "Not Removed";
+  }
+}
+
+// mutation projectRemove($project: ProjectRemove!){
+//   ProjectRemove(project: $project)
+// }
+
+module.exports = { addProject, removeProject };
