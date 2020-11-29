@@ -65,6 +65,7 @@ async function updateTask(_, { task }) {
   const taskArray = data.tasks;
   const index = taskArray.findIndex(x => x._id == task.task_id );
   const foundTask = taskArray[index];
+  foundTask.title = task.title;
   foundTask.description = task.description;
   foundTask.deadline = new Date(task.deadline.toISOString());
   foundTask.state = task.state;
@@ -77,8 +78,5 @@ async function updateTask(_, { task }) {
   }
 }
 
-// mutation taskUpdate($task: TaskUpdateInput!){
-//   TaskUpdate(task:$task)
-// }
 
 module.exports = { addTask, updateTaskState, updateTask, removeTask };

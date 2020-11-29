@@ -75,8 +75,6 @@ class Dashboard extends React.Component {
         <MainArea user={this.state.user} loadData={this.loadData}/>
         <AddTaskModal loadData={this.loadData}/>
         <SettingModal loadData={this.loadData}/>
-
-
         <AddProjectModal loadData={this.loadData} />
       </div>
     );

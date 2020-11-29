@@ -48,6 +48,7 @@ const MainContainer = (props) => {
         // handleChangeCheckbox={handleChangeCheckbox}
       />
       <InboxQuote
+        loadData={props.loadData}
         quote={props.quote}
         task={taskState}
         user={props.user}
