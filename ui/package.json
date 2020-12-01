@@ -26,10 +26,12 @@
   },
   "homepage": "https://github.com/Tarushfx/PTask#readme",
   "dependencies": {
+    "@apollo/client": "^3.2.9",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^4.5.3",
     "dotenv": "^6.2.0",
     "express": "^4.17.1",
+    "graphql": "^15.4.0",
     "http-proxy-middleware": "^0.21.0",
     "joi-browser": "^13.4.0",
     "jsonwebtoken": "^8.5.1",

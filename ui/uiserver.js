@@ -30,10 +30,10 @@ app.use(express.static('public'));
 
 const apiProxyTarget = process.env.API_PROXY_TARGET || 'http://localhost:3000';
 if (apiProxyTarget) {
-  app.use('/api', proxy({ target: apiProxyTarget }));
+  app.use('/graphql', proxy({ target: apiProxyTarget }));
 }
 
-const UI_API_ENDPOINT = process.env.UI_API_ENDPOINT || '/api';
+const UI_API_ENDPOINT = process.env.UI_API_ENDPOINT || '/graphql';
 const env = { UI_API_ENDPOINT };
 
 app.get('/env.js', (req, res) => {

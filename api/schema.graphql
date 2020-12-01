@@ -5,6 +5,23 @@ enum State {
   Completed
 }
 
+
+type Message {
+  id: ID!
+  user: String!
+  content: String!
+}
+
+input MessageInput {
+  user: String!
+  content: String!
+}
+
+
+type Subscription {
+  messages: [Message!]
+}
+
 type Notifications {
   _id: ID!
   text: String!
@@ -145,6 +162,7 @@ type Query {
   about: String!
   userData(user: getData!): UserData!
   UserSignIn(user: UserLoginInputs!): User
+  messages: [Message!]
 }
 
 type Mutation {
@@ -163,4 +181,5 @@ type Mutation {
   NotifUpdate(notif: NotifUpdate!): String
   NotifRemove(notif: NotifRemove!): String
   addLikes(likes: LikesInput!): String
+  postMessage(user: String!, content: String!): ID!
 }
