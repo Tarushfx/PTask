@@ -19,7 +19,7 @@ const CalendarDay = (props) => {
   const data = (
     <React.Fragment>
       {title.map((t, index) => (
-        <React.Fragment>
+        <React.Fragment key={index}>
           <div className="project-detail">{t}</div>
           <div className="hover-title">{state[index]}</div>
         </React.Fragment>

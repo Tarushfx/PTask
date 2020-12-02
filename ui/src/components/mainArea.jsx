@@ -9,13 +9,10 @@ class MainArea extends React.Component {
     this.state = {
       taskFilter: false,
     };
-    this.likesArray = [
-      "motivation",
-      "life",
-      "positivity",
-      "optimism",
-      "inspiration",
-    ];
+    this.likesArray = props.user.likes
+      ? props.user.likes
+      : ["motivation", "life", "positivity", "optimism", "inspiration"];
+
     this.quotetmp = quotes.filter((quote) => {
       let common = this.likesArray.filter((value) =>
         quote.tags.includes(value)

@@ -11,6 +11,7 @@ class ProfileBar extends React.Component {
     this.showNotif = this.showNotif.bind(this);
     this.getNotifs = this.getNotifs.bind(this);
     this.updateNotifNumber = this.updateNotifNumber.bind(this);
+    this.handleMessageClick = this.handleMessageClick.bind(this);
   }
   signOut() {
     authService.clearToken();
@@ -81,6 +82,21 @@ class ProfileBar extends React.Component {
     return user.projects ? user.projects : [];
   }
 
+  handleMessageClick() {
+    $(".calendar-container").hasClass("calendar-show")
+      ? $(".inbox-calendar-checkbox").click()
+      : null;
+    if ($(".message-area").hasClass("hide")) {
+      $("#quote-inbox-content").addClass("hide");
+      $(".mail-contents").addClass("hide");
+      // $(".inbox-container").addClass("hide");
+      $(".message-area").removeClass("hide");
+    } else {
+      $("#quote-inbox-content").removeClass("hide");
+      $(".message-area").addClass("hide");
+    }
+  }
+
   async showNotif() {
     console.log(this.getNotifs());
     Toast.Notifications(this.getNotifs());
@@ -117,7 +133,7 @@ class ProfileBar extends React.Component {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
                 fill="currentColor"
-                onClick={() => $(".inbox-calendar").click()}
+                onClick={this.handleMessageClick}
               >
                 <path d="M10.688 95.156C80.958 154.667 204.26 259.365 240.5 292.01c4.865 4.406 10.083 6.646 15.5 6.646 5.406 0 10.615-2.219 15.469-6.604 36.271-32.677 159.573-137.385 229.844-196.896 4.375-3.698 5.042-10.198 1.5-14.719C494.625 69.99 482.417 64 469.333 64H42.667c-13.083 0-25.292 5.99-33.479 16.438-3.542 4.52-2.875 11.02 1.5 14.718z" />
                 <path d="M505.813 127.406a10.618 10.618 0 00-11.375 1.542C416.51 195.01 317.052 279.688 285.76 307.885c-17.563 15.854-41.938 15.854-59.542-.021-33.354-30.052-145.042-125-208.656-178.917a10.674 10.674 0 00-11.375-1.542A10.674 10.674 0 000 137.083v268.25C0 428.865 19.135 448 42.667 448h426.667C492.865 448 512 428.865 512 405.333v-268.25a10.66 10.66 0 00-6.187-9.677z" />
@@ -136,9 +152,11 @@ class ProfileBar extends React.Component {
             </div>
           </div>
           <div className="progressBar">
-            <div class="progress-status">{ratio}</div>
-            <div class="progress">
-              <div class="progress-bar"></div>
+            <div className="progress-status">{`${
+              isNaN(ratio) ? `Infinity` : `${ratio.toString()} %`
+            }`}</div>
+            <div className="progress">
+              <div className="progress-bar"></div>
             </div>
           </div>
 
@@ -168,7 +186,7 @@ class ProfileBar extends React.Component {
               data-toggle="modal"
               data-target="#projectModal"
             >
-              <i class="fas fa-plus-circle fa-lg"></i>
+              <i className="fas fa-plus-circle fa-lg"></i>
             </button>
           </div>
           <div className="project-name">
