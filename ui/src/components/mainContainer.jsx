@@ -5,6 +5,8 @@ import InboxQuote from "./inboxQuote.jsx";
 import "../css/quote.css";
 import MessageArea from "./messageArea.jsx";
 
+import Chat from "./chat.jsx";
+
 const MainContainer = (props) => {
   const [taskState, setTaskState] = useState({});
 
@@ -57,6 +59,11 @@ const MainContainer = (props) => {
         user={props.user}
         buttonID={buttonID}
       />
+
+
+      <Chat />
+
+
       <Calender date={new Date()} user={props.user} />
     </div>
   );
