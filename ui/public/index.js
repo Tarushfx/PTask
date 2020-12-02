@@ -4,12 +4,14 @@ $(".mail-choice").click(function () {
 
 const colorInput = document.getElementById("colorpicker");
 
-colorInput.addEventListener("input", (e) => {
-  document.body.style.setProperty("--button-color", e.target.value);
-  colorInput.value = e.target.value;
-});
+colorInput
+  ? colorInput.addEventListener("input", (e) => {
+      document.body.style.setProperty("--button-color", e.target.value);
+      colorInput.value = e.target.value;
+    })
+  : null;
 
-$(".inbox-calendar").click(function () {
+$(".inbox-calendar-checkbox").click(function () {
   if ($(".calendar-container").hasClass("calendar-show")) {
     unmountCalendar("#quote-inbox-content");
   } else {
@@ -23,6 +25,7 @@ const displayCalendar = () => {
   $(".inbox-container").addClass("hide");
   $("#quote-inbox-content").addClass("hide");
   $(".mail-contents").addClass("hide");
+  $(".message-area").addClass("hide");
 };
 const unmountCalendar = (show) => {
   $(".calendar-container").removeClass("calendar-show");
@@ -34,6 +37,7 @@ const displayQuote = () => {
   // $(".calendar-container").removeClass("calendar-show");
   // $(".inbox-container").addClass("hide");
   $(".mail-contents").addClass("hide");
+  $(".message-area").addClass("hide");
 };
 const unmountQuote = () => {
   // $(".calendar-container").addClass("calendar-show");

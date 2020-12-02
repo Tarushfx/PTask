@@ -1,11 +1,11 @@
 import React from "react";
 const ModalInput = (props) => {
   const icons = {
-    title: <i class="fas fa-address-card"></i>,
+    title: <i className="fas fa-address-card"></i>,
     password: <i className="fas fa-lock" />,
-    date: <i class="far fa-clock"></i>,
+    date: <i className="far fa-clock"></i>,
     error: <i className="fas fa-exclamation-triangle" />,
-    interests: <i className="fa fa-thumbs-up" />
+    interests: <i className="fa fa-thumbs-up" />,
   };
 
   return (

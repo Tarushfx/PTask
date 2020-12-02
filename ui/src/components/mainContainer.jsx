@@ -3,6 +3,7 @@ import Calender from "./calender.jsx";
 import Inbox from "./inbox.jsx";
 import InboxQuote from "./inboxQuote.jsx";
 import "../css/quote.css";
+import MessageArea from "./messageArea.jsx";
 
 const MainContainer = (props) => {
   const [taskState, setTaskState] = useState({});
@@ -32,6 +33,7 @@ const MainContainer = (props) => {
       setTaskState(taskTarget);
       $(".mail-contents").removeClass("hide");
       $("#quote-inbox-content").addClass("hide");
+      $(".message-area").addClass("hide");
       console.log(taskTarget);
       buttonID = input.parentElement.children[0].id.split("-")[1];
       console.log(buttonID);
@@ -47,6 +49,7 @@ const MainContainer = (props) => {
         filterArray={filterArray}
         // handleChangeCheckbox={handleChangeCheckbox}
       />
+      <MessageArea />
       <InboxQuote
         loadData={props.loadData}
         quote={props.quote}
@@ -54,7 +57,6 @@ const MainContainer = (props) => {
         user={props.user}
         buttonID={buttonID}
       />
-
       <Calender date={new Date()} user={props.user} />
     </div>
   );

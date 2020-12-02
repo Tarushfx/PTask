@@ -19,6 +19,9 @@ html {
   --notif-bell-content: "";
   --notif-msg-content: "";
 }
+#interests {
+  font-size: medium;
+}
 .msg.selected-bg.anim-y {
   width: 100%;
   max-width: 420px;
