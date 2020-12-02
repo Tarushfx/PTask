@@ -3,10 +3,10 @@ import React from "react";
 const Input = (props) => {
   const id = `${props.name}${props.form}Form`;
   const icons = {
-    title: <i class="fas fa-address-card"></i>,
-    email: <i class="fas fa-envelope"></i>,
+    title: <i className="fas fa-address-card"></i>,
+    email: <i className="fas fa-envelope"></i>,
     password: <i className="fas fa-lock" />,
-    date: <i class="far fa-clock"></i>,
+    date: <i className="far fa-clock"></i>,
     error: <i className="fas fa-exclamation-triangle" />,
   };
   return (

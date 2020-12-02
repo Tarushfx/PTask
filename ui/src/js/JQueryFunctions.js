@@ -1,5 +1,4 @@
 const displayCalender = () => {
-  console.log("1234");
   $(".calendar-container").addClass("calendar-show");
   $(".inbox-container").addClass("hide");
   $("#quote-inbox-content").addClass("hide");

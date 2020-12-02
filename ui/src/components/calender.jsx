@@ -112,7 +112,7 @@ const Calender = (props) => {
             onMouseLeave={changeStyleButton}
             id="preMonthButton"
           >
-            <i class="fas fa-angle-left"></i>
+            <i className="fas fa-angle-left"></i>
             Previous Month
           </button>
           <button
@@ -146,7 +146,7 @@ const Calender = (props) => {
             id="nextMonthButton"
           >
             Next Month
-            <i class="fas fa-angle-right"></i>
+            <i className="fas fa-angle-right"></i>
           </button>
           {/* use this button */}
 
@@ -166,10 +166,12 @@ const Calender = (props) => {
       </div>
       <div className="calendar-wrapper anim-y">
         <div className="calendar">
-          {daysArray.map((dayOfWeek) => (
-            <div className="days">{dayOfWeek}</div>
+          {daysArray.map((dayOfWeek, index) => (
+            <div className="days" id={daysArray[index]} key={daysArray[index]}>
+              {dayOfWeek}
+            </div>
           ))}
-          {finalArray.map((day) => {
+          {finalArray.map((day, index) => {
             let tasksOnADay = taskArray.filter((task) => {
               let date = new Date(Date.parse(task.deadline)).getDate();
               let month = new Date(Date.parse(task.deadline)).getMonth();
@@ -179,7 +181,9 @@ const Calender = (props) => {
                 month === dateState.getMonth()
               );
             });
-            return <CalenderDay day={day} tasksOnADay={tasksOnADay} />;
+            return (
+              <CalenderDay day={day} key={index} tasksOnADay={tasksOnADay} />
+            );
           })}
         </div>
       </div>

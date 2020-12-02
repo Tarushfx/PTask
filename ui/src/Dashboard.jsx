@@ -51,6 +51,7 @@ class Dashboard extends React.Component {
           type
           status
         }
+        likes 
       }
     }`;
 
