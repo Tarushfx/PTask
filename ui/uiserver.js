@@ -1,6 +1,6 @@
 const express = require('express');
 require('dotenv').config();
-const proxy = require('http-proxy-middleware');
+// const proxy = require('http-proxy-middleware');
 const path = require('path');
 
 const port = process.env.UI_SERVER_PORT || 8000;
@@ -28,12 +28,12 @@ if (enableHMR && (process.env.NODE_ENV !== 'production')) {
 
 app.use(express.static('public'));
 
-const apiProxyTarget = process.env.API_PROXY_TARGET || 'http://localhost:3000';
-if (apiProxyTarget) {
-  app.use('/graphql', proxy({ target: apiProxyTarget }));
-}
+// const apiProxyTarget = process.env.API_PROXY_TARGET || 'http://localhost:4000/';
+// if (apiProxyTarget) {
+//   app.use('/', proxy({ target: apiProxyTarget }));
+// }
 
-const UI_API_ENDPOINT = process.env.UI_API_ENDPOINT || '/graphql';
+const UI_API_ENDPOINT = process.env.UI_API_ENDPOINT || 'http://localhost:4000/';
 const env = { UI_API_ENDPOINT };
 
 app.get('/env.js', (req, res) => {
