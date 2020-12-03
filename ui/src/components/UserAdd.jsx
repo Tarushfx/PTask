@@ -179,14 +179,15 @@ export default class UserAdd extends React.Component {
         "email",
         "password",
       ]);
-      console.log(user);
+      // console.log(user);
       const status = await this.props.createUser(user, likes);
-      if(status){
-        window.location = '/';
-      }else {
+      if (status) {
+        window.location = "/";
+      } else {
         throw new Error();
       }
     } catch (err) {
+      console.log(err.details);
       document.getElementById("likesModalCancel").click();
       document.getElementById("errorContent").innerHTML = "User Already exists";
       document.getElementById("errorButton").click();

@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import graphQLFetch from "../graphQLFetch.js";
 import ModalInput from "../components/modalInput.jsx";
 import Joi from "joi-browser";
+import Toast from "../components/Notification/Notifications.jsx";
 
 const AddTaskModal = (props) => {
   // let date = new Date();
@@ -54,8 +55,7 @@ const AddTaskModal = (props) => {
     const data = await graphQLFetch(query, { task: task });
     if (data.addTask) {
       return true;
-    }
-    else if(data.error){
+    } else if (data.error) {
       return false;
     }
   }
@@ -77,22 +77,27 @@ const AddTaskModal = (props) => {
       task.deadline = new Date(date);
     }
     const status = await addTask(task);
+    Toast.pushNotifications({
+      type: 2,
+      text: form.title.value,
+      status: 1,
+    });
     form.title.value = "";
     form.desc.value = "";
     form.deadline.value = "";
     await (() => $("#taskModal").modal("hide"))();
 
-    if(status){
-      document.getElementById("successContent").innerHTML = "Task Added !!! Get down to Work";
+    if (status) {
+      document.getElementById("successContent").innerHTML =
+        "Task Added !!! Get down to Work";
       document.getElementById("successButton").click();
-    }
-    else{
-      document.getElementById("errorContent").innerHTML = "Something went wrong! Try again";
+    } else {
+      document.getElementById("errorContent").innerHTML =
+        "Something went wrong! Try again";
       document.getElementById("errorButton").click();
     }
 
     await props.loadData();
-
   }
 
   return (

@@ -7,7 +7,9 @@ const ChatHeader = (props) => {
         {props.icon}
         &nbsp;
       </div>
-      <div className="chat-header-text justify-self-center">Hi</div>
+      <div className="chat-header-text justify-self-center">
+        {props.title ? props.title : "Teams"}
+      </div>
     </div>
   );
 };

@@ -91,3 +91,16 @@
   /* background-color: var(--body-bg-color); */
   font-size: 11px;
 }
+.chat-item {
+  height: fit-content;
+  min-height: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 20px;
+  font-weight: 400;
+  border: 1.5px solid var(--body-bg-color);
+  padding: 15px;
+  background-color: var(--theme-bg-color);
+}

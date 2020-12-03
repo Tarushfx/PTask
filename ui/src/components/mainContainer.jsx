@@ -49,7 +49,7 @@ const MainContainer = (props) => {
         filterArray={filterArray}
         // handleChangeCheckbox={handleChangeCheckbox}
       />
-      <Chat />
+      <Chat user={props.user} />
       <InboxQuote
         loadData={props.loadData}
         quote={props.quote}
