@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ChatHeader from "./chatHeader.jsx";
 import ChatBox from "./chatBox.jsx";
 import "../css/message.css";
 import ChatList from "./chatList.jsx";

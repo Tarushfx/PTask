@@ -5,8 +5,9 @@ const ChatHeader = (props) => {
     <div className="chat-header w-100">
       <div className="back-button" onClick={props.goBack}>
         {props.icon}
+        &nbsp;
       </div>
-      <div>Hi</div>
+      <div className="chat-header-text justify-self-center">Hi</div>
     </div>
   );
 };

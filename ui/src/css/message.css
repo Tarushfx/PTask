@@ -3,69 +3,91 @@
   height: fit-content;
   max-width: 400px;
   min-height: 30px;
-  border-radius: 10%;
-  margin-right: auto;
+  border-radius: 10px;
   overflow: auto;
-  margin-left: 10px;
   padding: 5px;
   background-color: var(--button-color);
   font-weight: 400;
-  margin: 2px;
   align-self: flex-end;
+  margin-bottom: 3px;
+  display: flex;
+  flex-direction: column;
 }
 .received {
   width: fit-content;
   height: fit-content;
   min-height: 30px;
   max-width: 400px;
-  margin-right: auto;
-  /* max-height: ; */
+  /* margin-right: auto; */
+  display: flex;
+  flex-direction: column;
   overflow: auto;
-  margin-left: 10px;
+  /* margin-left: 10px; */
   padding: 5px;
   background-color: var(--button-color);
   font-weight: 400;
-  border-radius: 10%;
-  margin: 2px;
+  border-radius: 10px;
+  /* margin: 2px; */
+  margin-bottom: 3px;
   align-self: flex-start;
 }
 .message-area {
-  width: 616.36px;
-  /* padding: 10px; */
-  /* background-color: var(--body-bg-color); */
-  /* background-color: white; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .chat-header {
   background-color: var(--button-color);
-  padding: 0px 40px;
-  height: 50px;
+  padding: 0px 20px;
+  min-height: 50px;
   margin-bottom: 5px;
   font-size: larger;
   display: flex;
   align-items: center;
-  justify-content: center;
   border-radius: 5px;
+}
+.back-button {
+  justify-self: flex-start;
+}
+.chat-header-text {
+  justify-self: center;
 }
 .chat {
   width: 100%;
   display: flex;
   flex-direction: column;
   margin: 0;
+  margin-bottom: 3px;
 }
 .chat-list {
-  /* display: flex; */
   width: 100%;
   padding: 0 20px;
+  overflow: auto;
 }
 
 .message-time {
-  height: 5px;
-  background-color: var(--body-bg-color);
-  font-size: smaller;
-}
-.sent + .message-time {
+  height: fit-content;
+  /* background-color: var(--body-bg-color); */
+  font-size: 11px;
   align-self: flex-end;
 }
-.received + .message-time {
+/* .sent .message-time {
+  align-self: flex-end;
+}
+.received .message-time {
   align-self: flex-start;
+} */
+
+.mail-textarea {
+  position: sticky;
+  bottom: 0;
+  right: 0;
+  max-height: 80px;
+}
+.message-name {
+  align-self: flex-start;
+
+  height: fit-content;
+  /* background-color: var(--body-bg-color); */
+  font-size: 11px;
 }
