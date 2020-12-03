@@ -8,7 +8,7 @@ const Message = (props) => {
   console.log(user);
   return (
     <React.Fragment>
-      <div className={`${props.user === email ? "sent" : "received"} px-3`}>
+      <div className={`${props.email === email ? "sent" : "received"} px-3`}>
         <div className={`message-name`}>{props.user}</div>
         <span className="justify-content-end">{props.content}</span>
         <div className="message-time">{new Date().getFullYear()}</div>

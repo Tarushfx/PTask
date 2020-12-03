@@ -9,8 +9,9 @@ const ChatInput = (props) => {
     if (!text) return;
     props.sendMessage({
       content: text,
-      user: email,
+      user: name,
       _id: props.teamID,
+      email: email,
     });
     document.getElementById("chatInput").value = "";
   };

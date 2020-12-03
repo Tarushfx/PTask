@@ -13,6 +13,7 @@ const ChatList = (props) => {
       {array &&
         array.map((item) => {
           let filtered = chat && chat.filter((c) => c._id == item._id);
+          console.log(filtered && true);
           return (
             <div
               className="chat-item w-100"
@@ -20,8 +21,11 @@ const ChatList = (props) => {
             >
               <strong>{item.title}</strong>
               <span>
-                {chat && filtered ? filtered[filtered.length - 1].user : ""}:
-                {chat && filtered
+                {chat && filtered && filtered.length != 0
+                  ? `${filtered[filtered.length - 1].user}:`
+                  : ""}
+
+                {chat && filtered && filtered.length != 0
                   ? filtered[filtered.length - 1].content
                   : "No Messages"}
               </span>
