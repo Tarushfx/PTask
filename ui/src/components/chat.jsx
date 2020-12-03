@@ -24,11 +24,7 @@ const client = new ApolloClient({
 
 const GET_MESSAGES = gql`
   subscription {
-    messages {
-      _id
-      user
-      content
-    }
+    messages { _id user content email }
   }
 `;
 
