@@ -11,11 +11,12 @@ import Notifications from "./components/Notification/Notifications.jsx";
 import graphQLFetch from "./graphQLFetch.js";
 import authservice from "../services/authservice.js";
 import AddProjectModal from "./Modal/AddProjectModal.jsx";
+import TeamModal from "./Modal/TeamModal.jsx";
 
 class Dashboard extends React.Component {
   constructor() {
     super();
-    this.state = { user: {} };
+    this.state = {user: {}};
     this.loadData = this.loadData.bind(this);
   }
 
@@ -41,9 +42,9 @@ class Dashboard extends React.Component {
           deadline
         }
         team {
+          _id
           title
           description
-          members
         }
         notifications {
           _id
@@ -57,10 +58,10 @@ class Dashboard extends React.Component {
 
     const token = authservice.getToken();
     const decodedToken = jwt.decode(token);
-    const id = { _id: decodedToken._id };
-    const data = await graphQLFetch(query, { user: id });
+    const id = {_id: decodedToken._id};
+    const data = await graphQLFetch(query, {user: id});
     if (data) {
-      this.setState({ user: data.userData });
+      this.setState({user: data.userData});
       console.log(this.state.user);
     }
   }
@@ -72,12 +73,27 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div className="Container">
-        <ProfileBar user={this.state.user} loadData={this.loadData} />
+        <ProfileBar user={this.state.user} loadData={this.loadData}/>
 
-        <MainArea user={this.state.user} loadData={this.loadData} />
-        <AddTaskModal loadData={this.loadData} />
-        <SettingModal loadData={this.loadData} />
-        <AddProjectModal loadData={this.loadData} />
+        <MainArea user={this.state.user} loadData={this.loadData}/>
+        <AddTaskModal loadData={this.loadData}/>
+        <SettingModal loadData={this.loadData}/>
+        <AddProjectModal loadData={this.loadData}/>
+        <TeamModal loadData={this.loadData}/>
+        <button
+          id="successButton"
+          style={{display: "none"}}
+          data-target="#successModal"
+          data-toggle="modal"
+        />
+        <button
+          id="errorButton"
+          style={{display: "none"}}
+          data-target="#errorModal"
+          data-toggle="modal"
+        />
+        <Success/>
+        <Error/>
       </div>
     );
   }

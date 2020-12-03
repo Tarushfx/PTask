@@ -124,7 +124,7 @@ const LikesModal = (props) => {
                 <label className="ml-1 mr-3">Karma</label> */}
               </div>
               <div className="form-group row">
-                <button type="button" className="btn ml-2" data-dismiss="modal">
+                <button type="button" className="btn ml-2" data-dismiss="modal" id="likesModalCancel">
                   Cancel
                 </button>
                 <button type="submit" className="btn ml-2" id="taskSubmit">

@@ -28,7 +28,13 @@ async function pushNotifications(notif) {
     status: notif.status,
   };
 
-  await graphQLFetch(query, { notif: addedNotif });
+  const data = await graphQLFetch(query, { notif: addedNotif });
+  if(data.NotifAdd == "Added Notification"){
+    return true;
+  }
+  else if(data.error){
+    return false;
+  }
 }
 
 /*

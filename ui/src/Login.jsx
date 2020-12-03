@@ -36,7 +36,10 @@ export default class Login extends React.Component {
 
       await graphQLFetch(likesQuery, { likes: likevar })
       console.log('User Created');
-      window.location = '/';
+      return true;
+    }
+    else {
+      return false;
     }
   }
 
@@ -68,13 +71,13 @@ export default class Login extends React.Component {
           style={{ display: "none" }}
           data-target="#successModal"
           data-toggle="modal"
-        ></button>
+        />
         <button
           id="errorButton"
           style={{ display: "none" }}
           data-target="#errorModal"
           data-toggle="modal"
-        ></button>
+        />
         <Success />
         <Error />
       </React.Fragment>

@@ -6,12 +6,13 @@ enum State {
 }
 
 type Message {
-  id: ID!
+  _id: ID!
   user: String!
   content: String!
 }
 
 input MessageInput {
+  _id: ID!
   user: String!
   content: String!
 }
@@ -28,9 +29,19 @@ type Notifications {
   status: Boolean!
 }
 
-type Team {
+input TeamJoin{
+  _id: ID!
+  team_id: ID!
+}
+
+input TeamInput {
   title: String!
-  members: [ID!]
+  description: String
+}
+
+type Team {
+  _id: ID!
+  title: String!
   description: String
 }
 
@@ -166,7 +177,7 @@ type Query {
 
 type Mutation {
   setAboutMessage(message: String!): String!
-  UserAdd(user: UserInputs!): User!
+  UserAdd(user: UserInputs!): User
   addTask(task: TaskInput!): Task
   addProject(project: ProjectInput!): Project
   UserUpdate(user: UserUpdateInputs!): String
@@ -181,4 +192,6 @@ type Mutation {
   NotifRemove(notif: NotifRemove!): String
   addLikes(likes: LikesInput!): String
   postMessage(message: MessageInput!): ID!
+  TeamAdd(team: TeamInput!): Team!
+  JoinTeam(team: TeamJoin!): Boolean!
 }

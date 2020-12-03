@@ -48,6 +48,15 @@ const EditTaskModal = (props) => {
 
       await (() => $("#editTaskModal").modal("hide"))();
 
+      if(data.TaskUpdate == "Updated"){
+        document.getElementById("successContent").innerHTML = "Task Edited !!! Get down to Work";
+        document.getElementById("successButton").click();
+      }
+      else if(data.error){
+        document.getElementById("errorContent").innerHTML = "Something went wrong! Try again";
+        document.getElementById("errorButton").click();
+      }
+
       await props.loadData();
     }catch(err){
       console.log(err.message)

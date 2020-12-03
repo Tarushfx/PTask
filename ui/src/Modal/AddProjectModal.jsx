@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import authservice from "../../services/authservice.js";
 import jwt from "jsonwebtoken";
@@ -16,9 +16,9 @@ const AddProjectModal = (props) => {
     title: Joi.string().min(5).required(),
     desc: Joi.string().min(5).required(),
   };
-  const handleChange = ({ currentTarget: input }) => {
-    let formDataNew = { ...formData };
-    let formErrorsNew = { ...formErrors };
+  const handleChange = ({currentTarget: input}) => {
+    let formDataNew = {...formData};
+    let formErrorsNew = {...formErrors};
 
     formDataNew[input.name] = input.value;
 
@@ -30,10 +30,10 @@ const AddProjectModal = (props) => {
     setFormErrors(formErrorsNew);
     setFormData(formDataNew);
   };
-  const validateProperty = ({ name, value }) => {
-    const proprertyObject = { [name]: value };
-    const propertySchema = { [name]: schema[name] };
-    const { error } = Joi.validate(proprertyObject, propertySchema);
+  const validateProperty = ({name, value}) => {
+    const proprertyObject = {[name]: value};
+    const propertySchema = {[name]: schema[name]};
+    const {error} = Joi.validate(proprertyObject, propertySchema);
     if (error) return error.details[0].message;
     return null;
   };
@@ -46,9 +46,12 @@ const AddProjectModal = (props) => {
     }`;
 
     console.log(project);
-    const data = await graphQLFetch(query, { project: project });
-    if (data) {
-      console.log(data);
+    const data = await graphQLFetch(query, {project: project});
+    if (data.addProject) {
+      return true;
+    }
+    if (data.error) {
+      return false;
     }
   }
 
@@ -63,10 +66,19 @@ const AddProjectModal = (props) => {
       description: form.desc.value,
     };
 
-    await addProject(project);
+    const status = await addProject(project);
     form.title.value = "";
     form.desc.value = "";
     await (() => $("#projectModal").modal("hide"))();
+
+    if (status) {
+      document.getElementById("successContent").innerHTML = "Project Added !!! New Challenges Ahead";
+      document.getElementById("successButton").click();
+    } else {
+      document.getElementById("errorContent").innerHTML = "Something went wrong! Try again";
+      document.getElementById("errorButton").click();
+    }
+
     await props.loadData();
   }
 

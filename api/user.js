@@ -33,8 +33,9 @@ async function validate(user) {
     errors.push('User already registered try another email');
   }
   if (errors.length > 0) {
-    throw new UserInputError('Invalid input(s)', { errors });
+    return false;
   }
+  return true;
 }
 
 async function hashpassword(user) {
@@ -46,12 +47,15 @@ async function hashpassword(user) {
 
 
 async function add(_, { user }) {
-  await validate(user);
-  const newUser = await hashpassword(user);
-  const savedUser = await User.create(newUser);
-  const token = savedUser.generateAuthToken();
-  savedUser.token = token;
-  return savedUser;
+  const status = await validate(user);
+  if(status){
+    const newUser = await hashpassword(user);
+    const savedUser = await User.create(newUser);
+    const token = savedUser.generateAuthToken();
+    savedUser.token = token;
+    return savedUser;
+  }
+  return null;
 }
 
 async function logIn(_, { user }) {
