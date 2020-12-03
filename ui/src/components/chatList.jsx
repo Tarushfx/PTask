@@ -19,16 +19,19 @@ const ChatList = (props) => {
               className="chat-item w-100"
               onClick={(e) => props.handleChange(e, item)}
             >
-              <strong>{item.title}</strong>
-              <span>
-                {chat && filtered && filtered.length != 0
-                  ? `${filtered[filtered.length - 1].user}:`
-                  : ""}
+              <i className="fas fa-envelope-open fa-2x"></i>
+              <div className="chat-detail">
+                <strong>{item.title}</strong>
+                <span>
+                  {chat && filtered && filtered.length != 0
+                    ? `${filtered[filtered.length - 1].user}:`
+                    : ""}
 
-                {chat && filtered && filtered.length != 0
-                  ? filtered[filtered.length - 1].content
-                  : "No Messages"}
-              </span>
+                  {chat && filtered && filtered.length != 0
+                    ? filtered[filtered.length - 1].content
+                    : "No Messages"}
+                </span>
+              </div>
             </div>
           );
         })}
