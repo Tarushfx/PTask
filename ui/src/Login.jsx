@@ -3,6 +3,8 @@ import UserAdd from './components/UserAdd.jsx';
 import graphQLFetch from './graphQLFetch.js';
 import authService from '../services/authservice.js';
 import jwt from 'jsonwebtoken';
+import { Success, Error } from "./Modal/GenericModal.jsx";
+
 
 export default class Login extends React.Component {
   constructor() {
@@ -32,7 +34,7 @@ export default class Login extends React.Component {
         likes: likes
       };
 
-      await graphQLFetch(likesQuery, {likes: likevar})
+      await graphQLFetch(likesQuery, { likes: likevar })
       console.log('User Created');
       window.location = '/';
     }
@@ -51,6 +53,8 @@ export default class Login extends React.Component {
       window.location = "/";
     } else {
       authService.clearToken();
+      document.getElementById("errorContent").innerHTML = "Incorrect email or password";
+      document.getElementById("errorButton").click()
       console.log("Unsuccessful");
     }
   }
@@ -59,6 +63,20 @@ export default class Login extends React.Component {
     return (
       <React.Fragment>
         <UserAdd createUser={this.createUser} login={this.login} />
+        <button
+          id="successButton"
+          style={{ display: "none" }}
+          data-target="#successModal"
+          data-toggle="modal"
+        ></button>
+        <button
+          id="errorButton"
+          style={{ display: "none" }}
+          data-target="#errorModal"
+          data-toggle="modal"
+        ></button>
+        <Success />
+        <Error />
       </React.Fragment>
     );
   }

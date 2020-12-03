@@ -3,6 +3,7 @@ import MainArea from "./components/mainArea.jsx";
 import ProfileBar from "./components/profileBar.jsx";
 import AddTaskModal from "./Modal/AddTaskModal.jsx";
 import SettingModal from "./Modal/SettingModal.jsx";
+import {Success, Error} from "./Modal/GenericModal.jsx";
 import jwt from "jsonwebtoken";
 
 import "./css/index.css";
