@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 const jwt = require("jsonwebtoken");
+const { TeamSchema } = require('./teams.model.js')
+
 
 const NotificationSchema = new mongoose.Schema({
   text :{
@@ -74,14 +76,7 @@ const UserSchema = new mongoose.Schema({
   tasks: [TaskSchema],
   projects: [ProjectSchema],
   likes: [String],
-  teams: {
-    type: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Team",
-      },
-    ],
-  },
+  teams: [TeamSchema],
   notifications: [NotificationSchema],
 });
 

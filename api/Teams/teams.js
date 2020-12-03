@@ -12,11 +12,6 @@ async function AddTeam(_, { team }){
   else return null;
 }
 
-// mutation teamAdd($team: TeamInput!) {
-//   TeamAdd(team:$team){
-//     _id title description
-//   }
-// }
 
 async function joinATeam(_, { team }){
   const foundUser = await User.findOne({_id: team._id});
@@ -31,8 +26,5 @@ async function joinATeam(_, { team }){
   }
 }
 
-// mutation teamJoin($team: TeamJoin!) {
-//   JoinTeam(team: $team)
-// }
 
 module.exports = { AddTeam, joinATeam };

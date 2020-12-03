@@ -41,7 +41,7 @@ class Dashboard extends React.Component {
           description
           deadline
         }
-        team {
+        teams {
           _id
           title
           description
