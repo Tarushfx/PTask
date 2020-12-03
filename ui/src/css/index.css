@@ -673,13 +673,14 @@ button:focus {
   background-color: var(--unselected-mail);
   padding: 30px 0;
   border-top: 1px solid var(--border-color);
-  position: sticky;
+  /* position: sticky; */
   bottom: 0;
   justify-content: space-between;
   margin-top: auto;
-  left: 0;
+  /* left: 0; */
   overflow: hidden;
   height: 80px;
+  width: 100%;
   flex-shrink: 0;
 }
 .mail-textarea input {
