@@ -683,6 +683,22 @@ button:focus {
   width: 100%;
   flex-shrink: 0;
 }
+.success-modal-button {
+  display: flex;
+}
+.success-modal-button button {
+  align-items: center;
+  margin-top: 5px;
+  background-color: #66ff66;
+}
+.error-modal-button {
+  display: flex;
+}
+.error-modal-button button {
+  align-items: center;
+  margin-top: 5px;
+  background-color: #dc3545b8;
+}
 .mail-textarea input {
   border: none;
   background-color: transparent;
