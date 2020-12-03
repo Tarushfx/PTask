@@ -5,6 +5,7 @@ const userAPI = require('./userAPI');
 const taskAPI = require('./Task/task.js');
 const projectAPI = require("./Project/project.js");
 const notifAPI = require("./Notification/notification");
+const teamAPI = require("./Teams/teams.js")
 const {subscribe} = require('graphql/subscription');
 const { PubSub } = require('graphql-subscriptions');
 
@@ -38,16 +39,18 @@ const resolvers = {
     NotifUpdate: notifAPI.notifUpdate,
     NotifRemove: notifAPI.notifRemove,
     addLikes:userAPI.addLikes,
+    TeamAdd: teamAPI.AddTeam,
+    JoinTeam: teamAPI.joinATeam,
     postMessage: (parent, {message}, { pubsub }) => {
       const id = messages.length;
       messages.push({
-        id,
+        _id: message._id,
         user: message.user,
         content: message.content,
       });
-      pubsub.publish("12345", {messages: messages});
+      // pubsub.publish("12345", {messages: messages});
       subscriber.forEach((fn) => fn());
-      return id;
+      return message._id;
     }
   },
   GraphQLDate,
@@ -55,6 +58,7 @@ const resolvers = {
     messages: {
       subscribe: (_, __, { pubsub }) => {
         const channel = Math.random().toString(36).slice(2,15);
+        console.log(channel);
         onMessageUpdate(() => pubsub.publish(channel, { messages }));
         setTimeout(() => pubsub.publish(channel, { messages }), 0);
         return pubsub.asyncIterator(channel)
