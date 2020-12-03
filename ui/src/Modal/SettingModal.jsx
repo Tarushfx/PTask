@@ -47,6 +47,9 @@ const SettingModal = (props) => {
     const data = await graphQLFetch(query, { user: user });
     if (data.UserUpdateName === "Updated") {
       props.loadData();
+      return true;
+    }else {
+      return false;
     }
   }
 
@@ -58,11 +61,15 @@ const SettingModal = (props) => {
     const data = await graphQLFetch(query, { user: user });
     if (data.UserUpdate === "Updated") {
       props.loadData();
+      return true;
+    } else {
+      return false;
     }
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
+    let status;
     const form = document.forms.UpdateUser;
     const token = authservice.getToken();
     const id = jwt.decode(token)._id;
@@ -77,7 +84,14 @@ const SettingModal = (props) => {
         } else {
           user.name = form.name.value;
         }
-        await usernameUpdate(user);
+        status = await usernameUpdate(user);
+        if(status){
+          document.getElementById("successContent").innerHTML = "User Updated";
+          document.getElementById("successButton").click();
+        }else {
+          document.getElementById("errorContent").innerHTML = "Something went wrong! Try again";
+          document.getElementById("errorButton").click();
+        }
       } else if (
         form.password.value === form.confirmPassword.value &&
         form.password.value.length >= 6
@@ -92,7 +106,7 @@ const SettingModal = (props) => {
         } else {
           user.name = name;
         }
-        await update(user);
+        status = await update(user);
 
         authservice.clearToken();
         window.location = "/";
@@ -199,6 +213,7 @@ const SettingModal = (props) => {
                 </button>
               </div>
             </form>
+            <p style={{fontSize: "10px", textAlign: "right"}}>*Password update requires you to login again*</p>
           </div>
         </div>
       </div>

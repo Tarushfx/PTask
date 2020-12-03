@@ -21,9 +21,18 @@ const PushNotification = (props) => {
 
     form.reminder.value = "";
 
-    await Toast.pushNotifications(notif);
+    const data = await Toast.pushNotifications(notif);
 
     await (() => $("#pushNotifModal").modal("hide"))();
+
+    if(data) {
+      document.getElementById("successContent").innerHTML = "Reminder Added!!";
+      document.getElementById("successButton").click();
+    }
+    else {
+      document.getElementById("errorContent").innerHTML = "Something went wrong! Try again";
+      document.getElementById("errorButton").click();
+    }
     await props.loadData();
   }
 

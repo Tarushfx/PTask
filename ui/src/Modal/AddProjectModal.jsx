@@ -47,8 +47,11 @@ const AddProjectModal = (props) => {
 
     console.log(project);
     const data = await graphQLFetch(query, { project: project });
-    if (data) {
-      console.log(data);
+    if (data.addProject) {
+      return true;
+    }
+    if(data.error){
+      return false;
     }
   }
 
@@ -63,10 +66,20 @@ const AddProjectModal = (props) => {
       description: form.desc.value,
     };
 
-    await addProject(project);
+    const status = await addProject(project);
     form.title.value = "";
     form.desc.value = "";
     await (() => $("#projectModal").modal("hide"))();
+
+    if(status){
+      document.getElementById("successContent").innerHTML = "Project Added !!! New Challenges Ahead";
+      document.getElementById("successButton").click();
+    }
+    else{
+      document.getElementById("errorContent").innerHTML = "Something went wrong! Try again";
+      document.getElementById("errorButton").click();
+    }
+
     await props.loadData();
   }
 

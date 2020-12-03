@@ -78,6 +78,20 @@ class Dashboard extends React.Component {
         <AddTaskModal loadData={this.loadData} />
         <SettingModal loadData={this.loadData} />
         <AddProjectModal loadData={this.loadData} />
+        <button
+          id="successButton"
+          style={{ display: "none" }}
+          data-target="#successModal"
+          data-toggle="modal"
+        />
+        <button
+          id="errorButton"
+          style={{ display: "none" }}
+          data-target="#errorModal"
+          data-toggle="modal"
+        />
+        <Success />
+        <Error />
       </div>
     );
   }

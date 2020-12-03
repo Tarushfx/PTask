@@ -7,16 +7,16 @@ export const Success = (props) => {
             <div className="modal-dialog modal-sm modal-dialog-centered" role="content">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h4 classname="modal-title">Success!!!</h4>
+                        <h4 className="modal-title">Success!!!</h4>
                         <button type="button" className="close" data-dismiss="modal">
                             &times;
                         </button>
                     </div>
                     
                     <div className="modal-body">
-                        <div id="successContent" className="form-group row"></div>
-                        <div className="form-group row">
-                            <button type="button" className="btn" data-dismiss="modal">
+                        <div id="successContent"></div>
+                        <div className="">
+                            <button type="button" className="btn-success btn-lg" data-dismiss="modal">
                                 Okay!!!
                             </button>
                         </div>
@@ -33,7 +33,7 @@ export const Error = (props) => {
             <div className="modal-dialog modal-sm modal-dialog-centered" role="content">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h4 classname="modal-title">Oops Something Went Wrong!</h4>
+                        <h4 className="modal-title">Oops Something Went Wrong!</h4>
                         <button type="button" className="close" data-dismiss="modal">
                             &times;
                         </button>
