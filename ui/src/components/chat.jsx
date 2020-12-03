@@ -6,7 +6,7 @@ import {
   useSubscription,
   gql,
 } from "@apollo/client";
-import {WebSocketLink} from "@apollo/client/link/ws";
+import { WebSocketLink } from "@apollo/client/link/ws";
 import MessageArea from "./messageArea.jsx";
 
 const link = new WebSocketLink({
@@ -24,7 +24,11 @@ const client = new ApolloClient({
 
 const GET_MESSAGES = gql`
   subscription {
-    messages { _id user content }
+    messages {
+      _id
+      user
+      content
+    }
   }
 `;
 
@@ -34,7 +38,7 @@ const GET_MESSAGES = gql`
 // }`;
 
 export const Messages = () => {
-  const {data} = useSubscription(GET_MESSAGES);
+  const { data } = useSubscription(GET_MESSAGES);
 
   if (!data) {
     return null;
@@ -51,8 +55,8 @@ export const Messages = () => {
 //   );
 // };
 
-export const Chat = () => (
+export const Chat = (props) => (
   <ApolloProvider client={client}>
-    <MessageArea/>
+    <MessageArea user={props.user} />
   </ApolloProvider>
 );

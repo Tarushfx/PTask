@@ -2,16 +2,19 @@ import React from "react";
 import authservice from "../../services/authservice.js";
 import jwt from "jsonwebtoken";
 const ChatInput = (props) => {
+  const name = jwt.decode(authservice.getToken()).name;
+  const email = jwt.decode(authservice.getToken()).email;
   const send = () => {
     const text = document.getElementById("chatInput").value;
     if (!text) return;
     props.sendMessage({
       content: text,
-      user: name,
+      user: email,
+      _id: props.teamID,
     });
     document.getElementById("chatInput").value = "";
   };
-  const name = jwt.decode(authservice.getToken()).name;
+
   return (
     <div className="mail-textarea">
       <input
