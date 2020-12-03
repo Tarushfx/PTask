@@ -12,8 +12,18 @@ class ProfileBar extends React.Component {
     this.getNotifs = this.getNotifs.bind(this);
     this.updateNotifNumber = this.updateNotifNumber.bind(this);
     this.handleMessageClick = this.handleMessageClick.bind(this);
+    this.copyCodeToClipboard = this.copyCodeToClipboard.bind(this);
   }
 
+  copyCodeToClipboard = ({ currentTarget: input }) => {
+    var copyText = document.getElementById("copyClipboard");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+    Toast.displayWithoutCallback({
+      text: "Copied",
+    });
+  };
   signOut() {
     authService.clearToken();
     window.location = "/";
@@ -229,9 +239,21 @@ class ProfileBar extends React.Component {
           </div>
           <div className="project-name">
             {this.getTeamsArray().map((item) => (
-              <div className="project-department">
-                {item.title}-{item.description}
-              </div>
+              <React.Fragment>
+                <div className="project-department">
+                  {item.title}-{item.description}
+                  &nbsp;&nbsp;
+                  <span onClick={this.copyCodeToClipboard}>
+                    <input
+                      type="text"
+                      value={item._id}
+                      id="copyClipboard"
+                      className="border-0"
+                    />
+                    <i className="fas fa-share-alt"></i>&nbsp;Share Team Id
+                  </span>
+                </div>
+              </React.Fragment>
             ))}
           </div>
         </div>

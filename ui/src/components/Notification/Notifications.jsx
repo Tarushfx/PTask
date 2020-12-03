@@ -29,10 +29,9 @@ async function pushNotifications(notif) {
   };
 
   const data = await graphQLFetch(query, { notif: addedNotif });
-  if(data.NotifAdd == "Added Notification"){
+  if (data.NotifAdd == "Added Notification") {
     return true;
-  }
-  else if(data.error){
+  } else if (data.error) {
     return false;
   }
 }
@@ -130,28 +129,25 @@ const NotifyComponent = (props) => {
 const displayAToast = ({ text, type, status, _id: id }) => {
   switch (type) {
     case 1:
-      return toast(
-        <NotifyComponent text={`"🦄 Wow so easy!  " + ${text}`} id={id} />,
-        settings
-      );
+      return toast(<NotifyComponent text={` 🦄 ${text}`} id={id} />, settings);
     case 2:
       return toast.info(
-        <NotifyComponent text={`"🦄 Wow so easy!  " + ${text}`} id={id} />,
+        <NotifyComponent text={`🦄 ${text}`} id={id} />,
         settings
       );
     case 3:
       return toast.success(
-        <NotifyComponent text={`"🦄 Wow so easy!  " + ${text}`} id={id} />,
+        <NotifyComponent text={`🦄 ${text}`} id={id} />,
         settings
       );
     case 4:
       return toast.error(
-        <NotifyComponent text={`"🦄 Wow so easy!  " + ${text}`} id={id} />,
+        <NotifyComponent text={`🦄  ${text}`} id={id} />,
         settings
       );
     default:
       return toast.warn(
-        <NotifyComponent text={`"🦄 Wow so easy!  " + ${text}`} id={id} />,
+        <NotifyComponent text={`🦄  ${text}`} id={id} />,
         settings
       );
   }
@@ -171,6 +167,17 @@ const Container = (
     role="alert"
   />
 );
+const displayWithoutCallback = ({ text }) => {
+  toast.success(`🦄 ${text}`, {
+    position: "top-right",
+    autoClose: false,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+};
 export default {
   Notifications,
   displayAToast,
@@ -178,4 +185,5 @@ export default {
   pushNotifications,
   updateNotificationStatus,
   removeNotification,
+  displayWithoutCallback,
 };

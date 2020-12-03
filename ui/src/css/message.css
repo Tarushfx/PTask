@@ -95,12 +95,22 @@
   height: fit-content;
   min-height: 50px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
   padding: 0 20px;
   font-weight: 400;
   border: 1.5px solid var(--body-bg-color);
   padding: 15px;
   background-color: var(--theme-bg-color);
+}
+.chat-item i {
+  color: var(--button-color);
+  margin: 10px;
+  align-self: center;
+  justify-self: center;
+}
+
+.chat-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
