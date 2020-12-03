@@ -10,12 +10,17 @@ const { PubSub } = require('graphql-subscriptions');
 
 const messages = [];
 
+const subscriber = [];
+const onMessageUpdate = (fn) => subscriber.push(fn);
 
 const resolvers = {
   Query: {
     about: about.getMessage,
     userData: userAPI.userData,
     UserSignIn: user.logIn,
+    messages: () => {
+      return messages
+    },
   },
   Mutation: {
     setAboutMessage: about.setMessage,
@@ -33,21 +38,28 @@ const resolvers = {
     NotifUpdate: notifAPI.notifUpdate,
     NotifRemove: notifAPI.notifRemove,
     addLikes:userAPI.addLikes,
-    postMessage: (parent, {user, content}, { pubsub }) => {
+    postMessage: (parent, {message}, { pubsub }) => {
       const id = messages.length;
       messages.push({
         id,
-        user,
-        content,
+        user: message.user,
+        content: message.content,
       });
       pubsub.publish("12345", {messages: messages});
+      subscriber.forEach((fn) => fn());
       return id;
     }
   },
   GraphQLDate,
   Subscription : {
     messages: {
-      subscribe: (_, __, { pubsub }) => pubsub.asyncIterator("12345")
+      subscribe: (_, __, { pubsub }) => {
+        const channel = Math.random().toString(36).slice(2,15);
+        onMessageUpdate(() => pubsub.publish(channel, { messages }));
+        setTimeout(() => pubsub.publish(channel, { messages }), 0);
+        return pubsub.asyncIterator(channel)
+      }
+
     }
   },
 };

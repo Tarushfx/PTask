@@ -5,7 +5,6 @@ enum State {
   Completed
 }
 
-
 type Message {
   id: ID!
   user: String!
@@ -181,5 +180,5 @@ type Mutation {
   NotifUpdate(notif: NotifUpdate!): String
   NotifRemove(notif: NotifRemove!): String
   addLikes(likes: LikesInput!): String
-  postMessage(user: String!, content: String!): ID!
+  postMessage(message: MessageInput!): ID!
 }

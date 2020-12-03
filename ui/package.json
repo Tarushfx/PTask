@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/Tarushfx/PTask#readme",
   "dependencies": {
-    "@apollo/client": "^3.2.9",
+    "@apollo/client": "^3.3.2",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^4.5.3",
     "dotenv": "^6.2.0",
@@ -42,6 +42,7 @@
     "react-dom": "^16.14.0",
     "react-router-dom": "^5.2.0",
     "react-toastify": "^6.1.0",
+    "subscriptions-transport-ws": "^0.9.18",
     "whatwg-fetch": "^3.5.0"
   },
   "devDependencies": {
