@@ -8,12 +8,14 @@ enum State {
 type Message {
   _id: ID!
   user: String!
+  email:String
   content: String!
 }
 
 input MessageInput {
   _id: ID!
   user: String!
+  email: String!
   content: String!
 }
 
