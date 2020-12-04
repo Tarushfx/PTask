@@ -7,6 +7,14 @@ import jwt from "jsonwebtoken"
 
 const CreateTeam = (props) => {
 
+  async function joinTeam(team) {
+    const query = `mutation teamJoin($team: TeamJoin!) {
+      JoinTeam(team: $team)
+    }`;
+  
+    const data = await graphQLFetch(query, {team: team})
+  }
+
   async function createTeam(team) {
     const query = `mutation teamAdd($team: TeamInput!) {
       TeamAdd(team:$team){
@@ -30,8 +38,16 @@ const CreateTeam = (props) => {
     };
 
     const status = await createTeam(team);
-    await props.loadData();
 
+    const id = jwt.decode(authservice.getToken())._id;
+    const addTeam = {
+      _id: id,
+      team_id: status._id,
+    }
+
+    await joinTeam(addTeam)
+  
+    await props.loadData();
     if (status) {
       document.getElementById("successContent").innerHTML = "Teams created !!! = Use this code to invite others  " + String(status._id);
       document.getElementById("successButton").click();
