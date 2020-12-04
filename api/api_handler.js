@@ -45,6 +45,7 @@ const resolvers = {
       const id = messages.length;
       messages.push({
         _id: message._id,
+        date: new Date(),
         email: message.email,
         user: message.user,
         content: message.content,
