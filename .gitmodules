@@ -1,0 +1,8 @@
+[submodule "PTask-API"]
+	path = PTask-API
+	url = git@github.com:Tarushfx/PTask-API.git
+	branch = main
+[submodule "PTask-UI"]
+	path = PTask-UI
+	url = git@github.com:Tarushfx/PTask-UI.git
+	branch = main
