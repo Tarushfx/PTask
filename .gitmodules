@@ -6,3 +6,7 @@
 	path = PTask-UI
 	url = git@github.com:Tarushfx/PTask-UI.git
 	branch = main
+[submodule "PTask-Desktop"]
+	path = PTask-Desktop
+	url = git@github.com:Tarushfx/PTask-Desktop.git
+	branch = main
