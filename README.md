@@ -36,4 +36,16 @@ Project Contributors:
 - [Tarush Bajaj](https://github.com/Tarushfx)
 - [Atishek Kumar](https://github.com/atishekk)
 
+Quotes:
+<img src="Snapshots/1.png">
+
+Calendar:
+<img src="Snapshots/2.png">
+
+Messages:
+<img src="Snapshots/3.png">
+
+Tasks:
+<img src="Snapshots/4.png">
+
 Happy PTasking!
